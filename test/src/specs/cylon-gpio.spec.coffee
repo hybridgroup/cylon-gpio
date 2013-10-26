@@ -1,6 +1,6 @@
 'use strict';
 
-cylonGpio = source("cylon-gpio")
+gpio = source("cylon-gpio")
 
 describe "basic tests", ->
   it "standard async test", (done) ->
@@ -29,8 +29,8 @@ describe "basic tests", ->
     # hard equal
     data[0].should.be.equal obj
 
-  # Now on to a `real` test
-  it "cylon-gpio should be awesome", ->
-    cylonGpio.should.have.keys 'awesome'
-    cylonGpio.awesome.should.be.a 'function'
-    cylonGpio.awesome().should.be.equal 'awesome'
+  it "should be able to register", ->
+    gpio.register.should.be.a 'function'
+
+  it "should be able to create led driver", ->
+    gpio.driver.should.be.a 'function'

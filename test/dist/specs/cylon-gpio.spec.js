@@ -1,8 +1,8 @@
 (function() {
   'use strict';
-  var cylonGpio;
+  var gpio;
 
-  cylonGpio = source("cylon-gpio");
+  gpio = source("cylon-gpio");
 
   describe("basic tests", function() {
     it("standard async test", function(done) {
@@ -34,10 +34,11 @@
       data[0].should.be.eql(obj);
       return data[0].should.be.equal(obj);
     });
-    return it("cylon-gpio should be awesome", function() {
-      cylonGpio.should.have.keys('awesome');
-      cylonGpio.awesome.should.be.a('function');
-      return cylonGpio.awesome().should.be.equal('awesome');
+    it("should be able to register", function() {
+      return gpio.register.should.be.a('function');
+    });
+    return it("should be able to create led driver", function() {
+      return gpio.driver.should.be.a('function');
     });
   });
 
