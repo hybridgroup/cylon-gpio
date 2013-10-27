@@ -21,7 +21,7 @@
         ctor.prototype = func.prototype;
         var child = new ctor, result = func.apply(child, args);
         return Object(result) === result ? result : child;
-      })(Driver.Led, args, function(){});
+      })(Cylon.Driver.Led, args, function(){});
     },
     register: function(robot) {
       Logger.debug("Registering LED driver for " + robot.name);

@@ -1,16 +1,20 @@
+/*
+ * LED driver
+ * http://cylonjs.com
+ *
+ * Copyright (c) 2013 The Hybrid Group
+ * Licensed under the Apache 2.0 license.
+*/
+
+
 (function() {
   'use strict';
-  var Driver, Led;
+  var namespace;
 
-  module.exports = Driver.Led = (function() {
-    function Led() {}
+  namespace = require('node-namespace');
 
-    return Led;
-
-  })();
-
-  Driver = {
-    Led: Led = (function() {
+  namespace("Cylon.Driver", function() {
+    return this.Led = (function() {
       function Led(opts) {
         this.self = this;
         this.device = opts.device;
@@ -48,7 +52,7 @@
 
       return Led;
 
-    })()
-  };
+    })();
+  });
 
 }).call(this);

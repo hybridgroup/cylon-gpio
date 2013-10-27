@@ -12,7 +12,7 @@ require('./led')
 
 module.exports =
   driver: (args...) ->
-    new Driver.Led(args...)
+    new Cylon.Driver.Led(args...)
 
   register: (robot) ->
     Logger.debug "Registering LED driver for #{robot.name}"
