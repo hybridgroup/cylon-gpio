@@ -9,19 +9,13 @@
 
 (function() {
   'use strict';
-  var __slice = [].slice;
-
   require('./led');
 
   module.exports = {
-    driver: function() {
-      var args;
-      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return (function(func, args, ctor) {
-        ctor.prototype = func.prototype;
-        var child = new ctor, result = func.apply(child, args);
-        return Object(result) === result ? result : child;
-      })(Cylon.Driver.Led, args, function(){});
+    driver: function(opts) {
+      if (opts.name === 'led') {
+        return new Cylon.Driver.Led(opts);
+      }
     },
     register: function(robot) {
       Logger.debug("Registering LED driver for " + robot.name);
