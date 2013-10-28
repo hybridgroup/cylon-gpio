@@ -1,5 +1,5 @@
 ###
- * LED driver
+ * Cylon button driver
  * http://cylonjs.com
  *
  * Copyright (c) 2013 The Hybrid Group
@@ -10,31 +10,25 @@
 namespace = require 'node-namespace'
 
 namespace "Cylon.Driver.GPIO", ->
-  class @Led
+  class @Button
     constructor: (opts) ->
       @self = this
       @device = opts.device
       @connection = @device.connection
       @pin = @device.pin
-      @isOn = false
+      @isPressed = false
 
     commands: ->
-      ['turnOn', 'turnOff', 'toggle']
+      ['isPressed']
 
     start: (callback) ->
       Logger.debug "LED on pin #{@pin} started"
+      @connection.digitalRead @pin, (data) =>
+        if data is 1
+          @isPressed = true
+          @emit 'pressed'
+        else
+          @isPressed = false
+          @emit 'released'
+
       (callback)(null)
-
-    turnOn: ->
-      @isOn = true
-      @connection.digitalWrite(@pin, 1)
-
-    turnOff: ->
-      @isOn = false
-      @connection.digitalWrite(@pin, 0)
-
-    toggle: ->
-      if @isOn
-        @turnOff()
-      else
-        @turnOn()

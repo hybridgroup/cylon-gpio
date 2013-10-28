@@ -13,7 +13,7 @@
 
   namespace = require('node-namespace');
 
-  namespace("Cylon.Driver", function() {
+  namespace("Cylon.Driver.GPIO", function() {
     return this.Led = (function() {
       function Led(opts) {
         this.self = this;
