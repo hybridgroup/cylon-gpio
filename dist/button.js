@@ -29,14 +29,14 @@
 
       Button.prototype.start = function(callback) {
         var _this = this;
-        Logger.debug("LED on pin " + this.pin + " started");
+        Logger.debug("Button on pin " + this.pin + " started");
         this.connection.digitalRead(this.pin, function(data) {
           if (data === 1) {
             _this.isPressed = true;
-            return _this.emit('pressed');
+            return _this.device.emit('pushed');
           } else {
             _this.isPressed = false;
-            return _this.emit('released');
+            return _this.device.emit('released');
           }
         });
         return callback(null);
