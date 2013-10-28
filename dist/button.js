@@ -33,10 +33,10 @@
         this.connection.digitalRead(this.pin, function(data) {
           if (data === 1) {
             _this.isPressed = true;
-            return _this.device.emit('pushed');
+            return _this.device.emit('push');
           } else {
             _this.isPressed = false;
-            return _this.device.emit('released');
+            return _this.device.emit('release');
           }
         });
         return callback(null);
