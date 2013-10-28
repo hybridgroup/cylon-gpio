@@ -26,7 +26,7 @@ namespace "Cylon.Driver.GPIO", ->
       @connection.digitalRead @pin, (data) =>
         if data is 1
           @isPressed = true
-          @emit 'pressed'
+          @emit 'pushed'
         else
           @isPressed = false
           @emit 'released'
