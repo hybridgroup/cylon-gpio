@@ -32,6 +32,7 @@
     "sinon": "~1.7.3"
   },
   "dependencies": {
-    "node-namespace": "~1.0.0"
+    "node-namespace": "~1.0.0",
+    "cylon": "~0.1.0"
   }
 }
