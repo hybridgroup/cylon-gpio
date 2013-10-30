@@ -12,8 +12,6 @@ namespace = require 'node-namespace'
 namespace "Cylon.Driver.GPIO", ->
   class @AnalogSensor
     constructor: (opts) ->
-      console.log('AnalogSensor driver opts =>')
-      console.log(opts)
       @self = this
       @device = opts.device
       @connection = @device.connection
@@ -27,13 +25,12 @@ namespace "Cylon.Driver.GPIO", ->
 
     start: (callback) ->
       Logger.debug "AnalogSensor on pin #{@pin} started"
-      @connection.analogRead(@pin, (readVal) =>
+      @connection.analogRead @pin, (readVal) =>
         @analogVal = readVal
+        @device.emit('analogRead', readVal)
         if readVal >= @upperLimit
           @device.emit('upperLimit', readVal)
         else if readVal <= @lowerLimit
           @device.emit('lowerLimit', readVal)
 
-        @device.emit('analogRead', readVal)
-      )
       (callback)(null)

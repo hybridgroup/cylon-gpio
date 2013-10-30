@@ -16,8 +16,6 @@
   namespace("Cylon.Driver.GPIO", function() {
     return this.AnalogSensor = (function() {
       function AnalogSensor(opts) {
-        console.log('AnalogSensor driver opts =>');
-        console.log(opts);
         this.self = this;
         this.device = opts.device;
         this.connection = this.device.connection;
@@ -36,12 +34,12 @@
         Logger.debug("AnalogSensor on pin " + this.pin + " started");
         this.connection.analogRead(this.pin, function(readVal) {
           _this.analogVal = readVal;
+          _this.device.emit('analogRead', readVal);
           if (readVal >= _this.upperLimit) {
-            _this.device.emit('upperLimit', readVal);
+            return _this.device.emit('upperLimit', readVal);
           } else if (readVal <= _this.lowerLimit) {
-            _this.device.emit('lowerLimit', readVal);
+            return _this.device.emit('lowerLimit', readVal);
           }
-          return _this.device.emit('analogRead', readVal);
         });
         return callback(null);
       };
