@@ -59,7 +59,7 @@ Thank you!
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-Version 0.1.0 - Initial release with support for Button and LED
+Version 0.1.0 - Initial release with support for AnalogSensor, Button, and LED
 
 ## License
 Copyright (c) 2013 The Hybrid Group. Licensed under the Apache 2.0 license.
