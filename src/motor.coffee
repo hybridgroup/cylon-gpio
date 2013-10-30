@@ -16,8 +16,8 @@ namespace "Cylon.Driver.GPIO", ->
       @device = opts.device
       @connection = @device.connection
       @pin = @device.pin
-      @current_speed = false
-      @isOn
+      @currentSpeed = 0
+      @isOn = false
 
     commands: ->
       ['turnOn', 'turnOff', 'toggle', 'speed']
@@ -42,4 +42,5 @@ namespace "Cylon.Driver.GPIO", ->
 
     speed: (value) ->
       @connection.pwmWrite(@pin, value)
-      @current_speed = value
+      @currentSpeed = value
+      @isOn = if @currentSpeed > 0 then true else false
