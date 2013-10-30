@@ -27,8 +27,6 @@ namespace "Cylon.Driver.GPIO", ->
 
     start: (callback) ->
       Logger.debug "AnalogSensor on pin #{@pin} started"
-      console.log("UPPER LIMIT VALUE => #{ @upperLimit }")
-      console.log("LOWER LIMIT VALUE => #{ @lowerLimit }")
       @connection.analogRead(@pin, (readVal) =>
         @analogVal = readVal
         if readVal >= @upperLimit

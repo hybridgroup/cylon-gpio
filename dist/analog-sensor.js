@@ -34,8 +34,6 @@
       AnalogSensor.prototype.start = function(callback) {
         var _this = this;
         Logger.debug("AnalogSensor on pin " + this.pin + " started");
-        console.log("UPPER LIMIT VALUE => " + this.upperLimit);
-        console.log("LOWER LIMIT VALUE => " + this.lowerLimit);
         this.connection.analogRead(this.pin, function(readVal) {
           _this.analogVal = readVal;
           if (readVal >= _this.upperLimit) {
