@@ -1,5 +1,5 @@
 ###
- * LED driver
+ * Motor driver
  * http://cylonjs.com
  *
  * Copyright (c) 2013 The Hybrid Group
@@ -10,19 +10,20 @@
 namespace = require 'node-namespace'
 
 namespace "Cylon.Driver.GPIO", ->
-  class @Led
+  class @Motor
     constructor: (opts) ->
       @self = this
       @device = opts.device
       @connection = @device.connection
       @pin = @device.pin
-      @isOn = false
+      @current_speed = false
+      @isOn
 
     commands: ->
-      ['turnOn', 'turnOff', 'toggle', 'brightness']
+      ['turnOn', 'turnOff', 'toggle', 'speed']
 
     start: (callback) ->
-      Logger.debug "LED on pin #{@pin} started"
+      Logger.debug "Motor on pin #{@pin} started"
       (callback)(null)
 
     turnOn: ->
@@ -39,5 +40,7 @@ namespace "Cylon.Driver.GPIO", ->
       else
         @turnOn()
 
-    brightness: (value) ->
+    speed: (value) ->
+      console.log("speed -> #{ value }")
       @connection.pwmWrite(@pin, value)
+      @current_speed = value
