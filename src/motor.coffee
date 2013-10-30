@@ -41,6 +41,5 @@ namespace "Cylon.Driver.GPIO", ->
         @turnOn()
 
     speed: (value) ->
-      console.log("speed -> #{ value }")
       @connection.pwmWrite(@pin, value)
       @current_speed = value
