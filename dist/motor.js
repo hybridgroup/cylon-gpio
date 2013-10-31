@@ -20,12 +20,12 @@
         this.device = opts.device;
         this.connection = this.device.connection;
         this.pin = this.device.pin;
-        this.currentSpeed = 0;
+        this.speedValue = 0;
         this.isOn = false;
       }
 
       Motor.prototype.commands = function() {
-        return ['turnOn', 'turnOff', 'toggle', 'speed'];
+        return ['turnOn', 'turnOff', 'toggle', 'speed', 'currentSpeed'];
       };
 
       Motor.prototype.start = function(callback) {
@@ -51,10 +51,14 @@
         }
       };
 
+      Motor.prototype.currentSpeed = function() {
+        return this.speedValue;
+      };
+
       Motor.prototype.speed = function(value) {
         this.connection.pwmWrite(this.pin, value);
-        this.currentSpeed = value;
-        return this.isOn = this.currentSpeed > 0 ? true : false;
+        this.speedValue = value;
+        return this.isOn = this.currentSpeed > 0;
       };
 
       return Motor;
