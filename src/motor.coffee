@@ -16,11 +16,11 @@ namespace "Cylon.Driver.GPIO", ->
       @device = opts.device
       @connection = @device.connection
       @pin = @device.pin
-      @currentSpeed = 0
+      @speedValue = 0
       @isOn = false
 
     commands: ->
-      ['turnOn', 'turnOff', 'toggle', 'speed']
+      ['turnOn', 'turnOff', 'toggle', 'speed', 'currentSpeed']
 
     start: (callback) ->
       Logger.debug "Motor on pin #{@pin} started"
@@ -40,7 +40,10 @@ namespace "Cylon.Driver.GPIO", ->
       else
         @turnOn()
 
+    currentSpeed: ->
+      @speedValue
+
     speed: (value) ->
       @connection.pwmWrite(@pin, value)
-      @currentSpeed = value
+      @speedValue = value
       @isOn = if @currentSpeed > 0 then true else false
