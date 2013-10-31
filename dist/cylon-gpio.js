@@ -15,6 +15,8 @@
 
   require('./analog-sensor');
 
+  require('./motor');
+
   module.exports = {
     driver: function(opts) {
       if (opts.name === 'led') {
@@ -23,6 +25,8 @@
         return new Cylon.Driver.GPIO.Button(opts);
       } else if (opts.name === 'analogSensor') {
         return new Cylon.Driver.GPIO.AnalogSensor(opts);
+      } else if (opts.name === 'motor') {
+        return new Cylon.Driver.GPIO.Motor(opts);
       }
     },
     register: function(robot) {
@@ -31,7 +35,9 @@
       Logger.debug("Registering GPIO button driver for " + robot.name);
       robot.registerDriver('cylon-gpio', 'button');
       Logger.debug("Registering GPIO analogSensor driver for " + robot.name);
-      return robot.registerDriver('cylon-gpio', 'analogSensor');
+      robot.registerDriver('cylon-gpio', 'analogSensor');
+      Logger.debug("Registering GPIO Motor driver for " + robot.name);
+      return robot.registerDriver('cylon-gpio', 'motor');
     }
   };
 

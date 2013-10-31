@@ -1,5 +1,5 @@
 /*
- * LED driver
+ * Motor driver
  * http://cylonjs.com
  *
  * Copyright (c) 2013 The Hybrid Group
@@ -14,35 +14,36 @@
   namespace = require('node-namespace');
 
   namespace("Cylon.Driver.GPIO", function() {
-    return this.Led = (function() {
-      function Led(opts) {
+    return this.Motor = (function() {
+      function Motor(opts) {
         this.self = this;
         this.device = opts.device;
         this.connection = this.device.connection;
         this.pin = this.device.pin;
+        this.currentSpeed = 0;
         this.isOn = false;
       }
 
-      Led.prototype.commands = function() {
-        return ['turnOn', 'turnOff', 'toggle', 'brightness'];
+      Motor.prototype.commands = function() {
+        return ['turnOn', 'turnOff', 'toggle', 'speed'];
       };
 
-      Led.prototype.start = function(callback) {
-        Logger.debug("LED on pin " + this.pin + " started");
+      Motor.prototype.start = function(callback) {
+        Logger.debug("Motor on pin " + this.pin + " started");
         return callback(null);
       };
 
-      Led.prototype.turnOn = function() {
+      Motor.prototype.turnOn = function() {
         this.isOn = true;
         return this.connection.digitalWrite(this.pin, 1);
       };
 
-      Led.prototype.turnOff = function() {
+      Motor.prototype.turnOff = function() {
         this.isOn = false;
         return this.connection.digitalWrite(this.pin, 0);
       };
 
-      Led.prototype.toggle = function() {
+      Motor.prototype.toggle = function() {
         if (this.isOn) {
           return this.turnOff();
         } else {
@@ -50,11 +51,13 @@
         }
       };
 
-      Led.prototype.brightness = function(value) {
-        return this.connection.pwmWrite(this.pin, value);
+      Motor.prototype.speed = function(value) {
+        this.connection.pwmWrite(this.pin, value);
+        this.currentSpeed = value;
+        return this.isOn = this.currentSpeed > 0 ? true : false;
       };
 
-      return Led;
+      return Motor;
 
     })();
   });
