@@ -46,4 +46,4 @@ namespace "Cylon.Driver.GPIO", ->
     speed: (value) ->
       @connection.pwmWrite(@pin, value)
       @speedValue = value
-      @isOn = if @currentSpeed > 0 then true else false
+      @isOn = (@currentSpeed > 0)

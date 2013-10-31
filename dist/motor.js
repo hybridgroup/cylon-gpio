@@ -58,7 +58,7 @@
       Motor.prototype.speed = function(value) {
         this.connection.pwmWrite(this.pin, value);
         this.speedValue = value;
-        return this.isOn = this.currentSpeed > 0 ? true : false;
+        return this.isOn = this.currentSpeed > 0;
       };
 
       return Motor;
