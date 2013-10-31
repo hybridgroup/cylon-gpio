@@ -12,6 +12,7 @@ require('./led')
 require('./button')
 require('./analog-sensor')
 require('./motor')
+require('./servo')
 
 module.exports =
   driver: (opts) ->
@@ -23,6 +24,8 @@ module.exports =
       new Cylon.Driver.GPIO.AnalogSensor(opts)
     else if opts.name is 'motor'
       new Cylon.Driver.GPIO.Motor(opts)
+    else if opts.name is 'servo'
+      new Cylon.Driver.GPIO.Servo(opts)
 
   register: (robot) ->
     Logger.debug "Registering GPIO LED driver for #{robot.name}"
@@ -33,3 +36,5 @@ module.exports =
     robot.registerDriver 'cylon-gpio', 'analogSensor'
     Logger.debug "Registering GPIO Motor driver for #{robot.name}"
     robot.registerDriver 'cylon-gpio', 'motor'
+    Logger.debug "Registering GPIO Servo driver for #{robot.name}"
+    robot.registerDriver 'cylon-gpio', 'servo'
