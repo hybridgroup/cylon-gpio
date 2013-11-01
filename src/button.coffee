@@ -33,3 +33,4 @@ namespace "Cylon.Driver.GPIO", ->
           @device.emit 'release'
 
       (callback)(null)
+      @device.emit 'start'

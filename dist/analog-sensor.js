@@ -41,7 +41,8 @@
             return _this.device.emit('lowerLimit', readVal);
           }
         });
-        return callback(null);
+        callback(null);
+        return this.device.emit('start');
       };
 
       return AnalogSensor;

@@ -24,6 +24,7 @@ namespace "Cylon.Driver.GPIO", ->
     start: (callback) ->
       Logger.debug "LED on pin #{@pin} started"
       (callback)(null)
+      @device.emit 'start'
 
     turnOn: ->
       @isOn = true

@@ -34,3 +34,4 @@ namespace "Cylon.Driver.GPIO", ->
           @device.emit('lowerLimit', readVal)
 
       (callback)(null)
+      @device.emit 'start'

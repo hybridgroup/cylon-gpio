@@ -39,7 +39,8 @@
             return _this.device.emit('release');
           }
         });
-        return callback(null);
+        callback(null);
+        return this.device.emit('start');
       };
 
       return Button;

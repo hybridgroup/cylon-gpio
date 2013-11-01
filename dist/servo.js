@@ -29,7 +29,8 @@
 
       Servo.prototype.start = function(callback) {
         Logger.debug("Servo on pin " + this.pin + " started");
-        return callback(null);
+        callback(null);
+        return this.device.emit('start');
       };
 
       Servo.prototype.currentAngle = function() {

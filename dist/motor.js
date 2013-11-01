@@ -30,7 +30,8 @@
 
       Motor.prototype.start = function(callback) {
         Logger.debug("Motor on pin " + this.pin + " started");
-        return callback(null);
+        callback(null);
+        return this.device.emit('start');
       };
 
       Motor.prototype.turnOn = function() {

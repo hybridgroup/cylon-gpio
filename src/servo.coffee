@@ -24,6 +24,7 @@ namespace "Cylon.Driver.GPIO", ->
     start: (callback) ->
       Logger.debug "Servo on pin #{@pin} started"
       (callback)(null)
+      @device.emit 'start'
 
     currentAngle: ->
       @angleValue
