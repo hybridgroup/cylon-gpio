@@ -49,6 +49,16 @@ Cylon.robot
 
 .start()
 ```
+## Hardware Support
+Cylon.js has a extensible system for connecting to hardware devices. The following GPIO devices are currently supported:
+
+  - Analog Sensor
+  - Button
+  - LED
+  - Motor
+  - Servo
+
+More drivers are coming soon...
 
 ## Documentation
 We're busy adding documentation to our web site at http://cylonjs.com/ please check there as we continue to work on Cylon.js
