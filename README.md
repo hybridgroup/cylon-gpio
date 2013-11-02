@@ -71,5 +71,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## Release History
 Version 0.1.0 - Initial release with support for AnalogSensor, Button, and LED
 
+Version 0.2.0 - Add Motor and Servo support, refactor to use Basestar
+
 ## License
 Copyright (c) 2013 The Hybrid Group. Licensed under the Apache 2.0 license.
