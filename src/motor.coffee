@@ -27,6 +27,9 @@ namespace "Cylon.Driver.GPIO", ->
       (callback)(null)
       @device.emit 'start'
 
+    stop: ->
+      Logger.debug "Motor on pin #{@pin} stopping"
+
     turnOn: ->
       @isOn = true
       @connection.digitalWrite(@pin, 1)
