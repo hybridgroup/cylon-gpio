@@ -31,6 +31,8 @@
         return new Cylon.Driver.GPIO.Motor(opts);
       } else if (opts.name === 'servo') {
         return new Cylon.Driver.GPIO.Servo(opts);
+      } else {
+        return null;
       }
     },
     register: function(robot) {

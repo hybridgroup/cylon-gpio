@@ -26,6 +26,8 @@ module.exports =
       new Cylon.Driver.GPIO.Motor(opts)
     else if opts.name is 'servo'
       new Cylon.Driver.GPIO.Servo(opts)
+    else
+      null
 
   register: (robot) ->
     Logger.debug "Registering GPIO LED driver for #{robot.name}"
