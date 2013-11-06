@@ -45,6 +45,10 @@
         return this.device.emit('start');
       };
 
+      AnalogSensor.prototype.stop = function() {
+        return Logger.debug("AnalogSensor on pin " + this.pin + " stopping");
+      };
+
       return AnalogSensor;
 
     })();

@@ -34,3 +34,6 @@ namespace "Cylon.Driver.GPIO", ->
 
       (callback)(null)
       @device.emit 'start'
+
+    stop: ->
+      Logger.debug "Button on pin #{@pin} stopping"

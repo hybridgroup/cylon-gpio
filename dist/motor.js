@@ -34,6 +34,10 @@
         return this.device.emit('start');
       };
 
+      Motor.prototype.stop = function() {
+        return Logger.debug("Motor on pin " + this.pin + " stopping");
+      };
+
       Motor.prototype.turnOn = function() {
         this.isOn = true;
         return this.connection.digitalWrite(this.pin, 1);

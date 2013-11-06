@@ -33,6 +33,10 @@
         return this.device.emit('start');
       };
 
+      Servo.prototype.stop = function() {
+        return Logger.debug("Servo on pin " + this.pin + " stopping");
+      };
+
       Servo.prototype.currentAngle = function() {
         return this.angleValue;
       };

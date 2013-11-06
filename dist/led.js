@@ -33,6 +33,10 @@
         return this.device.emit('start');
       };
 
+      Led.prototype.stop = function() {
+        return Logger.debug("LED on pin " + this.pin + " stopping");
+      };
+
       Led.prototype.turnOn = function() {
         this.isOn = true;
         return this.connection.digitalWrite(this.pin, 1);

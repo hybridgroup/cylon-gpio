@@ -43,6 +43,10 @@
         return this.device.emit('start');
       };
 
+      Button.prototype.stop = function() {
+        return Logger.debug("Button on pin " + this.pin + " stopping");
+      };
+
       return Button;
 
     })();
