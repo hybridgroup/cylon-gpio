@@ -31,6 +31,8 @@
         return new Cylon.Driver.GPIO.Motor(opts);
       } else if (opts.name === 'servo') {
         return new Cylon.Driver.GPIO.Servo(opts);
+      } else if (opts.name === 'maxbotix') {
+        return new Cylon.Driver.GPIO.Maxbotix(opts);
       } else {
         return null;
       }
@@ -45,7 +47,9 @@
       Logger.debug("Registering GPIO Motor driver for " + robot.name);
       robot.registerDriver('cylon-gpio', 'motor');
       Logger.debug("Registering GPIO Servo driver for " + robot.name);
-      return robot.registerDriver('cylon-gpio', 'servo');
+      robot.registerDriver('cylon-gpio', 'servo');
+      Logger.debug("Registering GPIO Maxbotix driver for " + robot.name);
+      return robot.registerDriver('cylon-gpio', 'maxbotix');
     }
   };
 
