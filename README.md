@@ -8,7 +8,7 @@ Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io)
 
 Want to use the Go programming language to power your robots? Check out our sister project Gobot (http://gobot.io).
 
-[![NPM](https://nodei.co/npm/cylon-gpio.png?compact=true)](https://nodei.co/npm/cylon-gpio/) [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon-gpio.png?branch=master)](http://travis-ci.org/hybridgroup/cylon-gpio)
+[![Build Status](https://secure.travis-ci.org/hybridgroup/cylon-gpio.png?branch=master)](http://travis-ci.org/hybridgroup/cylon-gpio)
 
 ## Getting Started
 Install the module with: `npm install cylon-gpio`
