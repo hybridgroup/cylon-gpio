@@ -20,11 +20,11 @@
         this.device = opts.device;
         this.connection = this.device.connection;
         this.pin = this.device.pin;
-        this.analogValue = null;
+        this.analogValue = 0;
       }
 
       Maxbotix.prototype.commands = function() {
-        return ['range'];
+        return ['analogValue', 'range', 'rangeCm'];
       };
 
       Maxbotix.prototype.start = function(callback) {

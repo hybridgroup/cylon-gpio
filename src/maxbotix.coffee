@@ -16,7 +16,7 @@ namespace "Cylon.Driver.GPIO", ->
       @device = opts.device
       @connection = @device.connection
       @pin = @device.pin
-      @analogValue = null
+      @analogValue = 0
 
     commands: ->
       ['analogValue', 'range', 'rangeCm']

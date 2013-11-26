@@ -8,11 +8,14 @@
 
 'use strict';
 
-require('./led')
-require('./button')
-require('./analog-sensor')
-require('./motor')
-require('./servo')
+require 'cylon'
+
+require './led'
+require './button'
+require './analog-sensor'
+require './motor'
+require './servo'
+require './maxbotix'
 
 module.exports =
   driver: (opts) ->

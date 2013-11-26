@@ -9,6 +9,8 @@
 
 (function() {
   'use strict';
+  require('cylon');
+
   require('./led');
 
   require('./button');
@@ -18,6 +20,8 @@
   require('./motor');
 
   require('./servo');
+
+  require('./maxbotix');
 
   module.exports = {
     driver: function(opts) {
