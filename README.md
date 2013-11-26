@@ -15,7 +15,7 @@ Install the module with: `npm install cylon-gpio`
 
 ## Examples
 
-### Javascript:
+### JavaScript:
 ```javascript
 var Cylon = require('cylon');
 
@@ -32,7 +32,7 @@ Cylon.robot({
 ```
 
 ### CoffeeScript:
-```coffee-script
+```
 Cylon = require('cylon')
 
 # Initialize the robot
@@ -73,6 +73,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## Release History
 
 [![NPM](https://nodei.co/npm/cylon-gpio.png?compact=true)](https://nodei.co/npm/cylon-gpio/)
+
+Version 0.5.0 - Add support for Maxbotix ultrasonic range finder, update to cylon 0.6.0
+
+Version 0.4.0 - Update for Cylon 0.5.0
 
 Version 0.3.0 - Proper event handling with newer proxying
 
