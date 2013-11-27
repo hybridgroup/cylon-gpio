@@ -58,6 +58,7 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
   - Button
   - LED
   - Motor
+  - Maxbotix Ultrasonic Range Finder
   - Servo
 
 More drivers are coming soon...
