@@ -2,7 +2,7 @@
 
 gpio = source("cylon-gpio")
 
-describe "basic tests", ->
+describe "Cylon.GPIO", ->
   it "standard async test", (done) ->
     bool = false
     bool.should.be.false
