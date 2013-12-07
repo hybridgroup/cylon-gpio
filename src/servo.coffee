@@ -20,7 +20,9 @@ namespace "Cylon.Driver.GPIO", ->
       @angleValue = 0
 
     commands: ->
-      ['angle', 'currentAngle']
+      cmds = ['angle', 'currentAngle']
+      cmds += ['clockwise', 'counterClockwise', 'stop'] if @type is 'continuous'
+      cmds
 
     start: (callback) ->
       Logger.debug "Servo on pin #{@pin} started"
