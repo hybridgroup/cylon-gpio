@@ -16,7 +16,7 @@ namespace "Cylon.Driver.GPIO", ->
       @device = opts.device
       @connection = @device.connection
       @pin = @device.pin
-      @type = opts.type || 'standard'
+      @type = opts.extraParams.type || 'standard'
       @angleValue = 0
 
     commands: ->
