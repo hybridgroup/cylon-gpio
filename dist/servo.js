@@ -20,21 +20,22 @@
         this.device = opts.device;
         this.connection = this.device.connection;
         this.pin = this.device.pin;
-        this.type = opts.type || 'standard';
+        this.type = opts.extraParams.type || 'standard';
         this.angleValue = 0;
       }
 
       Servo.prototype.commands = function() {
-        var cmds;
-        cmds = ['angle', 'currentAngle'];
         if (this.type === 'continuous') {
-          cmds += ['clockwise', 'counterClockwise', 'stop'];
+          return ['clockwise', 'counterClockwise', 'stop'];
+        } else {
+          return ['angle', 'currentAngle'];
         }
-        return cmds;
       };
 
       Servo.prototype.start = function(callback) {
-        Logger.debug("Servo on pin " + this.pin + " started");
+        var servoType;
+        servoType = this.type === 'continuous' ? "Continuous servo" : "Servo";
+        Logger.debug("" + servoType + " on pin " + this.pin + " started");
         callback(null);
         return this.device.emit('start');
       };
