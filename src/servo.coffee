@@ -25,7 +25,8 @@ namespace "Cylon.Driver.GPIO", ->
       cmds
 
     start: (callback) ->
-      Logger.debug "Servo on pin #{@pin} started"
+      servoType = if @type is 'continuous' then "Continuous servo" else "Servo"
+      Logger.debug "#{servoType} on pin #{@pin} started"
       (callback)(null)
       @device.emit 'start'
 
