@@ -53,6 +53,6 @@ namespace "Cylon.Driver.GPIO", ->
     counterClockwise: ->
       if @type is 'continuous'
         Logger.debug "Servo on pin #{@pin} turning counter clockwise"
-        @connection.servoWrite(@pin, 0)
+        @connection.servoWrite(@pin, 89)
       else
         Logger.debug "Servo can't turn counterclockwise since it is not continuous"

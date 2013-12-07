@@ -68,7 +68,7 @@
       Servo.prototype.counterClockwise = function() {
         if (this.type === 'continuous') {
           Logger.debug("Servo on pin " + this.pin + " turning counter clockwise");
-          return this.connection.servoWrite(this.pin, 0);
+          return this.connection.servoWrite(this.pin, 89);
         } else {
           return Logger.debug("Servo can't turn counterclockwise since it is not continuous");
         }
