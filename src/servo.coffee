@@ -20,9 +20,10 @@ namespace "Cylon.Driver.GPIO", ->
       @angleValue = 0
 
     commands: ->
-      cmds = ['angle', 'currentAngle']
-      cmds += ['clockwise', 'counterClockwise', 'stop'] if @type is 'continuous'
-      cmds
+      if @type is 'continuous'
+        ['clockwise', 'counterClockwise', 'stop']
+      else
+        ['angle', 'currentAngle']
 
     start: (callback) ->
       servoType = if @type is 'continuous' then "Continuous servo" else "Servo"
