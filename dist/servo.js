@@ -20,21 +20,23 @@
         this.device = opts.device;
         this.connection = this.device.connection;
         this.pin = this.device.pin;
+        this.type = opts.type || 'standard';
         this.angleValue = 0;
       }
 
       Servo.prototype.commands = function() {
-        return ['angle', 'currentAngle'];
+        var cmds;
+        cmds = ['angle', 'currentAngle'];
+        if (this.type === 'continuous') {
+          cmds += ['clockwise', 'counterClockwise', 'stop'];
+        }
+        return cmds;
       };
 
       Servo.prototype.start = function(callback) {
         Logger.debug("Servo on pin " + this.pin + " started");
         callback(null);
         return this.device.emit('start');
-      };
-
-      Servo.prototype.stop = function() {
-        return Logger.debug("Servo on pin " + this.pin + " stopping");
       };
 
       Servo.prototype.currentAngle = function() {
@@ -44,6 +46,31 @@
       Servo.prototype.angle = function(value) {
         this.connection.servoWrite(this.pin, value);
         return this.angleValue = value;
+      };
+
+      Servo.prototype.stop = function() {
+        if (this.type === 'continuous') {
+          Logger.debug("Servo on pin " + this.pin + " stopping");
+          return this.connection.servoWrite(this.pin, 90);
+        }
+      };
+
+      Servo.prototype.clockwise = function() {
+        if (this.type === 'continuous') {
+          Logger.debug("Servo on pin " + this.pin + " turning clockwise");
+          return this.connection.servoWrite(this.pin, 180);
+        } else {
+          return Logger.debug("Servo can't turn clockwise since it is not continuous");
+        }
+      };
+
+      Servo.prototype.counterClockwise = function() {
+        if (this.type === 'continuous') {
+          Logger.debug("Servo on pin " + this.pin + " turning counter clockwise");
+          return this.connection.servoWrite(this.pin, 0);
+        } else {
+          return Logger.debug("Servo can't turn counterclockwise since it is not continuous");
+        }
       };
 
       return Servo;
