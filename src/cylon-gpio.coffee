@@ -12,12 +12,12 @@ namespace = require 'node-namespace'
 
 require 'cylon'
 
-# require './analog-sensor'
-# require './button'
-# require './led'
+require './analog-sensor'
+require './button'
+require './led'
 require './maxbotix'
-# require './motor'
-# require './servo'
+require './motor'
+require './servo'
 
 module.exports =
   driver: (opts) ->

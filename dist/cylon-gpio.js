@@ -15,7 +15,17 @@
 
   require('cylon');
 
+  require('./analog-sensor');
+
+  require('./button');
+
+  require('./led');
+
   require('./maxbotix');
+
+  require('./motor');
+
+  require('./servo');
 
   module.exports = {
     driver: function(opts) {
