@@ -23,7 +23,6 @@ namespace "Cylon.Drivers.GPIO", ->
       ['isPressed']
 
     start: (callback) ->
-      Logger.debug "Button on pin #{@pin} started"
       @connection.digitalRead @pin, (data) =>
         if data is 1
           @isPressed = true
@@ -32,8 +31,4 @@ namespace "Cylon.Drivers.GPIO", ->
           @isPressed = false
           @device.emit 'release'
 
-      super
-
-    stop: ->
-      Logger.debug "Button on pin #{@pin} stopping"
       super

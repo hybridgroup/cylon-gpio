@@ -31,10 +31,6 @@ namespace "Cylon.Drivers.GPIO", ->
 
       super
 
-    stop: ->
-      Logger.debug "Maxbotix on pin #{@pin} stopping"
-      super
-
     range: () ->
       return ( 254.0 / 1024.0 ) * 2.0 * @analogValue
 

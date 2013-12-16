@@ -23,14 +23,6 @@ namespace "Cylon.Drivers.GPIO", ->
     commands: ->
       ['turnOn', 'turnOff', 'toggle', 'speed', 'currentSpeed']
 
-    start: (callback) ->
-      Logger.debug "Motor on pin #{@pin} started"
-      super
-
-    stop: ->
-      Logger.debug "Motor on pin #{@pin} stopping"
-      super
-
     turnOn: ->
       @isOn = true
       @connection.digitalWrite(@pin, 1)

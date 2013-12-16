@@ -32,16 +32,6 @@
         return ['turnOn', 'turnOff', 'toggle', 'speed', 'currentSpeed'];
       };
 
-      Motor.prototype.start = function(callback) {
-        Logger.debug("Motor on pin " + this.pin + " started");
-        return Motor.__super__.start.apply(this, arguments);
-      };
-
-      Motor.prototype.stop = function() {
-        Logger.debug("Motor on pin " + this.pin + " stopping");
-        return Motor.__super__.stop.apply(this, arguments);
-      };
-
       Motor.prototype.turnOn = function() {
         this.isOn = true;
         return this.connection.digitalWrite(this.pin, 1);

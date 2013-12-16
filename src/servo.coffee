@@ -22,14 +22,6 @@ namespace "Cylon.Drivers.GPIO", ->
     commands: ->
       ['angle', 'currentAngle']
 
-    start: (callback) ->
-      Logger.debug "Servo on pin #{@pin} started"
-      super
-
-    stop: ->
-      Logger.debug "Servo on pin #{@pin} stopping"
-      super
-
     currentAngle: ->
       @angleValue
 

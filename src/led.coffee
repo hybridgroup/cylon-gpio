@@ -22,14 +22,6 @@ namespace "Cylon.Drivers.GPIO", ->
     commands: ->
       ['turnOn', 'turnOff', 'toggle', 'brightness']
 
-    start: (callback) ->
-      Logger.debug "LED on pin #{@pin} started"
-      super
-
-    stop: ->
-      Logger.debug "LED on pin #{@pin} stopping"
-      super
-
     turnOn: ->
       @isOn = true
       @connection.digitalWrite(@pin, 1)

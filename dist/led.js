@@ -31,16 +31,6 @@
         return ['turnOn', 'turnOff', 'toggle', 'brightness'];
       };
 
-      Led.prototype.start = function(callback) {
-        Logger.debug("LED on pin " + this.pin + " started");
-        return Led.__super__.start.apply(this, arguments);
-      };
-
-      Led.prototype.stop = function() {
-        Logger.debug("LED on pin " + this.pin + " stopping");
-        return Led.__super__.stop.apply(this, arguments);
-      };
-
       Led.prototype.turnOn = function() {
         this.isOn = true;
         return this.connection.digitalWrite(this.pin, 1);

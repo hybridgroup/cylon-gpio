@@ -26,7 +26,6 @@ namespace "Cylon.Drivers.GPIO", ->
       ['analogRead']
 
     start: (callback) ->
-      Logger.debug "AnalogSensor on pin #{@pin} started"
       @connection.analogRead @pin, (readVal) =>
         @analogVal = readVal
         @device.emit('analogRead', readVal)
@@ -35,8 +34,4 @@ namespace "Cylon.Drivers.GPIO", ->
         else if readVal <= @lowerLimit
           @device.emit('lowerLimit', readVal)
 
-      super
-
-    stop: ->
-      Logger.debug "AnalogSensor on pin #{@pin} stopping"
       super

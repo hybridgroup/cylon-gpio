@@ -42,11 +42,6 @@
         return Maxbotix.__super__.start.apply(this, arguments);
       };
 
-      Maxbotix.prototype.stop = function() {
-        Logger.debug("Maxbotix on pin " + this.pin + " stopping");
-        return Maxbotix.__super__.stop.apply(this, arguments);
-      };
-
       Maxbotix.prototype.range = function() {
         return (254.0 / 1024.0) * 2.0 * this.analogValue;
       };

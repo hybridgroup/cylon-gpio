@@ -37,7 +37,6 @@
 
       AnalogSensor.prototype.start = function(callback) {
         var _this = this;
-        Logger.debug("AnalogSensor on pin " + this.pin + " started");
         this.connection.analogRead(this.pin, function(readVal) {
           _this.analogVal = readVal;
           _this.device.emit('analogRead', readVal);
@@ -48,11 +47,6 @@
           }
         });
         return AnalogSensor.__super__.start.apply(this, arguments);
-      };
-
-      AnalogSensor.prototype.stop = function() {
-        Logger.debug("AnalogSensor on pin " + this.pin + " stopping");
-        return AnalogSensor.__super__.stop.apply(this, arguments);
       };
 
       return AnalogSensor;

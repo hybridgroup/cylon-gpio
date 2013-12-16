@@ -33,7 +33,6 @@
 
       Button.prototype.start = function(callback) {
         var _this = this;
-        Logger.debug("Button on pin " + this.pin + " started");
         this.connection.digitalRead(this.pin, function(data) {
           if (data === 1) {
             _this.isPressed = true;
@@ -44,11 +43,6 @@
           }
         });
         return Button.__super__.start.apply(this, arguments);
-      };
-
-      Button.prototype.stop = function() {
-        Logger.debug("Button on pin " + this.pin + " stopping");
-        return Button.__super__.stop.apply(this, arguments);
       };
 
       return Button;

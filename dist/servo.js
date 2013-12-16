@@ -31,16 +31,6 @@
         return ['angle', 'currentAngle'];
       };
 
-      Servo.prototype.start = function(callback) {
-        Logger.debug("Servo on pin " + this.pin + " started");
-        return Servo.__super__.start.apply(this, arguments);
-      };
-
-      Servo.prototype.stop = function() {
-        Logger.debug("Servo on pin " + this.pin + " stopping");
-        return Servo.__super__.stop.apply(this, arguments);
-      };
-
       Servo.prototype.currentAngle = function() {
         return this.angleValue;
       };
