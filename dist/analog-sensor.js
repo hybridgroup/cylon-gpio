@@ -57,7 +57,7 @@
 
       return AnalogSensor;
 
-    })(Cylon.Drivers.Driver);
+    })(Cylon.Driver);
   });
 
 }).call(this);

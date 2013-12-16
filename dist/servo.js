@@ -52,7 +52,7 @@
 
       return Servo;
 
-    })(Cylon.Drivers.Driver);
+    })(Cylon.Driver);
   });
 
 }).call(this);

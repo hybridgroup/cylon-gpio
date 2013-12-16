@@ -53,7 +53,7 @@
 
       return Button;
 
-    })(Cylon.Drivers.Driver);
+    })(Cylon.Driver);
   });
 
 }).call(this);

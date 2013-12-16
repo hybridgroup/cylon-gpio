@@ -72,7 +72,7 @@
 
       return Motor;
 
-    })(Cylon.Drivers.Driver);
+    })(Cylon.Driver);
   });
 
 }).call(this);

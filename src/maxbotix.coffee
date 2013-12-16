@@ -13,7 +13,7 @@ namespace = require 'node-namespace'
 require './cylon-gpio'
 
 namespace "Cylon.Drivers.GPIO", ->
-  class @Maxbotix extends Cylon.Drivers.Driver
+  class @Maxbotix extends Cylon.Driver
     constructor: (opts) ->
       super
       @pin = @device.pin

@@ -57,7 +57,7 @@
 
       return Maxbotix;
 
-    })(Cylon.Drivers.Driver);
+    })(Cylon.Driver);
   });
 
 }).call(this);

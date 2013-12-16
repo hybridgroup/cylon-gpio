@@ -65,7 +65,7 @@
 
       return Led;
 
-    })(Cylon.Drivers.Driver);
+    })(Cylon.Driver);
   });
 
 }).call(this);
