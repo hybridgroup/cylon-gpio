@@ -8,14 +8,14 @@
 
 'use strict';
 
+require './cylon-gpio'
+
 namespace = require 'node-namespace'
 
-namespace "Cylon.Driver.GPIO", ->
-  class @Button
+namespace "Cylon.Drivers.GPIO", ->
+  class @Button extends Cylon.Driver
     constructor: (opts) ->
-      @self = this
-      @device = opts.device
-      @connection = @device.connection
+      super
       @pin = @device.pin
       @isPressed = false
 
@@ -23,7 +23,6 @@ namespace "Cylon.Driver.GPIO", ->
       ['isPressed']
 
     start: (callback) ->
-      Logger.debug "Button on pin #{@pin} started"
       @connection.digitalRead @pin, (data) =>
         if data is 1
           @isPressed = true
@@ -32,8 +31,4 @@ namespace "Cylon.Driver.GPIO", ->
           @isPressed = false
           @device.emit 'release'
 
-      (callback)(null)
-      @device.emit 'start'
-
-    stop: ->
-      Logger.debug "Button on pin #{@pin} stopping"
+      super

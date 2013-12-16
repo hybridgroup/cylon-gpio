@@ -9,16 +9,20 @@
 
 (function() {
   'use strict';
-  var namespace;
+  var namespace,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  require('./cylon-gpio');
 
   namespace = require('node-namespace');
 
-  namespace("Cylon.Driver.GPIO", function() {
-    return this.Button = (function() {
+  namespace("Cylon.Drivers.GPIO", function() {
+    return this.Button = (function(_super) {
+      __extends(Button, _super);
+
       function Button(opts) {
-        this.self = this;
-        this.device = opts.device;
-        this.connection = this.device.connection;
+        Button.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.isPressed = false;
       }
@@ -29,7 +33,6 @@
 
       Button.prototype.start = function(callback) {
         var _this = this;
-        Logger.debug("Button on pin " + this.pin + " started");
         this.connection.digitalRead(this.pin, function(data) {
           if (data === 1) {
             _this.isPressed = true;
@@ -39,17 +42,12 @@
             return _this.device.emit('release');
           }
         });
-        callback(null);
-        return this.device.emit('start');
-      };
-
-      Button.prototype.stop = function() {
-        return Logger.debug("Button on pin " + this.pin + " stopping");
+        return Button.__super__.start.apply(this, arguments);
       };
 
       return Button;
 
-    })();
+    })(Cylon.Driver);
   });
 
 }).call(this);

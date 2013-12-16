@@ -4,7 +4,7 @@
 
   gpio = source("cylon-gpio");
 
-  describe("Cylon.GPIO", function() {
+  describe("Cylon.Drivers.GPIO", function() {
     it("standard async test", function(done) {
       var bool;
       bool = false;

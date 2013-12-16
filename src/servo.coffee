@@ -7,29 +7,20 @@
 ###
 
 'use strict';
+
+require './cylon-gpio'
+
 namespace = require 'node-namespace'
 
-namespace "Cylon.Driver.GPIO", ->
-  class @Servo
-    constructor: (opts) ->
-      @self = this
-      @device = opts.device
-      @connection = @device.connection
+namespace "Cylon.Drivers.GPIO", ->
+  class @Servo extends Cylon.Driver
+    constructor: (opts = {}) ->
+      super
       @pin = @device.pin
-      @type = opts.extraParams.type || 'standard'
       @angleValue = 0
 
     commands: ->
-      if @type is 'continuous'
-        ['clockwise', 'counterClockwise', 'stop']
-      else
-        ['angle', 'currentAngle']
-
-    start: (callback) ->
-      servoType = if @type is 'continuous' then "Continuous servo" else "Servo"
-      Logger.debug "#{servoType} on pin #{@pin} started"
-      (callback)(null)
-      @device.emit 'start'
+      ['angle', 'currentAngle']
 
     currentAngle: ->
       @angleValue
@@ -37,22 +28,3 @@ namespace "Cylon.Driver.GPIO", ->
     angle: (value) ->
       @connection.servoWrite(@pin, value)
       @angleValue = value
-
-    stop: ->
-      if @type is 'continuous'
-        Logger.debug "Servo on pin #{@pin} stopping"
-        @connection.servoWrite(@pin, 90)
-
-    clockwise: ->
-      if @type is 'continuous'
-        Logger.debug "Servo on pin #{@pin} turning clockwise"
-        @connection.servoWrite(@pin, 180)
-      else
-        Logger.debug "Servo can't turn clockwise since it is not continuous"
-
-    counterClockwise: ->
-      if @type is 'continuous'
-        Logger.debug "Servo on pin #{@pin} turning counter clockwise"
-        @connection.servoWrite(@pin, 89)
-      else
-        Logger.debug "Servo can't turn counterclockwise since it is not continuous"

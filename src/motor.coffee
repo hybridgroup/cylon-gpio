@@ -7,28 +7,21 @@
 ###
 
 'use strict';
+
 namespace = require 'node-namespace'
 
-namespace "Cylon.Driver.GPIO", ->
-  class @Motor
+require './cylon-gpio'
+
+namespace "Cylon.Drivers.GPIO", ->
+  class @Motor extends Cylon.Driver
     constructor: (opts) ->
-      @self = this
-      @device = opts.device
-      @connection = @device.connection
+      super
       @pin = @device.pin
       @speedValue = 0
       @isOn = false
 
     commands: ->
       ['turnOn', 'turnOff', 'toggle', 'speed', 'currentSpeed']
-
-    start: (callback) ->
-      Logger.debug "Motor on pin #{@pin} started"
-      (callback)(null)
-      @device.emit 'start'
-
-    stop: ->
-      Logger.debug "Motor on pin #{@pin} stopping"
 
     turnOn: ->
       @isOn = true

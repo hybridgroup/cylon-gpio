@@ -9,32 +9,26 @@
 
 (function() {
   'use strict';
-  var namespace;
+  var namespace,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   namespace = require('node-namespace');
 
-  namespace("Cylon.Driver.GPIO", function() {
-    return this.Led = (function() {
+  require('./cylon-gpio');
+
+  namespace("Cylon.Drivers.GPIO", function() {
+    return this.Led = (function(_super) {
+      __extends(Led, _super);
+
       function Led(opts) {
-        this.self = this;
-        this.device = opts.device;
-        this.connection = this.device.connection;
+        Led.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.isOn = false;
       }
 
       Led.prototype.commands = function() {
         return ['turnOn', 'turnOff', 'toggle', 'brightness'];
-      };
-
-      Led.prototype.start = function(callback) {
-        Logger.debug("LED on pin " + this.pin + " started");
-        callback(null);
-        return this.device.emit('start');
-      };
-
-      Led.prototype.stop = function() {
-        return Logger.debug("LED on pin " + this.pin + " stopping");
       };
 
       Led.prototype.turnOn = function() {
@@ -61,7 +55,7 @@
 
       return Led;
 
-    })();
+    })(Cylon.Driver);
   });
 
 }).call(this);

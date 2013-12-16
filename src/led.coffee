@@ -7,27 +7,20 @@
 ###
 
 'use strict';
+
 namespace = require 'node-namespace'
 
-namespace "Cylon.Driver.GPIO", ->
-  class @Led
+require './cylon-gpio'
+
+namespace "Cylon.Drivers.GPIO", ->
+  class @Led extends Cylon.Driver
     constructor: (opts) ->
-      @self = this
-      @device = opts.device
-      @connection = @device.connection
+      super
       @pin = @device.pin
       @isOn = false
 
     commands: ->
       ['turnOn', 'turnOff', 'toggle', 'brightness']
-
-    start: (callback) ->
-      Logger.debug "LED on pin #{@pin} started"
-      (callback)(null)
-      @device.emit 'start'
-
-    stop: ->
-      Logger.debug "LED on pin #{@pin} stopping"
 
     turnOn: ->
       @isOn = true

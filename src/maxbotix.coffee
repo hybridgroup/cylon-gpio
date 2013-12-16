@@ -7,14 +7,15 @@
 ###
 
 'use strict';
+
 namespace = require 'node-namespace'
 
-namespace "Cylon.Driver.GPIO", ->
-  class @Maxbotix
+require './cylon-gpio'
+
+namespace "Cylon.Drivers.GPIO", ->
+  class @Maxbotix extends Cylon.Driver
     constructor: (opts) ->
-      @self = this
-      @device = opts.device
-      @connection = @device.connection
+      super
       @pin = @device.pin
       @analogValue = 0
 
@@ -23,16 +24,12 @@ namespace "Cylon.Driver.GPIO", ->
 
     start: (callback) ->
       Logger.debug "Maxbotix on pin #{@pin} started"
-      @connection.analogRead @pin, (readVal) =>
+      @device.connection.analogRead @pin, (readVal) =>
         @self.analogValue = readVal
         @device.emit('range', @self.range())
         @device.emit('rangeCm', @self.rangeCm())
 
-      (callback)(null)
-      @device.emit 'start'
-
-    stop: ->
-      Logger.debug "Maxbotix on pin #{@pin} stopping"
+      super
 
     range: () ->
       return ( 254.0 / 1024.0 ) * 2.0 * @analogValue
