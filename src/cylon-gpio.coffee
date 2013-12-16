@@ -14,6 +14,7 @@ require 'cylon'
 
 require './analog-sensor'
 require './button'
+require './continuous-servo'
 require './led'
 require './maxbotix'
 require './motor'
@@ -25,6 +26,8 @@ module.exports =
       new Cylon.Drivers.GPIO.AnalogSensor(opts)
     else if opts.name is 'button'
       new Cylon.Drivers.GPIO.Button(opts)
+    else if opts.name is 'continuous-servo'
+      new Cylon.Drivers.GPIO.ContinuousServo(opts)
     else if opts.name is 'led'
       new Cylon.Drivers.GPIO.Led(opts)
     else if opts.name is 'maxbotix'
@@ -41,6 +44,8 @@ module.exports =
     robot.registerDriver 'cylon-gpio', 'analogSensor'
     Logger.debug "Registering GPIO button driver for #{robot.name}"
     robot.registerDriver 'cylon-gpio', 'button'
+    Logger.debug "Registering GPIO continuous-servo driver for #{robot.name}"
+    robot.registerDriver 'cylon-gpio', 'continuous-servo'
     Logger.debug "Registering GPIO LED driver for #{robot.name}"
     robot.registerDriver 'cylon-gpio', 'led'
     Logger.debug "Registering GPIO Maxbotix driver for #{robot.name}"
