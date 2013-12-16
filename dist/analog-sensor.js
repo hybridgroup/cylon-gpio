@@ -9,19 +9,25 @@
 
 (function() {
   'use strict';
-  var namespace;
+  var namespace,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  require('./cylon-gpio');
 
   namespace = require('node-namespace');
 
-  namespace("Cylon.Driver.GPIO", function() {
-    return this.AnalogSensor = (function() {
+  namespace("Cylon.Drivers.GPIO", function() {
+    return this.AnalogSensor = (function(_super) {
+      __extends(AnalogSensor, _super);
+
       function AnalogSensor(opts) {
-        this.self = this;
-        this.device = opts.device;
-        this.connection = this.device.connection;
+        var extraParams;
+        AnalogSensor.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
-        this.upperLimit = opts.extraParams.upperLimit;
-        this.lowerLimit = opts.extraParams.lowerLimit;
+        extraParams = opts.extraParams || {};
+        this.upperLimit = extraParams.upperLimit || 256;
+        this.lowerLimit = extraParams.lowerLimit || 0;
         this.analog_val = null;
       }
 
@@ -41,17 +47,17 @@
             return _this.device.emit('lowerLimit', readVal);
           }
         });
-        callback(null);
-        return this.device.emit('start');
+        return AnalogSensor.__super__.start.apply(this, arguments);
       };
 
       AnalogSensor.prototype.stop = function() {
-        return Logger.debug("AnalogSensor on pin " + this.pin + " stopping");
+        Logger.debug("AnalogSensor on pin " + this.pin + " stopping");
+        return AnalogSensor.__super__.stop.apply(this, arguments);
       };
 
       return AnalogSensor;
 
-    })();
+    })(Cylon.Drivers.Driver);
   });
 
 }).call(this);

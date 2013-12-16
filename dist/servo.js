@@ -9,16 +9,20 @@
 
 (function() {
   'use strict';
-  var namespace;
+  var namespace,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   namespace = require('node-namespace');
 
-  namespace("Cylon.Driver.GPIO", function() {
-    return this.Servo = (function() {
+  require('./cylon-gpio');
+
+  namespace("Cylon.Drivers.GPIO", function() {
+    return this.Servo = (function(_super) {
+      __extends(Servo, _super);
+
       function Servo(opts) {
-        this.self = this;
-        this.device = opts.device;
-        this.connection = this.device.connection;
+        Servo.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.angleValue = 0;
       }
@@ -29,12 +33,12 @@
 
       Servo.prototype.start = function(callback) {
         Logger.debug("Servo on pin " + this.pin + " started");
-        callback(null);
-        return this.device.emit('start');
+        return Servo.__super__.start.apply(this, arguments);
       };
 
       Servo.prototype.stop = function() {
-        return Logger.debug("Servo on pin " + this.pin + " stopping");
+        Logger.debug("Servo on pin " + this.pin + " stopping");
+        return Servo.__super__.stop.apply(this, arguments);
       };
 
       Servo.prototype.currentAngle = function() {
@@ -48,7 +52,7 @@
 
       return Servo;
 
-    })();
+    })(Cylon.Drivers.Driver);
   });
 
 }).call(this);

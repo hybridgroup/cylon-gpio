@@ -7,14 +7,15 @@
 ###
 
 'use strict';
+
 namespace = require 'node-namespace'
 
-namespace "Cylon.Driver.GPIO", ->
-  class @Servo
+require './cylon-gpio'
+
+namespace "Cylon.Drivers.GPIO", ->
+  class @Servo extends Cylon.Drivers.Driver
     constructor: (opts) ->
-      @self = this
-      @device = opts.device
-      @connection = @device.connection
+      super
       @pin = @device.pin
       @angleValue = 0
 
@@ -23,11 +24,11 @@ namespace "Cylon.Driver.GPIO", ->
 
     start: (callback) ->
       Logger.debug "Servo on pin #{@pin} started"
-      (callback)(null)
-      @device.emit 'start'
+      super
 
     stop: ->
       Logger.debug "Servo on pin #{@pin} stopping"
+      super
 
     currentAngle: ->
       @angleValue

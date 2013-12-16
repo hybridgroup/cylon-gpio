@@ -2,7 +2,7 @@
 
 gpio = source("cylon-gpio")
 
-describe "Cylon.GPIO", ->
+describe "Cylon.Drivers.GPIO", ->
   it "standard async test", (done) ->
     bool = false
     bool.should.be.false

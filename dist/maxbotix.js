@@ -9,16 +9,20 @@
 
 (function() {
   'use strict';
-  var namespace;
+  var namespace,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   namespace = require('node-namespace');
 
-  namespace("Cylon.Driver.GPIO", function() {
-    return this.Maxbotix = (function() {
+  require('./cylon-gpio');
+
+  namespace("Cylon.Drivers.GPIO", function() {
+    return this.Maxbotix = (function(_super) {
+      __extends(Maxbotix, _super);
+
       function Maxbotix(opts) {
-        this.self = this;
-        this.device = opts.device;
-        this.connection = this.device.connection;
+        Maxbotix.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.analogValue = 0;
       }
@@ -30,17 +34,17 @@
       Maxbotix.prototype.start = function(callback) {
         var _this = this;
         Logger.debug("Maxbotix on pin " + this.pin + " started");
-        this.connection.analogRead(this.pin, function(readVal) {
+        this.device.connection.analogRead(this.pin, function(readVal) {
           _this.self.analogValue = readVal;
           _this.device.emit('range', _this.self.range());
           return _this.device.emit('rangeCm', _this.self.rangeCm());
         });
-        callback(null);
-        return this.device.emit('start');
+        return Maxbotix.__super__.start.apply(this, arguments);
       };
 
       Maxbotix.prototype.stop = function() {
-        return Logger.debug("Maxbotix on pin " + this.pin + " stopping");
+        Logger.debug("Maxbotix on pin " + this.pin + " stopping");
+        return Maxbotix.__super__.stop.apply(this, arguments);
       };
 
       Maxbotix.prototype.range = function() {
@@ -53,7 +57,7 @@
 
       return Maxbotix;
 
-    })();
+    })(Cylon.Drivers.Driver);
   });
 
 }).call(this);

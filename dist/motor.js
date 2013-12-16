@@ -9,16 +9,20 @@
 
 (function() {
   'use strict';
-  var namespace;
+  var namespace,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   namespace = require('node-namespace');
 
-  namespace("Cylon.Driver.GPIO", function() {
-    return this.Motor = (function() {
+  require('./cylon-gpio');
+
+  namespace("Cylon.Drivers.GPIO", function() {
+    return this.Motor = (function(_super) {
+      __extends(Motor, _super);
+
       function Motor(opts) {
-        this.self = this;
-        this.device = opts.device;
-        this.connection = this.device.connection;
+        Motor.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.speedValue = 0;
         this.isOn = false;
@@ -30,12 +34,12 @@
 
       Motor.prototype.start = function(callback) {
         Logger.debug("Motor on pin " + this.pin + " started");
-        callback(null);
-        return this.device.emit('start');
+        return Motor.__super__.start.apply(this, arguments);
       };
 
       Motor.prototype.stop = function() {
-        return Logger.debug("Motor on pin " + this.pin + " stopping");
+        Logger.debug("Motor on pin " + this.pin + " stopping");
+        return Motor.__super__.stop.apply(this, arguments);
       };
 
       Motor.prototype.turnOn = function() {
@@ -68,7 +72,7 @@
 
       return Motor;
 
-    })();
+    })(Cylon.Drivers.Driver);
   });
 
 }).call(this);
