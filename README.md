@@ -76,6 +76,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 [![NPM](https://nodei.co/npm/cylon-gpio.png?compact=true)](https://nodei.co/npm/cylon-gpio/)
 
+Version 0.7.0 - Add support for continuous servo, update to cylon 0.8.0
+
 Version 0.6.0 - Update to cylon 0.7.0
 
 Version 0.5.0 - Add support for Maxbotix ultrasonic range finder, update to cylon 0.6.0
