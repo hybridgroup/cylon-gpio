@@ -6,7 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-'use strict';
+'use strict'
 
 require './cylon-gpio'
 
@@ -18,13 +18,29 @@ namespace "Cylon.Drivers.GPIO", ->
       super
       @pin = @device.pin
       @angleValue = 0
+      @safetyLock = true
 
     commands: ->
-      ['angle', 'currentAngle']
+      ['angle', 'currentAngle', 'unlockAngleSafety']
 
     currentAngle: ->
       @angleValue
 
     angle: (value) ->
+      value = @angleSafety(value) if @safetyLock
       @connection.servoWrite(@pin, value)
       @angleValue = value
+
+    angleSafety: (value) ->
+      if value < 30 or value > 150
+        if value < 30
+          value = 30
+        else
+          value = 150
+
+      value
+
+    # Use to unlock the safety on the servo angle at your
+    # own risk.
+    unlockAngleSafety: () ->
+      @safetyLock = false

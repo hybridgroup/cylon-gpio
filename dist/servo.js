@@ -28,10 +28,11 @@
         Servo.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.angleValue = 0;
+        this.safetyLock = true;
       }
 
       Servo.prototype.commands = function() {
-        return ['angle', 'currentAngle'];
+        return ['angle', 'currentAngle', 'unlockAngleSafety'];
       };
 
       Servo.prototype.currentAngle = function() {
@@ -39,8 +40,26 @@
       };
 
       Servo.prototype.angle = function(value) {
+        if (this.safetyLock) {
+          value = this.angleSafety(value);
+        }
         this.connection.servoWrite(this.pin, value);
         return this.angleValue = value;
+      };
+
+      Servo.prototype.angleSafety = function(value) {
+        if (value < 30 || value > 150) {
+          if (value < 30) {
+            value = 30;
+          } else {
+            value = 150;
+          }
+        }
+        return value;
+      };
+
+      Servo.prototype.unlockAngleSafety = function() {
+        return this.safetyLock = false;
       };
 
       return Servo;
