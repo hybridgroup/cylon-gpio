@@ -21,17 +21,17 @@ namespace "Cylon.Drivers.GPIO", ->
       @angleRange = if opts.extraParams.range? then opts.extraParams.range? else { min: 30, max: 150}
 
     commands: ->
-      ['angle', 'currentAngle', 'unlockAngleSafety']
+      ['angle', 'currentAngle']
 
     currentAngle: ->
       @angleValue
 
     angle: (value) ->
-      value = @angleSafety(value) if @safetyLock
+      value = @safeAngle(value)
       @connection.servoWrite(@pin, value)
       @angleValue = value
 
-    angleSafety: (value) ->
+    safeAngle: (value) ->
       if value < @angleRange.min or value > @angleRange.max
         if value < @angleRange.min
           value = @angleRange.min
