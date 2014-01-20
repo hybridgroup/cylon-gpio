@@ -28,6 +28,10 @@
         Servo.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.angleValue = 0;
+        this.angleRange = opts.extraParams.range != null ? opts.extraParams.range : {
+          min: 30,
+          max: 150
+        };
       }
 
       Servo.prototype.commands = function() {
@@ -39,8 +43,20 @@
       };
 
       Servo.prototype.angle = function(value) {
+        value = this.safeAngle(value);
         this.connection.servoWrite(this.pin, value);
         return this.angleValue = value;
+      };
+
+      Servo.prototype.safeAngle = function(value) {
+        if (value < this.angleRange.min || value > this.angleRange.max) {
+          if (value < this.angleRange.min) {
+            value = this.angleRange.min;
+          } else {
+            value = this.angleRange.max;
+          }
+        }
+        return value;
       };
 
       return Servo;

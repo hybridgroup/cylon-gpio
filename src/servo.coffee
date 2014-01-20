@@ -6,7 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-'use strict';
+'use strict'
 
 require './cylon-gpio'
 
@@ -18,6 +18,7 @@ namespace "Cylon.Drivers.GPIO", ->
       super
       @pin = @device.pin
       @angleValue = 0
+      @angleRange = if opts.extraParams.range? then opts.extraParams.range else { min: 30, max: 150}
 
     commands: ->
       ['angle', 'currentAngle']
@@ -26,5 +27,15 @@ namespace "Cylon.Drivers.GPIO", ->
       @angleValue
 
     angle: (value) ->
+      value = @safeAngle(value)
       @connection.servoWrite(@pin, value)
       @angleValue = value
+
+    safeAngle: (value) ->
+      if value < @angleRange.min or value > @angleRange.max
+        if value < @angleRange.min
+          value = @angleRange.min
+        else
+          value = @angleRange.max
+
+      value
