@@ -28,7 +28,7 @@
         Servo.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.angleValue = 0;
-        this.angleRange = opts.extraParams.range != null ? opts.extraParams.range != null : {
+        this.angleRange = opts.extraParams.range != null ? opts.extraParams.range : {
           min: 30,
           max: 150
         };
