@@ -18,7 +18,7 @@ namespace "Cylon.Drivers.GPIO", ->
       super
       @pin = @device.pin
       @angleValue = 0
-      @safetyLock = true
+      @angleRange = if opts.extraParams.range? then opts.extraParams.range? else { min: 30, max: 150}
 
     commands: ->
       ['angle', 'currentAngle', 'unlockAngleSafety']
@@ -32,15 +32,10 @@ namespace "Cylon.Drivers.GPIO", ->
       @angleValue = value
 
     angleSafety: (value) ->
-      if value < 30 or value > 150
-        if value < 30
-          value = 30
+      if value < @angleRange.min or value > @angleRange.max
+        if value < @angleRange.min
+          value = @angleRange.min
         else
-          value = 150
+          value = @angleRange.max
 
       value
-
-    # Use to unlock the safety on the servo angle at your
-    # own risk.
-    unlockAngleSafety: () ->
-      @safetyLock = false
