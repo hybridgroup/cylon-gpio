@@ -24,7 +24,12 @@ namespace "Cylon.Drivers.GPIO", ->
 
     commands: ->
       ['analogRead']
-
+      
+    # Public: Starts the driver
+    #
+    # callback - params
+    #
+    # Returns null.
     start: (callback) ->
       @connection.analogRead @pin, (readVal) =>
         @analogVal = readVal

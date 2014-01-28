@@ -22,6 +22,11 @@ namespace "Cylon.Drivers.GPIO", ->
     commands: ->
       ['isPressed']
 
+    # Public: Starts the driver
+    #
+    # callback - params
+    #
+    # Returns null.
     start: (callback) ->
       @connection.digitalRead @pin, (data) =>
         if data is 1
