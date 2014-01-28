@@ -34,15 +34,24 @@
         return ['clockwise', 'counterClockwise', 'stop'];
       };
 
+      # Public: Stops the driver
+      #
+      # Returns null.
       ContinuousServo.prototype.stop = function() {
         return this.connection.servoWrite(this.pin, 90);
       };
 
+      # Public: Turns the servo to go clockwise, if the driver is continuous.
+      #
+      # Returns true | nil.
       ContinuousServo.prototype.clockwise = function() {
         Logger.debug("Servo on pin " + this.pin + " turning clockwise");
         return this.connection.servoWrite(this.pin, 180);
       };
 
+      # Public: Turns the servo to go counter clockwise, if the driver is continuous.
+      #
+      # Returns true | nil.
       ContinuousServo.prototype.counterClockwise = function() {
         Logger.debug("Servo on pin " + this.pin + " turning counter clockwise");
         return this.connection.servoWrite(this.pin, 89);

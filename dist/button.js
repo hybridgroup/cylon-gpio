@@ -31,6 +31,11 @@
         return ['isPressed'];
       };
 
+      # Public: Starts the driver
+      #
+      # callback - params
+      #
+      # Returns null.
       Button.prototype.start = function(callback) {
         var _this = this;
         this.connection.digitalRead(this.pin, function(data) {
