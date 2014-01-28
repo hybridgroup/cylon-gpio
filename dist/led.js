@@ -31,25 +31,18 @@
         return ['turnOn', 'turnOff', 'toggle', 'brightness'];
       };
 
-      # Public: Turns LED on.
-      #
-      # Returns null
+
       Led.prototype.turnOn = function() {
         this.isOn = true;
         return this.connection.digitalWrite(this.pin, 1);
       };
 
-      # Public: Turns LED off.
-      #
-      # Returns null.
       Led.prototype.turnOff = function() {
         this.isOn = false;
         return this.connection.digitalWrite(this.pin, 0);
       };
 
-      # Public: Turns the LED on, or off, depending on if it is already off, or on, respectively.
-      #
-      # Returns null.
+
       Led.prototype.toggle = function() {
         if (this.isOn) {
           return this.turnOff();
@@ -58,13 +51,6 @@
         }
       };
 
-      # Public: Sets brightness of the led to the specified brightness value 
-      # passed to brightness(brightness_int) using PWM, brightness can be any 
-      # integer value between 0 and 255.
-      #
-      # value - params, The brightness level
-      #
-      # Returns null.
       Led.prototype.brightness = function(value) {
         return this.connection.pwmWrite(this.pin, value);
       };

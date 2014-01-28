@@ -38,32 +38,18 @@
         return ['angle', 'currentAngle'];
       };
 
-      # Public: Returns the current angle of the servo, an integer value 
-      # between 0 and 180.
-      #
-      # Returns null.
+
       Servo.prototype.currentAngle = function() {
         return this.angleValue;
       };
 
-      # Public: Moves the servo to the specified angle, angle must be an 
-      # integer value between 0 and 180.
-      #
-      # value - params
-      #
-      # Returns null.
+
       Servo.prototype.angle = function(value) {
         value = this.safeAngle(value);
         this.connection.servoWrite(this.pin, value);
         return this.angleValue = value;
       };
 
-      # Public: Saves an specified angle, angle must be an 
-      # integer value between 0 and 180.
-      #
-      # value - params
-      #
-      # Returns null.
       Servo.prototype.safeAngle = function(value) {
         if (value < this.angleRange.min || value > this.angleRange.max) {
           if (value < this.angleRange.min) {

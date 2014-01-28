@@ -31,9 +31,6 @@
         return ['analogValue', 'range', 'rangeCm'];
       };
 
-      # Public: Stops the driver
-      #
-      # Returns null.
       Maxbotix.prototype.start = function(callback) {
         var _this = this;
         Logger.debug("Maxbotix on pin " + this.pin + " started");
@@ -45,16 +42,12 @@
         return Maxbotix.__super__.start.apply(this, arguments);
       };
 
-      # Public: Returns the distance measured by the sonar in inches.
-      #
-      # Returns number.
+
       Maxbotix.prototype.range = function() {
         return (254.0 / 1024.0) * 2.0 * this.analogValue;
       };
 
-      # Public: Returns the distance measured by the sonar in cm.
-      #
-      # Returns number.
+
       Maxbotix.prototype.rangeCm = function() {
         return (this.analogValue / 2.0) * 2.54;
       };

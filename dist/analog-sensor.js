@@ -35,11 +35,6 @@
         return ['analogRead'];
       };
 
-      # Public: Starts the driver
-      #
-      # callback - params
-      #
-      # Returns null.
       AnalogSensor.prototype.start = function(callback) {
         var _this = this;
         this.connection.analogRead(this.pin, function(readVal) {
