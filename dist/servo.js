@@ -38,9 +38,11 @@
         return ['angle', 'currentAngle'];
       };
 
+
       Servo.prototype.currentAngle = function() {
         return this.angleValue;
       };
+
 
       Servo.prototype.angle = function(value) {
         value = this.safeAngle(value);

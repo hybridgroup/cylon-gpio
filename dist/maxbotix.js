@@ -42,9 +42,11 @@
         return Maxbotix.__super__.start.apply(this, arguments);
       };
 
+
       Maxbotix.prototype.range = function() {
         return (254.0 / 1024.0) * 2.0 * this.analogValue;
       };
+
 
       Maxbotix.prototype.rangeCm = function() {
         return (this.analogValue / 2.0) * 2.54;

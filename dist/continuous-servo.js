@@ -34,6 +34,7 @@
         return ['clockwise', 'counterClockwise', 'stop'];
       };
 
+
       ContinuousServo.prototype.stop = function() {
         return this.connection.servoWrite(this.pin, 90);
       };

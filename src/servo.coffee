@@ -23,14 +23,30 @@ namespace "Cylon.Drivers.GPIO", ->
     commands: ->
       ['angle', 'currentAngle']
 
+    # Public: Returns the current angle of the servo, an integer value 
+    # between 0 and 180.
+    #
+    # Returns null.
     currentAngle: ->
       @angleValue
 
+    # Public: Moves the servo to the specified angle, angle must be an 
+    # integer value between 0 and 180.
+    #
+    # value - params
+    #
+    # Returns null.
     angle: (value) ->
       value = @safeAngle(value)
       @connection.servoWrite(@pin, value)
       @angleValue = value
 
+    # Public: Saves an specified angle, angle must be an 
+    # integer value between 0 and 180.
+    #
+    # value - params
+    #
+    # Returns null.
     safeAngle: (value) ->
       if value < @angleRange.min or value > @angleRange.max
         if value < @angleRange.min

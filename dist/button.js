@@ -31,6 +31,7 @@
         return ['isPressed'];
       };
 
+
       Button.prototype.start = function(callback) {
         var _this = this;
         this.connection.digitalRead(this.pin, function(data) {

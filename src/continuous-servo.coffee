@@ -22,13 +22,22 @@ namespace "Cylon.Drivers.GPIO", ->
     commands: ->
       ['clockwise', 'counterClockwise', 'stop']
 
+    # Public: Stops the driver
+    #
+    # Returns null.
     stop: ->
       @connection.servoWrite(@pin, 90)
 
+    # Public: Turns the servo to go clockwise, if the driver is continuous.
+    #
+    # Returns true | nil.
     clockwise: ->
       Logger.debug "Servo on pin #{@pin} turning clockwise"
       @connection.servoWrite(@pin, 180)
 
+    # Public: Turns the servo to go counter clockwise, if the driver is continuous.
+    #
+    # Returns true | nil.
     counterClockwise: ->
       Logger.debug "Servo on pin #{@pin} turning counter clockwise"
       @connection.servoWrite(@pin, 89)

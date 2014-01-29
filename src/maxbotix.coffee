@@ -22,6 +22,9 @@ namespace "Cylon.Drivers.GPIO", ->
     commands: ->
       ['analogValue', 'range', 'rangeCm']
 
+    # Public: Stops the driver
+    #
+    # Returns null.
     start: (callback) ->
       Logger.debug "Maxbotix on pin #{@pin} started"
       @device.connection.analogRead @pin, (readVal) =>
@@ -31,8 +34,14 @@ namespace "Cylon.Drivers.GPIO", ->
 
       super
 
+    # Public: Returns the distance measured by the sonar in inches.
+    #
+    # Returns number.
     range: () ->
       return ( 254.0 / 1024.0 ) * 2.0 * @analogValue
 
+    # Public: Returns the distance measured by the sonar in cm.
+    #
+    # Returns number.
     rangeCm: () ->
       return (@analogValue / 2.0) * 2.54
