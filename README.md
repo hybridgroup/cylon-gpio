@@ -59,6 +59,7 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
   - Continuous Servo
   - LED
   - Motor
+  - Makey Button (high-resistance button like the [MakeyMakey](http://www.makeymakey.com/))
   - Maxbotix Ultrasonic Range Finder
   - Servo
 

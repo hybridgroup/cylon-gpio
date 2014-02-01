@@ -16,38 +16,35 @@ require './analog-sensor'
 require './button'
 require './continuous-servo'
 require './led'
+require './makey-button'
 require './maxbotix'
 require './motor'
 require './servo'
 
 module.exports =
   driver: (opts) ->
-    if opts.name is 'analogSensor'
-      new Cylon.Drivers.GPIO.AnalogSensor(opts)
-    else if opts.name is 'button'
-      new Cylon.Drivers.GPIO.Button(opts)
-    else if opts.name is 'continuous-servo'
-      new Cylon.Drivers.GPIO.ContinuousServo(opts)
-    else if opts.name is 'led'
-      new Cylon.Drivers.GPIO.Led(opts)
-    else if opts.name is 'maxbotix'
-      new Cylon.Drivers.GPIO.Maxbotix(opts)
-    else if opts.name is 'motor'
-      new Cylon.Drivers.GPIO.Motor(opts)
-    else if opts.name is 'servo'
-      new Cylon.Drivers.GPIO.Servo(opts)
-    else
-      null
+    switch opts.name
+      when 'analogSensor' then new Cylon.Drivers.GPIO.AnalogSensor(opts)
+      when 'button' then new Cylon.Drivers.GPIO.Button(opts)
+      when 'continuous-servo' then new Cylon.Drivers.GPIO.ContinuousServo(opts)
+      when 'led' then new Cylon.Drivers.GPIO.Led(opts)
+      when 'makey-button' then new Cylon.Drivers.GPIO.MakeyButton(opts)
+      when 'maxbotix' then new Cylon.Drivers.GPIO.Maxbotix(opts)
+      when 'motor' then new Cylon.Drivers.GPIO.Motor(opts)
+      when 'servo' then new Cylon.Drivers.GPIO.Servo(opts)
+      else null
 
   register: (robot) ->
-    Logger.debug "Registering GPIO analogSensor driver for #{robot.name}"
+    Logger.debug "Registering GPIO AnalogSensor driver for #{robot.name}"
     robot.registerDriver 'cylon-gpio', 'analogSensor'
-    Logger.debug "Registering GPIO button driver for #{robot.name}"
+    Logger.debug "Registering GPIO Button driver for #{robot.name}"
     robot.registerDriver 'cylon-gpio', 'button'
-    Logger.debug "Registering GPIO continuous-servo driver for #{robot.name}"
+    Logger.debug "Registering GPIO ContinuousServo driver for #{robot.name}"
     robot.registerDriver 'cylon-gpio', 'continuous-servo'
     Logger.debug "Registering GPIO LED driver for #{robot.name}"
     robot.registerDriver 'cylon-gpio', 'led'
+    Logger.debug "Registering GPIO MakeyButton driver for #{robot.name}"
+    robot.registerDriver 'cylon-gpio', 'button'
     Logger.debug "Registering GPIO Maxbotix driver for #{robot.name}"
     robot.registerDriver 'cylon-gpio', 'maxbotix'
     Logger.debug "Registering GPIO Motor driver for #{robot.name}"

@@ -31,7 +31,6 @@
         return ['turnOn', 'turnOff', 'toggle', 'brightness'];
       };
 
-
       Led.prototype.turnOn = function() {
         this.isOn = true;
         return this.connection.digitalWrite(this.pin, 1);
@@ -41,7 +40,6 @@
         this.isOn = false;
         return this.connection.digitalWrite(this.pin, 0);
       };
-
 
       Led.prototype.toggle = function() {
         if (this.isOn) {

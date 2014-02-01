@@ -23,6 +23,8 @@
 
   require('./led');
 
+  require('./makey-button');
+
   require('./maxbotix');
 
   require('./motor');
@@ -31,33 +33,38 @@
 
   module.exports = {
     driver: function(opts) {
-      if (opts.name === 'analogSensor') {
-        return new Cylon.Drivers.GPIO.AnalogSensor(opts);
-      } else if (opts.name === 'button') {
-        return new Cylon.Drivers.GPIO.Button(opts);
-      } else if (opts.name === 'continuous-servo') {
-        return new Cylon.Drivers.GPIO.ContinuousServo(opts);
-      } else if (opts.name === 'led') {
-        return new Cylon.Drivers.GPIO.Led(opts);
-      } else if (opts.name === 'maxbotix') {
-        return new Cylon.Drivers.GPIO.Maxbotix(opts);
-      } else if (opts.name === 'motor') {
-        return new Cylon.Drivers.GPIO.Motor(opts);
-      } else if (opts.name === 'servo') {
-        return new Cylon.Drivers.GPIO.Servo(opts);
-      } else {
-        return null;
+      switch (opts.name) {
+        case 'analogSensor':
+          return new Cylon.Drivers.GPIO.AnalogSensor(opts);
+        case 'button':
+          return new Cylon.Drivers.GPIO.Button(opts);
+        case 'continuous-servo':
+          return new Cylon.Drivers.GPIO.ContinuousServo(opts);
+        case 'led':
+          return new Cylon.Drivers.GPIO.Led(opts);
+        case 'makey-button':
+          return new Cylon.Drivers.GPIO.MakeyButton(opts);
+        case 'maxbotix':
+          return new Cylon.Drivers.GPIO.Maxbotix(opts);
+        case 'motor':
+          return new Cylon.Drivers.GPIO.Motor(opts);
+        case 'servo':
+          return new Cylon.Drivers.GPIO.Servo(opts);
+        default:
+          return null;
       }
     },
     register: function(robot) {
-      Logger.debug("Registering GPIO analogSensor driver for " + robot.name);
+      Logger.debug("Registering GPIO AnalogSensor driver for " + robot.name);
       robot.registerDriver('cylon-gpio', 'analogSensor');
-      Logger.debug("Registering GPIO button driver for " + robot.name);
+      Logger.debug("Registering GPIO Button driver for " + robot.name);
       robot.registerDriver('cylon-gpio', 'button');
-      Logger.debug("Registering GPIO continuous-servo driver for " + robot.name);
+      Logger.debug("Registering GPIO ContinuousServo driver for " + robot.name);
       robot.registerDriver('cylon-gpio', 'continuous-servo');
       Logger.debug("Registering GPIO LED driver for " + robot.name);
       robot.registerDriver('cylon-gpio', 'led');
+      Logger.debug("Registering GPIO MakeyButton driver for " + robot.name);
+      robot.registerDriver('cylon-gpio', 'button');
       Logger.debug("Registering GPIO Maxbotix driver for " + robot.name);
       robot.registerDriver('cylon-gpio', 'maxbotix');
       Logger.debug("Registering GPIO Motor driver for " + robot.name);

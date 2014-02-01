@@ -35,13 +35,12 @@
       Motor.prototype.turnOn = function() {
         this.isOn = true;
         return this.connection.digitalWrite(this.pin, 1);
-      };  
+      };
 
       Motor.prototype.turnOff = function() {
         this.isOn = false;
         return this.connection.digitalWrite(this.pin, 0);
       };
-
 
       Motor.prototype.toggle = function() {
         if (this.isOn) {
@@ -49,12 +48,11 @@
         } else {
           return this.turnOn();
         }
-      };  
+      };
 
       Motor.prototype.currentSpeed = function() {
         return this.speedValue;
       };
-
 
       Motor.prototype.speed = function(value) {
         this.connection.pwmWrite(this.pin, value);

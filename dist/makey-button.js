@@ -18,34 +18,51 @@
   namespace = require('node-namespace');
 
   namespace("Cylon.Drivers.GPIO", function() {
-    return this.Button = (function(_super) {
-      __extends(Button, _super);
+    return this.MakeyButton = (function(_super) {
+      __extends(MakeyButton, _super);
 
-      function Button(opts) {
-        Button.__super__.constructor.apply(this, arguments);
+      function MakeyButton(opts) {
+        MakeyButton.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.isPressed = false;
+        this.data = [];
       }
 
-      Button.prototype.commands = function() {
+      MakeyButton.prototype.commands = function() {
         return ['isPressed'];
       };
 
-      Button.prototype.start = function(callback) {
+      MakeyButton.prototype.start = function(callback) {
         var _this = this;
         this.connection.digitalRead(this.pin, function(data) {
-          if (data === 1) {
+          _this.data.push(data);
+          return _this.data.shift;
+        });
+        every(100, function() {
+          if (_this.averageData() > 0.5 && !_this.isPressed) {
             _this.isPressed = true;
             return _this.device.emit('push');
-          } else {
+          } else if (_this.averageData() <= 0.5 && _this.isPressed) {
             _this.isPressed = false;
             return _this.device.emit('release');
           }
         });
-        return Button.__super__.start.apply(this, arguments);
+        return MakeyButton.__super__.start.apply(this, arguments);
       };
 
-      return Button;
+      MakeyButton.prototype.averageData = function() {
+        var result;
+        result = 0;
+        if (this.data.length > 0) {
+          this.data.forEach(function(n) {
+            return result += n;
+          });
+          result = result / this.data.length;
+        }
+        return result;
+      };
+
+      return MakeyButton;
 
     })(Cylon.Driver);
   });
