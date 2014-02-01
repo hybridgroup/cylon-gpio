@@ -18,7 +18,7 @@ namespace "Cylon.Drivers.GPIO", ->
       super
       @pin = @device.pin
       @angleValue = 0
-      @angleRange = if opts.extraParams.range? then opts.extraParams.range else { min: 30, max: 150}
+      @angleRange = if opts.extraParams? and opts.extraParams.range? then opts.extraParams.range else { min: 30, max: 150}
 
     commands: ->
       ['angle', 'currentAngle']

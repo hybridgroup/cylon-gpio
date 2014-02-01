@@ -28,7 +28,7 @@
         Servo.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.angleValue = 0;
-        this.angleRange = opts.extraParams.range != null ? opts.extraParams.range : {
+        this.angleRange = (opts.extraParams != null) && (opts.extraParams.range != null) ? opts.extraParams.range : {
           min: 30,
           max: 150
         };
@@ -38,11 +38,9 @@
         return ['angle', 'currentAngle'];
       };
 
-
       Servo.prototype.currentAngle = function() {
         return this.angleValue;
       };
-
 
       Servo.prototype.angle = function(value) {
         value = this.safeAngle(value);
