@@ -2,6 +2,9 @@
 
 ## isPressed()
 
-Public: Returns true or false matching state of the button.
+Returns true or false matching state of the button.
 
-Returns true | false.
+##### Returns  
+
+`true or false`
+
