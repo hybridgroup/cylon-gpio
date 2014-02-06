@@ -1,19 +1,25 @@
 # Commands
 
-## analogValue()
+## analogValue
 
-Public: Text here.
+Text here.
 
-Returns integer_value.
+##### Returns 
 
-## range()
+`integer`
 
-Public: Returns the distance measured by the sonar in inches.
+## range
 
-Returns integer_value.
+Returns the distance measured by the sonar in inches.
 
-## rangeCm()
+##### Returns 
 
-Public: Returns the distance measured by the sonar in cm.
+`integer`
 
-Returns integer_value.
+## rangeCm
+
+Returns the distance measured by the sonar in cm.
+
+##### Returns 
+
+`integer`

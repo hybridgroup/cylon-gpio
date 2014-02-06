@@ -1,20 +1,26 @@
 # Commands
 
-## clockwise()
+## clockwise
 
-Public: Turns the servo to go clockwise, if the driver is continuous.
+Turns the servo to go clockwise, if the driver is continuous.
 
-Returns true | nil.
+##### Returns  
 
-## counterClockwise()
+`true or nil`
 
-Public: Turns the servo to go counter clockwise, if the driver is continuous.
+## counterClockwise
 
-Returns true | nil.
+Turns the servo to go counter clockwise, if the driver is continuous.
 
-## stop()
+##### Returns  
 
-Public: Stops the driver.
+`true or nil`
 
-Returns nil.
+## stop
+
+Stops the driver.
+
+##### Returns  
+
+`nil`
 

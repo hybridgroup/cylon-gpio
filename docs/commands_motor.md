@@ -1,33 +1,45 @@
 # Commands
 
-## turnOn()
+## turnOn
 
-Public: Starts the motor.
+Starts the motor.
 
-Returns true | nil.
+##### Returns 
 
-## turnOff()
+`true or nil`
 
-Public: Stops the motor.
+## turnOff
 
-Returns true | nil.
+Stops the motor.
 
-## toggle()
+##### Returns 
 
-Public: Sets the state of the motor to the oposite of the current state, if motor is on then sets it to off.
+`true or nil`
 
-Returns true | nil.
+## toggle
+
+Sets the state of the motor to the oposite of the current state, if motor is on then sets it to off.
+
+##### Returns 
+
+`true or nil`
 
 ## speed(speed_value)
 
-Public: Sets the speed of the motor to the value provided in the speed param, speed value must be an integer between 0 and 255.
+Sets the speed of the motor to the value provided in the speed param, speed value must be an integer between `0` and `255`.
+
+##### Params
 
 - **speed_value** -  The speed value for which to return data
 
-Returns integer_value.
+##### Returns 
 
-## currentSpeed()
+`integer`
 
-Public: Returns the current speed of the motor as an integer between 0 and 255.
+## currentSpeed
 
-Returns integer_value.
+Returns the current speed of the motor as an integer between 0 and 255.
+
+##### Returns 
+
+`integer`

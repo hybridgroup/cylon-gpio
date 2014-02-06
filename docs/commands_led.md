@@ -1,27 +1,37 @@
 # Commands
 
-## turnOn()
+## turnOn
 
-Public: Turns LED on.
+Turns LED on.
 
-Returns true | false.
+##### Returns  
 
-## turnOff()
+`true or false`
 
-Public: Turns LED off.
+## turnOff
 
-Returns true | false.
+Turns LED off.
 
-## toggle()
+##### Returns  
 
-Public: Turns the LED on, or off, depending on if it is already off, or on, respectively.
+`true or false`
 
-Returns on | off.
+## toggle
+
+Turns the LED on, or off, depending on if it is already off, or on, respectively.
+
+##### Returns  
+
+`on or off`
 
 ## brightness(brightness_int)
 
-Public: Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between 0 and 255.
+Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between `0` and `255`.
+
+##### Params
 
 - **brightness_int** - The brightness for which to return data
 
-Returns integer.
+##### Returns  
+
+`integer`

@@ -1,13 +1,17 @@
 # Commands
 
-## angle()
+## angle
 
-Public: Moves the servo to the specified angle, angle must be an integer value between 0 and 180.
+Moves the servo to the specified angle, angle must be an integer value between `0` and `180`.
 
-Returns integer_value (between 0 and 180).
+##### Returns 
 
-## currentAngle()
+`integer` (between 0 and 180).
 
-Public: Returns the current angle of the servo, an integer value between 0 and 180.
+## currentAngle
 
-Returns integer_value (between 0 and 180).
+Returns the current angle of the servo, an integer value between `0` and `180`.
+
+##### Returns 
+
+`integer` (between 0 and 180).
