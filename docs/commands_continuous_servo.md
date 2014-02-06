@@ -1,6 +1,6 @@
 # Commands
 
-## clockwise
+## clockwise()
 
 Turns the servo to go clockwise, if the driver is continuous.
 
@@ -8,7 +8,7 @@ Turns the servo to go clockwise, if the driver is continuous.
 
 `true or nil`
 
-## counterClockwise
+## counterClockwise()
 
 Turns the servo to go counter clockwise, if the driver is continuous.
 
@@ -16,7 +16,7 @@ Turns the servo to go counter clockwise, if the driver is continuous.
 
 `true or nil`
 
-## stop
+## stop()
 
 Stops the driver.
 

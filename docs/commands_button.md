@@ -1,6 +1,6 @@
 # Commands
 
-## isPressed
+## isPressed()
 
 Returns true or false matching state of the button.
 

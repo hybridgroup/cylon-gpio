@@ -1,6 +1,6 @@
 # Commands
 
-## angle
+## angle()
 
 Moves the servo to the specified angle, angle must be an integer value between `0` and `180`.
 
@@ -8,7 +8,7 @@ Moves the servo to the specified angle, angle must be an integer value between `
 
 `integer` (between 0 and 180).
 
-## currentAngle
+## currentAngle()
 
 Returns the current angle of the servo, an integer value between `0` and `180`.
 

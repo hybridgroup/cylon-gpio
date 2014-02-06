@@ -1,6 +1,6 @@
 # Commands
 
-## turnOn
+## turnOn()
 
 Starts the motor.
 
@@ -8,7 +8,7 @@ Starts the motor.
 
 `true or nil`
 
-## turnOff
+## turnOff()
 
 Stops the motor.
 
@@ -16,7 +16,7 @@ Stops the motor.
 
 `true or nil`
 
-## toggle
+## toggle()
 
 Sets the state of the motor to the oposite of the current state, if motor is on then sets it to off.
 
@@ -36,7 +36,7 @@ Sets the speed of the motor to the value provided in the speed param, speed valu
 
 `integer`
 
-## currentSpeed
+## currentSpeed()
 
 Returns the current speed of the motor as an integer between 0 and 255.
 

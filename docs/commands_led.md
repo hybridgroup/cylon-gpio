@@ -1,6 +1,6 @@
 # Commands
 
-## turnOn
+## turnOn()
 
 Turns LED on.
 
@@ -8,7 +8,7 @@ Turns LED on.
 
 `true or false`
 
-## turnOff
+## turnOff()
 
 Turns LED off.
 
@@ -16,7 +16,7 @@ Turns LED off.
 
 `true or false`
 
-## toggle
+## toggle()
 
 Turns the LED on, or off, depending on if it is already off, or on, respectively.
 

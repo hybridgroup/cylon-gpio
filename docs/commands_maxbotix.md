@@ -1,6 +1,6 @@
 # Commands
 
-## analogValue
+## analogValue()
 
 Text here.
 
@@ -8,7 +8,7 @@ Text here.
 
 `integer`
 
-## range
+## range()
 
 Returns the distance measured by the sonar in inches.
 
@@ -16,7 +16,7 @@ Returns the distance measured by the sonar in inches.
 
 `integer`
 
-## rangeCm
+## rangeCm()
 
 Returns the distance measured by the sonar in cm.
 
