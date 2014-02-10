@@ -19,6 +19,12 @@
       "type": "Apache 2.0"
     }
   ],
+  "hardware": {
+    "*": false,
+    "./": false,
+    "node-namespace": true,
+    "./dist": true
+  },
   "devDependencies": {
     "matchdep": "~0.1.1",
     "grunt-contrib-jshint": "~0.6.0",
