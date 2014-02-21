@@ -6,7 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-'use strict';
+'use strict'
 
 namespace = require 'node-namespace'
 
@@ -29,15 +29,15 @@ namespace "Cylon.Drivers.GPIO", ->
     turnOn: ->
       @isOn = true
       @connection.digitalWrite(@pin, 1)
-    
+
     # Public: Stops the motor.
     #
     # Returns nil.
     turnOff: ->
       @isOn = false
       @connection.digitalWrite(@pin, 0)
-    
-    # Public: Sets the state of the motor to the oposite of the current state, 
+
+    # Public: Sets the state of the motor to the oposite of the current state,
     # if motor is on then sets it to off.
     #
     # Returns true | nil.
@@ -53,7 +53,7 @@ namespace "Cylon.Drivers.GPIO", ->
     currentSpeed: ->
       @speedValue
 
-    # Public: Sets the speed of the motor to the value provided in the 
+    # Public: Sets the speed of the motor to the value provided in the
     # speed param, speed value must be an integer between 0 and 255.
     #
     # value- params
@@ -62,4 +62,6 @@ namespace "Cylon.Drivers.GPIO", ->
     speed: (value) ->
       @connection.pwmWrite(@pin, value)
       @speedValue = value
-      @isOn = (@currentSpeed > 0)
+      @isOn = (@speedValue > 0)
+
+module.exports = Cylon.Drivers.GPIO.Motor

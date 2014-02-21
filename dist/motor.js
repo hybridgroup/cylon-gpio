@@ -57,12 +57,14 @@
       Motor.prototype.speed = function(value) {
         this.connection.pwmWrite(this.pin, value);
         this.speedValue = value;
-        return this.isOn = this.currentSpeed > 0;
+        return this.isOn = this.speedValue > 0;
       };
 
       return Motor;
 
     })(Cylon.Driver);
   });
+
+  module.exports = Cylon.Drivers.GPIO.Motor;
 
 }).call(this);
