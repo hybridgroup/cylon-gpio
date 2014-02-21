@@ -14,6 +14,14 @@
       }
     });
     spy = sinon.spy;
+    describe('constructor', function() {
+      it("sets @pin to the value of the passed device's pin", function() {
+        return expect(led.pin).to.be.eql(13);
+      });
+      return it("sets @isOn to false by default", function() {
+        return expect(led.isOn).to.be.eql(false);
+      });
+    });
     it("has LED commands", function() {
       return expect(led.commands()).to.be.eql(['turnOn', 'turnOff', 'toggle', 'brightness']);
     });

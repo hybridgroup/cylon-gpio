@@ -6,6 +6,13 @@ describe "Cylon.Drivers.GPIO.Led", ->
   led = new LED(name: 'blinky', device: {connection: 'connect', pin: 13})
   spy = sinon.spy
 
+  describe 'constructor', ->
+    it "sets @pin to the value of the passed device's pin", ->
+      expect(led.pin).to.be.eql 13
+
+    it "sets @isOn to false by default", ->
+      expect(led.isOn).to.be.eql false
+
   it "has LED commands", ->
     expect(led.commands()).to.be.eql ['turnOn', 'turnOff', 'toggle', 'brightness']
 
