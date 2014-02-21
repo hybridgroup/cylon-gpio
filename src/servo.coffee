@@ -18,7 +18,10 @@ namespace "Cylon.Drivers.GPIO", ->
       super
       @pin = @device.pin
       @angleValue = 0
-      @angleRange = if opts.extraParams? and opts.extraParams.range? then opts.extraParams.range else { min: 30, max: 150}
+      @angleRange = { min: 30, max: 150 }
+
+      if opts.extraParams? and opts.extraParams.range?
+        @angleRange = opts.extraParams.range
 
     commands: ->
       ['angle', 'currentAngle']
@@ -26,7 +29,7 @@ namespace "Cylon.Drivers.GPIO", ->
     # Public: Returns the current angle of the servo, an integer value 
     # between 0 and 180.
     #
-    # Returns null.
+    # Returns an integer.
     currentAngle: ->
       @angleValue
 
@@ -55,3 +58,5 @@ namespace "Cylon.Drivers.GPIO", ->
           value = @angleRange.max
 
       value
+
+module.exports = Cylon.Drivers.GPIO.Servo

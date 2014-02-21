@@ -28,10 +28,13 @@
         Servo.__super__.constructor.apply(this, arguments);
         this.pin = this.device.pin;
         this.angleValue = 0;
-        this.angleRange = (opts.extraParams != null) && (opts.extraParams.range != null) ? opts.extraParams.range : {
+        this.angleRange = {
           min: 30,
           max: 150
         };
+        if ((opts.extraParams != null) && (opts.extraParams.range != null)) {
+          this.angleRange = opts.extraParams.range;
+        }
       }
 
       Servo.prototype.commands = function() {
@@ -63,5 +66,7 @@
 
     })(Cylon.Driver);
   });
+
+  module.exports = Cylon.Drivers.GPIO.Servo;
 
 }).call(this);
