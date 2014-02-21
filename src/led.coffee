@@ -6,7 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-'use strict';
+'use strict'
 
 namespace = require 'node-namespace'
 
@@ -54,3 +54,5 @@ namespace "Cylon.Drivers.GPIO", ->
     # Returns null.
     brightness: (value) ->
       @connection.pwmWrite(@pin, value)
+
+module.exports = Cylon.Drivers.GPIO.Led

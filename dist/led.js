@@ -58,4 +58,6 @@
     })(Cylon.Driver);
   });
 
+  module.exports = Cylon.Drivers.GPIO.Led;
+
 }).call(this);
