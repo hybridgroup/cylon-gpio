@@ -8,7 +8,7 @@
 
 
 (function() {
-  'use strict';
+  "use strict";
   var namespace,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -34,6 +34,7 @@
       Button.prototype.start = function(callback) {
         var _this = this;
         this.connection.digitalRead(this.pin, function(data) {
+          console.log(_this);
           if (data === 1) {
             _this.isPressed = true;
             return _this.device.emit('push');
@@ -49,5 +50,7 @@
 
     })(Cylon.Driver);
   });
+
+  module.exports = Cylon.Drivers.GPIO.Button;
 
 }).call(this);

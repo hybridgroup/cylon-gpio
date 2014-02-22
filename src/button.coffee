@@ -6,7 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-'use strict';
+"use strict"
 
 require './cylon-gpio'
 
@@ -29,6 +29,7 @@ namespace "Cylon.Drivers.GPIO", ->
     # Returns null.
     start: (callback) ->
       @connection.digitalRead @pin, (data) =>
+        console.log this
         if data is 1
           @isPressed = true
           @device.emit 'push'
@@ -37,3 +38,5 @@ namespace "Cylon.Drivers.GPIO", ->
           @device.emit 'release'
 
       super
+
+module.exports = Cylon.Drivers.GPIO.Button
