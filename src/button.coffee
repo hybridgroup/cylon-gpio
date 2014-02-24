@@ -29,7 +29,6 @@ namespace "Cylon.Drivers.GPIO", ->
     # Returns null.
     start: (callback) ->
       @connection.digitalRead @pin, (data) =>
-        console.log this
         if data is 1
           @isPressed = true
           @device.emit 'push'

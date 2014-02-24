@@ -34,7 +34,6 @@
       Button.prototype.start = function(callback) {
         var _this = this;
         this.connection.digitalRead(this.pin, function(data) {
-          console.log(_this);
           if (data === 1) {
             _this.isPressed = true;
             return _this.device.emit('push');
