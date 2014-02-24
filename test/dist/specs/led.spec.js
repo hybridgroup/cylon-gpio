@@ -5,8 +5,8 @@
   LED = source("led");
 
   describe("Cylon.Drivers.GPIO.Led", function() {
-    var led, spy;
-    led = new LED({
+    var driver, spy;
+    driver = new LED({
       name: 'blinky',
       device: {
         connection: 'connect',
@@ -16,14 +16,14 @@
     spy = sinon.spy;
     describe('constructor', function() {
       it("sets @pin to the value of the passed device's pin", function() {
-        return expect(led.pin).to.be.eql(13);
+        return expect(driver.pin).to.be.eql(13);
       });
       return it("sets @isOn to false by default", function() {
-        return expect(led.isOn).to.be["false"];
+        return expect(driver.isOn).to.be["false"];
       });
     });
-    it("has LED commands", function() {
-      return expect(led.commands()).to.be.eql(['turnOn', 'turnOff', 'toggle', 'brightness']);
+    it("has led commands", function() {
+      return expect(driver.commands()).to.be.eql(['turnOn', 'turnOff', 'toggle', 'brightness']);
     });
     describe('#turnOn', function() {
       return it('writes a high value to the pin', function() {
@@ -31,10 +31,10 @@
         connection = {
           digitalWrite: spy()
         };
-        led.isOn = false;
-        led.connection = connection;
-        led.turnOn();
-        expect(led.isOn).to.be["true"];
+        driver.isOn = false;
+        driver.connection = connection;
+        driver.turnOn();
+        expect(driver.isOn).to.be["true"];
         assert(connection.digitalWrite.calledOnce);
         return assert(connection.digitalWrite.calledWith(13, 1));
       });
@@ -45,10 +45,10 @@
         connection = {
           digitalWrite: spy()
         };
-        led.isOn = true;
-        led.connection = connection;
-        led.turnOff();
-        expect(led.isOn).to.be["false"];
+        driver.isOn = true;
+        driver.connection = connection;
+        driver.turnOff();
+        expect(driver.isOn).to.be["false"];
         assert(connection.digitalWrite.calledOnce);
         return assert(connection.digitalWrite.calledWith(13, 0));
       });
@@ -57,18 +57,18 @@
       context('when @isOn is true', function() {
         return it('turns the light off', function() {
           var turnOff;
-          led.isOn = true;
-          turnOff = sinon.stub(led, 'turnOff');
-          led.toggle();
+          driver.isOn = true;
+          turnOff = sinon.stub(driver, 'turnOff');
+          driver.toggle();
           return assert(turnOff.calledOnce);
         });
       });
       return context('when @isOn is false', function() {
         return it('turns the light on', function() {
           var turnOn;
-          led.isOn = false;
-          turnOn = sinon.stub(led, 'turnOn');
-          led.toggle();
+          driver.isOn = false;
+          turnOn = sinon.stub(driver, 'turnOn');
+          driver.toggle();
           return assert(turnOn.calledOnce);
         });
       });

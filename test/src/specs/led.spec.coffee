@@ -3,28 +3,28 @@
 LED = source "led"
 
 describe "Cylon.Drivers.GPIO.Led", ->
-  led = new LED(name: 'blinky', device: {connection: 'connect', pin: 13})
+  driver = new LED(name: 'blinky', device: {connection: 'connect', pin: 13})
   spy = sinon.spy
 
   describe 'constructor', ->
     it "sets @pin to the value of the passed device's pin", ->
-      expect(led.pin).to.be.eql 13
+      expect(driver.pin).to.be.eql 13
 
     it "sets @isOn to false by default", ->
-      expect(led.isOn).to.be.false
+      expect(driver.isOn).to.be.false
 
-  it "has LED commands", ->
-    expect(led.commands()).to.be.eql ['turnOn', 'turnOff', 'toggle', 'brightness']
+  it "has led commands", ->
+    expect(driver.commands()).to.be.eql ['turnOn', 'turnOff', 'toggle', 'brightness']
 
   describe '#turnOn', ->
     it 'writes a high value to the pin', ->
       connection = { digitalWrite: spy() }
-      led.isOn = false
-      led.connection = connection
+      driver.isOn = false
+      driver.connection = connection
 
-      led.turnOn()
+      driver.turnOn()
 
-      expect(led.isOn).to.be.true
+      expect(driver.isOn).to.be.true
 
       assert connection.digitalWrite.calledOnce
       assert connection.digitalWrite.calledWith 13, 1
@@ -32,12 +32,12 @@ describe "Cylon.Drivers.GPIO.Led", ->
   describe '#turnOff', ->
     it 'writes a high value to the pin', ->
       connection = { digitalWrite: spy() }
-      led.isOn = true
-      led.connection = connection
+      driver.isOn = true
+      driver.connection = connection
 
-      led.turnOff()
+      driver.turnOff()
 
-      expect(led.isOn).to.be.false
+      expect(driver.isOn).to.be.false
 
       assert connection.digitalWrite.calledOnce
       assert connection.digitalWrite.calledWith 13, 0
@@ -45,18 +45,18 @@ describe "Cylon.Drivers.GPIO.Led", ->
   describe '#toggle', ->
     context 'when @isOn is true', ->
       it 'turns the light off', ->
-        led.isOn = true
-        turnOff = sinon.stub led, 'turnOff'
+        driver.isOn = true
+        turnOff = sinon.stub driver, 'turnOff'
 
-        led.toggle()
+        driver.toggle()
 
         assert turnOff.calledOnce
 
     context 'when @isOn is false', ->
       it 'turns the light on', ->
-        led.isOn = false
-        turnOn = sinon.stub led, 'turnOn'
+        driver.isOn = false
+        turnOn = sinon.stub driver, 'turnOn'
 
-        led.toggle()
+        driver.toggle()
 
         assert turnOn.calledOnce
