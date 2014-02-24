@@ -55,4 +55,6 @@
     })(Cylon.Driver);
   });
 
+  module.exports = Cylon.Drivers.GPIO.Maxbotix;
+
 }).call(this);

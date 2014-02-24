@@ -6,7 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-'use strict';
+'use strict'
 
 namespace = require 'node-namespace'
 
@@ -45,3 +45,5 @@ namespace "Cylon.Drivers.GPIO", ->
     # Returns number.
     rangeCm: () ->
       return (@analogValue / 2.0) * 2.54
+
+module.exports = Cylon.Drivers.GPIO.Maxbotix

@@ -1,20 +1,42 @@
-'use strict';
+'use strict'
 
-maxbotix = source("maxbotix")
+Maxbotix = source "maxbotix"
 
 describe "Cylon.Drivers.GPIO.Maxbotix", ->
-  driver = new Cylon.Drivers.GPIO.Maxbotix(name: 'max', device: {connection: 'connect', pin: 13})
+  driver = new Maxbotix(name: 'max', device: {connection: 'connect', pin: 13})
 
-  it "has range of 0 with no reading", ->
-    driver.range().should.equal 0
+  describe "#constructor", ->
+    it "sets @pin to the device's pin", ->
+      expect(driver.pin).to.be.eql 13
 
-  it "has range in cm of 0 with no reading", ->
-    driver.rangeCm().should.equal 0
+    it "sets @analogValue to 0 by default", ->
+      expect(driver.analogValue).to.be.eql 0
 
-  it "has range of close to 10 inches with 20.1575 reading", ->
-    driver.analogValue = 20.1575
-    driver.range().should.be.closeTo 10, 0.0001
+  it "has an array of maxbotix commands", ->
+    expect(driver.commands()).to.be.eql ["analogValue", "range", "rangeCm"]
 
-  it "has range of close to 25.6 cm with 20.1575 reading", ->
-    driver.analogValue = 20.1575
-    driver.rangeCm().should.be.closeTo 25.6, 0.0001
+  describe "#range", ->
+    context "with no reading", ->
+      before -> driver.analogValue = 0
+
+      it "returns 0", ->
+        expect(driver.range()).to.equal 0
+
+    context "with a reading of 20.1575", ->
+      before -> driver.analogValue = 20.1575
+
+      it "returns a value near 10", ->
+        expect(driver.range()).to.be.closeTo 10, 0.0001
+
+  describe "#rangeCm", ->
+    context "with no reading", ->
+      before -> driver.analogValue = 0
+
+      it "returns 0", ->
+        expect(driver.rangeCm()).to.equal 0
+
+    context "with a reading of 20.1575", ->
+      before -> driver.analogValue = 20.1575
+
+      it "returns a value near 25.6", ->
+        expect(driver.rangeCm()).to.be.closeTo 25.6, 0.0001

@@ -1,31 +1,64 @@
 (function() {
   'use strict';
-  var maxbotix;
+  var Maxbotix;
 
-  maxbotix = source("maxbotix");
+  Maxbotix = source("maxbotix");
 
   describe("Cylon.Drivers.GPIO.Maxbotix", function() {
     var driver;
-    driver = new Cylon.Drivers.GPIO.Maxbotix({
+    driver = new Maxbotix({
       name: 'max',
       device: {
         connection: 'connect',
         pin: 13
       }
     });
-    it("has range of 0 with no reading", function() {
-      return driver.range().should.equal(0);
+    describe("#constructor", function() {
+      it("sets @pin to the device's pin", function() {
+        return expect(driver.pin).to.be.eql(13);
+      });
+      return it("sets @analogValue to 0 by default", function() {
+        return expect(driver.analogValue).to.be.eql(0);
+      });
     });
-    it("has range in cm of 0 with no reading", function() {
-      return driver.rangeCm().should.equal(0);
+    it("has an array of maxbotix commands", function() {
+      return expect(driver.commands()).to.be.eql(["analogValue", "range", "rangeCm"]);
     });
-    it("has range of close to 10 inches with 20.1575 reading", function() {
-      driver.analogValue = 20.1575;
-      return driver.range().should.be.closeTo(10, 0.0001);
+    describe("#range", function() {
+      context("with no reading", function() {
+        before(function() {
+          return driver.analogValue = 0;
+        });
+        return it("returns 0", function() {
+          return expect(driver.range()).to.equal(0);
+        });
+      });
+      return context("with a reading of 20.1575", function() {
+        before(function() {
+          return driver.analogValue = 20.1575;
+        });
+        return it("returns a value near 10", function() {
+          return expect(driver.range()).to.be.closeTo(10, 0.0001);
+        });
+      });
     });
-    return it("has range of close to 25.6 cm with 20.1575 reading", function() {
-      driver.analogValue = 20.1575;
-      return driver.rangeCm().should.be.closeTo(25.6, 0.0001);
+    return describe("#rangeCm", function() {
+      context("with no reading", function() {
+        before(function() {
+          return driver.analogValue = 0;
+        });
+        return it("returns 0", function() {
+          return expect(driver.rangeCm()).to.equal(0);
+        });
+      });
+      return context("with a reading of 20.1575", function() {
+        before(function() {
+          return driver.analogValue = 20.1575;
+        });
+        return it("returns a value near 25.6", function() {
+          return expect(driver.rangeCm()).to.be.closeTo(25.6, 0.0001);
+        });
+      });
     });
   });
 
