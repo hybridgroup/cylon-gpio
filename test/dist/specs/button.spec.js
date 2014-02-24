@@ -18,7 +18,7 @@
         return expect(button.pin).to.be.eql(13);
       });
       return it("sets @isPressed to false by default", function() {
-        return expect(button.isPressed).to.be.eql(false);
+        return expect(button.isPressed).to.be["false"];
       });
     });
     it("provides an array of button commands", function() {
@@ -41,7 +41,7 @@
           return assert(button.device.emit.calledWith('push'));
         });
         return it('sets @isPressed to true', function() {
-          return expect(button.isPressed).to.be.eql(true);
+          return expect(button.isPressed).to.be["true"];
         });
       });
       return context("when 0", function() {
@@ -57,7 +57,7 @@
           return assert(button.device.emit.calledWith('release'));
         });
         return it('sets @isPressed to false', function() {
-          return expect(button.isPressed).to.be.eql(false);
+          return expect(button.isPressed).to.be["false"];
         });
       });
     });

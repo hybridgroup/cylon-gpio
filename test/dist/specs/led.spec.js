@@ -19,7 +19,7 @@
         return expect(led.pin).to.be.eql(13);
       });
       return it("sets @isOn to false by default", function() {
-        return expect(led.isOn).to.be.eql(false);
+        return expect(led.isOn).to.be["false"];
       });
     });
     it("has LED commands", function() {
@@ -34,7 +34,7 @@
         led.isOn = false;
         led.connection = connection;
         led.turnOn();
-        expect(led.isOn).to.be.eql(true);
+        expect(led.isOn).to.be["true"];
         assert(connection.digitalWrite.calledOnce);
         return assert(connection.digitalWrite.calledWith(13, 1));
       });
@@ -48,7 +48,7 @@
         led.isOn = true;
         led.connection = connection;
         led.turnOff();
-        expect(led.isOn).to.be.eql(false);
+        expect(led.isOn).to.be["false"];
         assert(connection.digitalWrite.calledOnce);
         return assert(connection.digitalWrite.calledWith(13, 0));
       });

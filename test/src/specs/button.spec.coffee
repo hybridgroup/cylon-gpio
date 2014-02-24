@@ -10,7 +10,7 @@ describe "Cylon.Drivers.GPIO.Button", ->
       expect(button.pin).to.be.eql 13
 
     it "sets @isPressed to false by default", ->
-      expect(button.isPressed).to.be.eql false
+      expect(button.isPressed).to.be.false
 
   it "provides an array of button commands", ->
     expect(button.commands()).to.be.eql ['isPressed']
@@ -26,7 +26,7 @@ describe "Cylon.Drivers.GPIO.Button", ->
         assert button.device.emit.calledWith 'push'
 
       it 'sets @isPressed to true', ->
-        expect(button.isPressed).to.be.eql true
+        expect(button.isPressed).to.be.true
 
     context "when 0", ->
       before ->
@@ -37,4 +37,4 @@ describe "Cylon.Drivers.GPIO.Button", ->
         assert button.device.emit.calledWith 'release'
 
       it 'sets @isPressed to false', ->
-        expect(button.isPressed).to.be.eql false
+        expect(button.isPressed).to.be.false

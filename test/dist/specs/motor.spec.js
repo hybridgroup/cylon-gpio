@@ -22,7 +22,7 @@
         return expect(motor.speedValue).to.be.eql(0);
       });
       return it("sets @isOn to false by default", function() {
-        return expect(motor.isOn).to.be.eql(false);
+        return expect(motor.isOn).to.be["false"];
       });
     });
     it('provides a list of motor commands', function() {
@@ -38,7 +38,7 @@
         };
         motor.connection = connection;
         motor.turnOn();
-        expect(motor.isOn).to.be.eql(true);
+        expect(motor.isOn).to.be["true"];
         assert(connection.digitalWrite.calledOnce);
         return assert(connection.digitalWrite.calledWith(13, 1));
       });
@@ -51,7 +51,7 @@
         };
         motor.connection = connection;
         motor.turnOff();
-        expect(motor.isOn).to.be.eql(false);
+        expect(motor.isOn).to.be["false"];
         assert(connection.digitalWrite.calledOnce);
         return assert(connection.digitalWrite.calledWith(13, 0));
       });
@@ -99,9 +99,9 @@
         return expect(motor.speedValue).to.be.eql(100);
       });
       return it("sets @isOn depending on whether the speed is greater than 0", function() {
-        expect(motor.isOn).to.be.eql(true);
+        expect(motor.isOn).to.be["true"];
         motor.speed(0);
-        return expect(motor.isOn).to.be.eql(false);
+        return expect(motor.isOn).to.be["false"];
       });
     });
   });

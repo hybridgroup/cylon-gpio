@@ -14,7 +14,7 @@ describe "Cylon.Drivers.GPIO.Motor", ->
       expect(motor.speedValue).to.be.eql 0
 
     it "sets @isOn to false by default", ->
-      expect(motor.isOn).to.be.eql false
+      expect(motor.isOn).to.be.false
 
   it 'provides a list of motor commands', ->
     commands = ['turnOn', 'turnOff', 'toggle', 'speed', 'currentSpeed']
@@ -27,7 +27,7 @@ describe "Cylon.Drivers.GPIO.Motor", ->
 
       motor.turnOn()
 
-      expect(motor.isOn).to.be.eql true
+      expect(motor.isOn).to.be.true
 
       assert connection.digitalWrite.calledOnce
       assert connection.digitalWrite.calledWith 13, 1
@@ -39,7 +39,7 @@ describe "Cylon.Drivers.GPIO.Motor", ->
 
       motor.turnOff()
 
-      expect(motor.isOn).to.be.eql false
+      expect(motor.isOn).to.be.false
 
       assert connection.digitalWrite.calledOnce
       assert connection.digitalWrite.calledWith 13, 0
@@ -83,6 +83,6 @@ describe "Cylon.Drivers.GPIO.Motor", ->
       expect(motor.speedValue).to.be.eql 100
 
     it "sets @isOn depending on whether the speed is greater than 0", ->
-      expect(motor.isOn).to.be.eql true
+      expect(motor.isOn).to.be.true
       motor.speed(0)
-      expect(motor.isOn).to.be.eql false
+      expect(motor.isOn).to.be.false

@@ -11,7 +11,7 @@ describe "Cylon.Drivers.GPIO.Led", ->
       expect(led.pin).to.be.eql 13
 
     it "sets @isOn to false by default", ->
-      expect(led.isOn).to.be.eql false
+      expect(led.isOn).to.be.false
 
   it "has LED commands", ->
     expect(led.commands()).to.be.eql ['turnOn', 'turnOff', 'toggle', 'brightness']
@@ -24,7 +24,7 @@ describe "Cylon.Drivers.GPIO.Led", ->
 
       led.turnOn()
 
-      expect(led.isOn).to.be.eql true
+      expect(led.isOn).to.be.true
 
       assert connection.digitalWrite.calledOnce
       assert connection.digitalWrite.calledWith 13, 1
@@ -37,7 +37,7 @@ describe "Cylon.Drivers.GPIO.Led", ->
 
       led.turnOff()
 
-      expect(led.isOn).to.be.eql false
+      expect(led.isOn).to.be.false
 
       assert connection.digitalWrite.calledOnce
       assert connection.digitalWrite.calledWith 13, 0
