@@ -6,7 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-'use strict';
+'use strict'
 
 require './cylon-gpio'
 
@@ -50,3 +50,5 @@ namespace "Cylon.Drivers.GPIO", ->
         result = result / @data.length
 
       result
+
+module.exports = Cylon.Drivers.GPIO.MakeyButton

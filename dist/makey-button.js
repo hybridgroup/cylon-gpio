@@ -67,4 +67,6 @@
     })(Cylon.Driver);
   });
 
+  module.exports = Cylon.Drivers.GPIO.MakeyButton;
+
 }).call(this);
