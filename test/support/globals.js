@@ -24,7 +24,7 @@ global.stub = sinon.stub
 // relative to the base path (where the Gruntfile.js also lives)
 global.source = function (src) {
   console.log('source loading: ' +  src)
-  var resource = path.normalize('../../dist/' + src);
+  var resource = path.normalize('../../lib/' + src);
 
   return require(resource);
 };
