@@ -1,19 +1,14 @@
-(function() {
-  'use strict';
-  var analogSensor;
+"use strict";
+var analogSensor = source("analog-sensor");
 
-  analogSensor = source("analog-sensor");
-
-  describe("Cylon.Drivers.GPIO.AnalogSensor", function() {
-    var button;
-    button = new Cylon.Drivers.GPIO.AnalogSensor({
-      name: 'sensor',
-      device: {
-        connection: 'connect',
-        pin: 13
-      }
-    });
-    return it("needs tests");
+describe("Cylon.Drivers.GPIO.AnalogSensor", function() {
+  var driver = new Cylon.Drivers.GPIO.AnalogSensor({
+    name: 'sensor',
+    device: {
+      connection: 'connect',
+      pin: 13
+    }
   });
 
-}).call(this);
+  it("needs tests");
+});

@@ -1,19 +1,15 @@
-(function() {
-  'use strict';
-  var servo;
+"use strict";
 
-  servo = source("servo");
+var servo = source("servo");
 
-  describe("Cylon.Drivers.GPIO.ContinuousServo", function() {
-    var button;
-    button = new Cylon.Drivers.GPIO.ContinuousServo({
-      name: 'serv',
-      device: {
-        connection: 'connect',
-        pin: 13
-      }
-    });
-    return it("needs tests");
+describe("Cylon.Drivers.GPIO.ContinuousServo", function() {
+  var driver = new Cylon.Drivers.GPIO.ContinuousServo({
+    name: 'serv',
+    device: {
+      connection: 'connect',
+      pin: 13
+    }
   });
 
-}).call(this);
+  it("needs tests");
+});
