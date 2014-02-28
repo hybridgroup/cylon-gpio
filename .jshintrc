@@ -10,5 +10,10 @@
   "unused": true,
   "boss": true,
   "eqnull": true,
-  "node": true
+  "node": true,
+  "predef": [
+    "Cylon",
+    "Logger",
+    "subclass"
+  ]
 }
