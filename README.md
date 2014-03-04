@@ -85,6 +85,7 @@ Thank you!
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
+Version 0.9.1 - Update to cylon 0.11.0, migrated to pure JS
 
 Version 0.9.0 - Update to cylon 0.10.0, add MakeyButton driver
 
