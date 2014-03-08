@@ -17,12 +17,12 @@ describe("Cylon.Drivers.GPIO.Led", function() {
     });
 
      it("sets @isOn to false by default", function() {
-      expect(driver.isOn).to.be["false"];
+      expect(driver.isOn()).to.be["false"];
     });
   });
 
   it("has led commands", function() {
-    var commands = ['turnOn', 'turnOff', 'toggle', 'brightness'];
+    var commands = ['isOn', 'turnOn', 'turnOff', 'toggle', 'brightness'];
     expect(driver.commands()).to.be.eql(commands);
   });
 
@@ -30,11 +30,11 @@ describe("Cylon.Drivers.GPIO.Led", function() {
     it('writes a high value to the pin', function() {
       var connection = { digitalWrite: spy() };
 
-      driver.isOn = false;
+      driver.isHigh = false;
       driver.connection = connection;
       driver.turnOn();
 
-      expect(driver.isOn).to.be["true"];
+      expect(driver.isOn()).to.be["true"];
 
       assert(connection.digitalWrite.calledOnce);
       assert(connection.digitalWrite.calledWith(13, 1));
@@ -44,12 +44,12 @@ describe("Cylon.Drivers.GPIO.Led", function() {
   describe('#turnOff', function() {
     it('writes a high value to the pin', function() {
       var connection = { digitalWrite: spy() };
-      driver.isOn = true;
+      driver.isHigh = true;
       driver.connection = connection;
 
       driver.turnOff();
 
-      expect(driver.isOn).to.be["false"];
+      expect(driver.isOn()).to.be["false"];
 
       assert(connection.digitalWrite.calledOnce);
       assert(connection.digitalWrite.calledWith(13, 0));
@@ -60,7 +60,7 @@ describe("Cylon.Drivers.GPIO.Led", function() {
     context('when @isOn is true', function() {
       it('turns the light off', function() {
         var turnOff = sinon.stub(driver, 'turnOff');
-        driver.isOn = true;
+        driver.isHigh = true;
 
         driver.toggle();
 
@@ -71,7 +71,7 @@ describe("Cylon.Drivers.GPIO.Led", function() {
     context('when @isOn is false', function() {
       it('turns the light on', function() {
         var turnOn = sinon.stub(driver, 'turnOn');
-        driver.isOn = false;
+        driver.isHigh = false;
 
         driver.toggle();
 
