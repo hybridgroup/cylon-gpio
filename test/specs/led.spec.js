@@ -1,12 +1,12 @@
 "use strict";
 
-var LED = source("led");
+source("led");
 
 describe("Cylon.Drivers.GPIO.Led", function() {
-  var driver = new LED({
+  var driver = new Cylon.Drivers.GPIO.Led({
     name: 'blinky',
     device: {
-      connection: 'connect',
+      connection: { digitalWrite: spy(), pwmWrite: spy() },
       pin: 13
     }
   });
@@ -16,8 +16,8 @@ describe("Cylon.Drivers.GPIO.Led", function() {
       expect(driver.pin).to.be.eql(13);
     });
 
-     it("sets @isOn to false by default", function() {
-      expect(driver.isOn()).to.be["false"];
+     it("sets @isHigh to false by default", function() {
+      expect(driver.isHigh).to.be.false;
     });
   });
 
@@ -28,55 +28,72 @@ describe("Cylon.Drivers.GPIO.Led", function() {
 
   describe('#turnOn', function() {
     it('writes a high value to the pin', function() {
-      var connection = { digitalWrite: spy() };
-
       driver.isHigh = false;
-      driver.connection = connection;
       driver.turnOn();
 
-      expect(driver.isOn()).to.be["true"];
-
-      assert(connection.digitalWrite.calledOnce);
-      assert(connection.digitalWrite.calledWith(13, 1));
+      expect(driver.isHigh).to.be.true;
+      expect(driver.connection.digitalWrite).to.be.calledWith(13 ,1);
     });
   });
 
   describe('#turnOff', function() {
     it('writes a high value to the pin', function() {
-      var connection = { digitalWrite: spy() };
       driver.isHigh = true;
-      driver.connection = connection;
-
       driver.turnOff();
 
-      expect(driver.isOn()).to.be["false"];
-
-      assert(connection.digitalWrite.calledOnce);
-      assert(connection.digitalWrite.calledWith(13, 0));
+      expect(driver.isHigh).to.be.false;
+      expect(driver.connection.digitalWrite).to.be.calledWith(13, 0);
     });
   });
 
   describe('#toggle', function() {
-    context('when @isOn is true', function() {
-      it('turns the light off', function() {
-        var turnOff = sinon.stub(driver, 'turnOff');
+    context('when @isHigh is true', function() {
+      before(function() {
         driver.isHigh = true;
+        stub(driver, 'turnOff');
+      });
 
+      after(function() {
+        driver.turnOff.restore();
+      });
+
+      it('turns the light off', function() {
         driver.toggle();
-
-        assert(turnOff.calledOnce);
+        expect(driver.turnOff).to.be.called;
       });
     });
 
-    context('when @isOn is false', function() {
-      it('turns the light on', function() {
-        var turnOn = sinon.stub(driver, 'turnOn');
+    context('when @isHigh is false', function() {
+      before(function() {
         driver.isHigh = false;
-
-        driver.toggle();
-
-        assert(turnOn.calledOnce);
+        stub(driver, 'turnOn');
       });
+
+      after(function() {
+        driver.turnOn.restore();
+      });
+
+      it('turns the light on', function() {
+        driver.toggle();
+        expect(driver.turnOn).to.be.called;
+      });
+    });
+  });
+
+  describe("#brightness", function() {
+    it("calls #pwmWrite to set the pin's brightness", function() {
+      driver.brightness(250);
+      expect(driver.connection.pwmWrite).to.be.calledWith(13, 250);
+    });
+  });
+
+  describe("#isOn", function() {
+    it("returns the value of @isHigh", function() {
+      driver.isHigh = true;
+      expect(driver.isOn()).to.be.eql(true);
+
+      driver.isHigh = false;
+      expect(driver.isOn()).to.be.eql(false);
     });
   });
 });
