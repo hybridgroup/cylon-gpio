@@ -1,15 +1,56 @@
 "use strict";
 
-var servo = source("servo");
+source("servo");
 
 describe("Cylon.Drivers.GPIO.ContinuousServo", function() {
   var driver = new Cylon.Drivers.GPIO.ContinuousServo({
     name: 'serv',
     device: {
-      connection: 'connect',
+      connection: { servoWrite: spy() },
       pin: 13
     }
   });
 
-  it("needs tests");
+  describe("#constructor", function() {
+    it("sets @pin to the provided device's pin", function() {
+      expect(driver.pin).to.be.eql(13);
+    });
+
+    it("sets @angleValue to 0 by default", function() {
+      expect(driver.angleValue).to.be.eql(0);
+    });
+  });
+
+  describe("#commands", function() {
+    var commands = driver.commands();
+
+    it("returns an array of ContinuousSphero commands", function() {
+      expect(commands).to.be.an('array');
+
+      for (var i = 0; i < commands.length; i++) {
+        expect(commands[i]).to.be.a('string');
+      }
+    });
+  });
+
+  describe("#stop", function() {
+    it('writes a value of 90 to the servo', function() {
+      driver.stop();
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 90);
+    });
+  });
+
+  describe("#clockwise", function() {
+    it('writes a value of 180 to the servo', function() {
+      driver.clockwise();
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 180);
+    });
+  });
+
+  describe("#counterClockwise", function() {
+    it('writes a value of 180 to the servo', function() {
+      driver.counterClockwise();
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 89);
+    });
+  });
 });
