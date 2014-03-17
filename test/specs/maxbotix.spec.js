@@ -1,12 +1,14 @@
 'use strict';
-var Maxbotix = source("maxbotix");
+
+source("maxbotix");
 
 describe("Cylon.Drivers.GPIO.Maxbotix", function() {
-  var driver = new Maxbotix({
+  var driver = new Cylon.Drivers.GPIO.Maxbotix({
     name: 'max',
     device: {
-      connection: 'connect',
-      pin: 13
+      connection: { analogRead: function() {} },
+      pin: 13,
+      emit: spy()
     }
   });
 
@@ -20,8 +22,48 @@ describe("Cylon.Drivers.GPIO.Maxbotix", function() {
     });
   });
 
-  it("has an array of maxbotix commands", function() {
-    expect(driver.commands()).to.be.eql(["analogValue", "range", "rangeCm"]);
+  describe("#commands", function() {
+    var commands = driver.commands();
+
+    it("provides an array of Maxbotix commands", function() {
+      expect(commands).to.be.an('array');
+
+      for (var i = 0; i < commands.length; i++) {
+        expect(commands[i]).to.be.a('string');
+      }
+    });
+  });
+
+  describe("#start", function() {
+    before(function() {
+      stub(driver.device.connection, 'analogRead').callsArgWith(1, 20);
+      stub(driver, 'range').returns(10);
+      stub(driver, 'rangeCm').returns(20);
+
+      driver.start(function() {});
+    });
+
+    after(function() {
+      driver.device.connection.analogRead.restore();
+      driver.range.restore();
+      driver.rangeCm.restore();
+    });
+
+    it("asks the connection to read the analog pin value", function() {
+      expect(driver.device.connection.analogRead).to.be.calledWith(13);
+    });
+
+    it("sets @analogValue to the pin value", function() {
+      expect(driver.analogValue).to.be.eql(20);
+    });
+
+    it("emits 'range' with the distance in inches", function() {
+      expect(driver.device.emit).to.be.calledWith('range', 10);
+    });
+
+    it("emits 'rangeCm' with the distance in centimeters", function() {
+      expect(driver.device.emit).to.be.calledWith('rangeCm', 20);
+    });
   });
 
   describe("#range", function() {
