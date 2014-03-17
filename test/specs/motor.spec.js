@@ -6,7 +6,7 @@ describe("Cylon.Drivers.GPIO.Motor", function() {
   var driver = new Motor({
     name: 'vrroom',
     device: {
-      connection: 'connect',
+      connection: { digitalWrite: spy(), pwmWrite: spy() },
       pin: 13
     }
   });
@@ -25,59 +25,62 @@ describe("Cylon.Drivers.GPIO.Motor", function() {
     });
   });
 
-  it('provides a list of motor commands', function() {
-    var commands = ['turnOn', 'turnOff', 'toggle', 'speed', 'currentSpeed'];
-    expect(driver.commands()).to.be.eql(commands);
+  describe("#commands", function() {
+    var commands = driver.commands();
+    it("provides an array of motor commands", function() {
+      expect(commands).to.be.an('array');
+
+      for (var i = 0; i < commands.length; i++) {
+        expect(commands[i]).to.be.a('string');
+      }
+    });
   });
 
   describe("#turnOn", function() {
     it("writes a high value to the digital pin", function() {
-      var connection = { digitalWrite: spy() };
-      driver.connection = connection;
-
       driver.turnOn();
 
-      expect(driver.isOn).to.be["true"];
-
-      assert(connection.digitalWrite.calledOnce);
-      assert(connection.digitalWrite.calledWith(13, 1));
+      expect(driver.isOn).to.be.eql(true);
+      expect(driver.connection.digitalWrite).to.be.calledWith(13, 1);
     });
   });
 
   describe("#turnOff", function() {
     it("writes a low value to the digital pin", function() {
-      var connection = { digitalWrite: spy() };
-      driver.connection = connection;
-
       driver.turnOff();
 
-      expect(driver.isOn).to.be["false"];
-
-      assert(connection.digitalWrite.calledOnce);
-      assert(connection.digitalWrite.calledWith(13, 0));
+      expect(driver.isOn).to.be.eql(false);
+      expect(driver.connection.digitalWrite).to.be.calledWith(13, 0);
     });
   });
 
   describe("#toggle", function() {
+
+    before(function() {
+      stub(driver, 'turnOn');
+      stub(driver, 'turnOff');
+    });
+
+    after(function() {
+      driver.turnOn.restore();
+      driver.turnOff.restore();
+    });
+
     context("when @isOn is true", function() {
       it("turns the motor off", function() {
-        var turnOff = sinon.stub(driver, 'turnOff');
         driver.isOn = true;
-
         driver.toggle();
 
-        assert(turnOff.calledOnce);
+        expect(driver.turnOff).to.be.called;;
       });
     });
 
     context("when @isOn is false", function() {
       it("turns the motor on", function() {
-        var turnOn = sinon.stub(driver, 'turnOn');
         driver.isOn = false;
-
         driver.toggle();
 
-        assert(turnOn.calledOnce);
+        expect(driver.turnOn).to.be.called;
       });
     });
   });
@@ -85,21 +88,17 @@ describe("Cylon.Drivers.GPIO.Motor", function() {
   describe("#currentSpeed", function() {
     it("returns the current @speedValue of the motor", function() {
       driver.speedValue = 120;
-
       expect(driver.currentSpeed()).to.be.eql(120);
     });
   });
 
   describe("#speed", function() {
     before(function() {
-      var connection = { pwmWrite: spy() };
-      driver.connection = connection;
       driver.speed(100);
     });
 
     it("writes the speed value to the pin via the connection", function() {
-      assert(driver.connection.pwmWrite.calledOnce);
-      assert(driver.connection.pwmWrite.calledWith(13, 100));
+      expect(driver.connection.pwmWrite).to.be.calledWith(13, 100);
     });
 
     it("sets @speedValue to the passed value", function() {
@@ -107,9 +106,9 @@ describe("Cylon.Drivers.GPIO.Motor", function() {
     });
 
     it("sets @isOn depending on whether the speed is greater than 0", function() {
-      expect(driver.isOn).to.be["true"];
+      expect(driver.isOn).to.be.eql(true);
       driver.speed(0);
-      expect(driver.isOn).to.be["false"];
+      expect(driver.isOn).to.be.eql(false);
     });
   });
 });
