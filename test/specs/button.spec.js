@@ -1,14 +1,11 @@
 "use strict";
 
-var Button = source("button");
+source("button");
 
 describe("Cylon.Drivers.GPIO.Button", function() {
-  var driver = new Button({
+  var driver = new Cylon.Drivers.GPIO.Button({
     name: 'button',
-    device: {
-      connection: 'connect',
-      pin: 13
-    }
+    device: { connection: 'connect', pin: 13 }
   });
 
   describe("constructor", function() {
@@ -21,44 +18,56 @@ describe("Cylon.Drivers.GPIO.Button", function() {
     });
   });
 
-  it("provides an array of button commands", function() {
-    expect(driver.commands()).to.be.eql(['isPressed']);
+  describe("#commands", function() {
+    var commands = driver.commands();
+
+    it("returns an array of button commands", function() {
+      expect(commands).to.be.an('array');
+
+      for(var i = 0; i < commands.length; i++) {
+        expect(commands[i]).to.be.a('string');
+      }
+    });
   });
 
   describe("on the 'data' event", function() {
-    driver.device = { emit: sinon.spy() };
+    var callback = function() {},
+        originalConnection;
+
+    before(function() {
+      originalConnection = driver.connection;
+
+      driver.connection = { digitalRead: stub() };
+      driver.device = { emit: spy() };
+    });
 
     context("when 1", function() {
       before(function() {
-        driver.connection = {
-          digitalRead: function(_, callback) { callback(1); }
-        };
-        driver.start(function() {});
+        driver.connection.digitalRead.callsArgWith(1, 1);
+        driver.start(callback);
       });
 
       it("emits 'push'", function() {
-        assert(driver.device.emit.calledWith('push'));
+        expect(driver.device.emit).to.be.calledWith('push');
       });
 
       it('sets @isPressed to true', function() {
-        expect(driver.isPressed).to.be["true"];
+        expect(driver.isPressed).to.be.true;
       });
     });
 
     context("when 0", function() {
       before(function() {
-        driver.connection = {
-          digitalRead: function(_, callback) { callback(0); }
-        };
-        driver.start(function() {});
+        driver.connection.digitalRead.callsArgWith(1, 0);
+        driver.start(callback);
       });
 
       it("emits 'release'", function() {
-        assert(driver.device.emit.calledWith('release'));
+        expect(driver.device.emit).to.be.calledWith('release');
       });
 
       it('sets @isPressed to false', function() {
-        expect(driver.isPressed).to.be["false"];
+        expect(driver.isPressed).to.be.false;
       });
     });
   });
