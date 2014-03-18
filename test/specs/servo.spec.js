@@ -1,12 +1,12 @@
 "use strict";
 
-var Servo = source("servo");
+source("servo");
 
 describe("Cylon.Drivers.GPIO.Servo", function() {
-  var driver = new Servo({
+  var driver = new Cylon.Drivers.GPIO.Servo({
     name: 'serv',
     device: {
-      connection: 'connect',
+      connection: { servoWrite: spy() },
       pin: 13
     }
   });
@@ -22,18 +22,10 @@ describe("Cylon.Drivers.GPIO.Servo", function() {
 
     context("if a servo range is supplied", function() {
       it("@angleRange is set to provided range", function() {
-        var new_driver = new Servo({
+        var new_driver = new Cylon.Drivers.GPIO.Servo({
           name: 'serv',
-          device: {
-            connection: 'connect',
-            pin: 13
-          },
-          extraParams: {
-            range: {
-              min: 0,
-              max: 180
-            }
-          }
+          device: { connection: 'connect', pin: 13 },
+          extraParams: { range: { min: 0, max: 180 } }
         });
 
         expect(new_driver.angleRange.min).to.be.eql(0);
@@ -49,8 +41,15 @@ describe("Cylon.Drivers.GPIO.Servo", function() {
     });
   });
 
-  it("contains an array of servo commands", function() {
-    expect(driver.commands()).to.be.eql(['angle', 'currentAngle']);
+  describe("#commands", function() {
+    var commands = driver.commands();
+    it("provides an array of motor commands", function() {
+      expect(commands).to.be.an('array');
+
+      for (var i = 0; i < commands.length; i++) {
+        expect(commands[i]).to.be.a('string');
+      }
+    });
   });
 
   describe('#currentAngle', function() {
@@ -66,10 +65,7 @@ describe("Cylon.Drivers.GPIO.Servo", function() {
     var safeAngle = null;
 
     before(function() {
-      safeAngle = sinon.stub(driver, 'safeAngle').returns(120);
-      connection = { servoWrite: sinon.spy() };
-
-      driver.connection = connection;
+      stub(driver, 'safeAngle').returns(120);
       driver.angle(120);
     });
 
@@ -78,13 +74,11 @@ describe("Cylon.Drivers.GPIO.Servo", function() {
     });
 
     it("ensures the value is safe", function() {
-      assert(safeAngle.calledOnce);
-      assert(safeAngle.calledWith(120));
+      expect(driver.safeAngle).to.be.calledWith(120);
     });
 
     it("writes the value to the servo", function() {
-      assert(connection.servoWrite.calledOnce);
-      assert(connection.servoWrite.calledWith(13, 120));
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 120);
     });
 
     it("sets @angleValue to the new servo value", function() {
@@ -94,10 +88,7 @@ describe("Cylon.Drivers.GPIO.Servo", function() {
 
   describe("#safeAngle", function() {
     before(function() {
-      driver.angleRange = {
-        min: 30,
-        max: 130
-      };
+      driver.angleRange = { min: 30, max: 130 };
     });
 
     context("when passed a value below the servo's range min", function() {
