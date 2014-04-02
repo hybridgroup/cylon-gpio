@@ -1,6 +1,6 @@
 {
   "name": "cylon-gpio",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "main": "lib/cylon-gpio.js",
   "description": "Cylon module for General Purpose Input/Output (GPIO)",
   "homepage": "http://cylonjs.com",
@@ -34,6 +34,6 @@
   },
   "dependencies": {
     "node-namespace": "~1.0.0",
-    "cylon": ">= 0.12.0"
+    "cylon": ">= 0.13.0"
   }
 }
