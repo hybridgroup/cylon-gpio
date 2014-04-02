@@ -23,7 +23,7 @@
     "*": false,
     "./": false,
     "node-namespace": true,
-    "./dist": true
+    "./lib": true
   },
   "devDependencies": {
     "sinon-chai": "~2.4.0",
