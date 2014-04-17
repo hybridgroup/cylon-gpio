@@ -86,6 +86,8 @@ Thank you!
 
 ## Release History
 
+Version 0.13.1 - Adds new direct-pin driver
+
 Version 0.13.0 - Update to cylon 0.13.0, Tessel compatibility
 
 Version 0.12.0 - Update to cylon 0.12.0
