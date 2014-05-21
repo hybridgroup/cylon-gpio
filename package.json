@@ -31,7 +31,6 @@
   },
 
   "dependencies": {
-    "node-namespace": "~1.0.0",
     "cylon":          ">= 0.13.0"
   }
 }
