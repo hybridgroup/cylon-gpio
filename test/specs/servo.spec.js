@@ -1,9 +1,9 @@
 "use strict";
 
-source("servo");
+var Servo = source("servo");
 
-describe("Cylon.Drivers.GPIO.Servo", function() {
-  var driver = new Cylon.Drivers.GPIO.Servo({
+describe("Servo", function() {
+  var driver = new Servo({
     name: 'serv',
     device: {
       connection: { servoWrite: spy() },

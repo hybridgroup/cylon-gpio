@@ -1,9 +1,9 @@
 "use strict";
 
-source("button");
+var Button = source("button");
 
-describe("Cylon.Drivers.GPIO.Button", function() {
-  var driver = new Cylon.Drivers.GPIO.Button({
+describe("Button", function() {
+  var driver = new Button({
     name: 'button',
     device: { connection: 'connect', pin: 13 }
   });

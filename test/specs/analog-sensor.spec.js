@@ -1,15 +1,15 @@
 "use strict";
 
-source("analog-sensor");
+var AnalogSensor = source("analog-sensor");
 
-describe("Cylon.Drivers.GPIO.AnalogSensor", function() {
-  var driver = new Cylon.Drivers.GPIO.AnalogSensor({
+describe("AnalogSensor", function() {
+  var driver = new AnalogSensor({
     name: 'sensor',
     device: { connection: 'connect', pin: 13 },
   });
 
   describe("constructor", function() {
-    var testDriver = new Cylon.Drivers.GPIO.AnalogSensor({
+    var testDriver = new AnalogSensor({
       name: 'sensor',
       device: { connection: 'connect', pin: 13 },
       extraParams: { upperLimit: 180, lowerLimit: 50 }

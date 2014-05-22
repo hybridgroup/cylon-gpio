@@ -1,41 +1,42 @@
 "use strict";
 
 var module = source("cylon-gpio");
+var Cylon = require('cylon');
 
-source('./analog-sensor');
-source('./button');
-source('./continuous-servo');
-source('./led');
-source('./makey-button');
-source('./maxbotix');
-source('./motor');
-source('./servo');
+var AnalogSensor = source('analog-sensor');
+var Button = source('button');
+var ContinuousServo = source('continuous-servo');
+var Led = source('led');
+var MakeyButton = source('makey-button');
+var Maxbotix = source('maxbotix');
+var Motor = source('motor');
+var Servo = source('servo');
+var IrRangeSensor = source('ir-range-sensor');
+var DirectPin = source('direct-pin');
 
-describe("Cylon.Drivers.GPIO", function() {
+describe("GPIO", function() {
   describe('#driver', function() {
     after(function() {
-      Cylon.Drivers.GPIO.AnalogSensor.restore()
-      Cylon.Drivers.GPIO.Button.restore()
-      Cylon.Drivers.GPIO.ContinuousServo.restore()
-      Cylon.Drivers.GPIO.Led.restore()
-      Cylon.Drivers.GPIO.MakeyButton.restore()
-      Cylon.Drivers.GPIO.Maxbotix.restore()
-      Cylon.Drivers.GPIO.Motor.restore()
-      Cylon.Drivers.GPIO.Servo.restore()
+      AnalogSensor.restore()
+      Button.restore()
+      ContinuousServo.restore()
+      Led.restore()
+      MakeyButton.restore()
+      Maxbotix.restore()
+      Motor.restore()
+      Servo.restore()
     });
 
     it("can instantiate a new AnalogSensor", function() {
-      stub(Cylon.Drivers.GPIO, 'AnalogSensor');
-      var opts = { name: 'analogSensor' }
-
+      var s = sinon.spy(AnalogSensor)
+      var opts = { name: 'analogSensor', device: {}}
       module.driver(opts);
-
-      expect(Cylon.Drivers.GPIO.AnalogSensor).to.be.calledWithNew;
-      expect(Cylon.Drivers.GPIO.AnalogSensor).to.be.calledWith(opts);
+      expect(s.calledWithNew);
+      expect(s.calledWith(opts));
     });
 
     it("can instantiate a new Button", function() {
-      stub(Cylon.Drivers.GPIO, 'Button');
+      stub(Button, 'Button');
       var opts = { name: 'button' }
 
       module.driver(opts);
@@ -55,13 +56,11 @@ describe("Cylon.Drivers.GPIO", function() {
     });
 
     it("can instantiate a new LED", function() {
-      stub(Cylon.Drivers.GPIO, 'Led');
-      var opts = { name: 'led' }
-
+      var s = sinon.spy(Led)
+      var opts = { name: 'led', device: {} }
       module.driver(opts);
-
-      expect(Cylon.Drivers.GPIO.Led).to.be.calledWithNew;
-      expect(Cylon.Drivers.GPIO.Led).to.be.calledWith(opts);
+      expect(s.calledWithNew);
+      expect(s.calledWith(opts));
     });
 
     it("can instantiate a new MakeyButton", function() {
