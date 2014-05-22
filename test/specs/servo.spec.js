@@ -22,7 +22,7 @@ describe("Servo", function() {
 
     context("if a servo range is supplied", function() {
       it("@angleRange is set to provided range", function() {
-        var new_driver = new Cylon.Drivers.GPIO.Servo({
+        var new_driver = new Servo({
           name: 'serv',
           device: { connection: 'connect', pin: 13 },
           extraParams: { range: { min: 0, max: 180 } }
