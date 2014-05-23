@@ -18,7 +18,6 @@
   "hardware": {
     "*": false,
     "./": false,
-    "node-namespace": true,
     "./lib": true
   },
 
