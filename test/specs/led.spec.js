@@ -1,9 +1,9 @@
 "use strict";
 
-source("led");
+var Led = source("led");
 
-describe("Cylon.Drivers.GPIO.Led", function() {
-  var driver = new Cylon.Drivers.GPIO.Led({
+describe("Led", function() {
+  var driver = new Led({
     name: 'blinky',
     device: {
       connection: { digitalWrite: spy(), pwmWrite: spy() },

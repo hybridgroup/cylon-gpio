@@ -2,7 +2,7 @@
 
 var Motor = source("motor");
 
-describe("Cylon.Drivers.GPIO.Motor", function() {
+describe("Motor", function() {
   var driver = new Motor({
     name: 'vrroom',
     device: {

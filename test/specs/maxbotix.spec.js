@@ -1,9 +1,9 @@
 'use strict';
 
-source("maxbotix");
+var Maxbotix = source("maxbotix");
 
-describe("Cylon.Drivers.GPIO.Maxbotix", function() {
-  var driver = new Cylon.Drivers.GPIO.Maxbotix({
+describe("Maxbotix", function() {
+  var driver = new Maxbotix({
     name: 'max',
     device: {
       connection: { analogRead: function() {} },

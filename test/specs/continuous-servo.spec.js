@@ -1,9 +1,9 @@
 "use strict";
 
-source("servo");
+var ContinuousServo = source("continuous-servo");
 
-describe("Cylon.Drivers.GPIO.ContinuousServo", function() {
-  var driver = new Cylon.Drivers.GPIO.ContinuousServo({
+describe("ContinuousServo", function() {
+  var driver = new ContinuousServo({
     name: 'serv',
     device: {
       connection: { servoWrite: spy() },

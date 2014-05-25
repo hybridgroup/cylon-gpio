@@ -1,9 +1,9 @@
 "use strict";
 
-source("makey-button");
+var MakeyButton = source("makey-button");
 
-describe("Cylon.Drivers.GPIO.MakeyButton", function() {
-  var driver = new Cylon.Drivers.GPIO.MakeyButton({
+describe("MakeyButton", function() {
+  var driver = new MakeyButton({
     name: 'button',
     device: {
       connection: { digitalRead: spy() },
