@@ -8,7 +8,8 @@ describe("Led", function() {
     device: {
       connection: { digitalWrite: spy(), pwmWrite: spy() },
       pin: 13
-    }
+    },
+    extraParams: {}
   });
 
   describe('constructor', function() {

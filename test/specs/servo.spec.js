@@ -8,7 +8,8 @@ describe("Servo", function() {
     device: {
       connection: { servoWrite: spy() },
       pin: 13
-    }
+    },
+    extraParams: {}
   });
 
   describe("constructor", function() {
@@ -34,9 +35,9 @@ describe("Servo", function() {
     });
 
     context("if no servo range is supplied", function() {
-      it("@angleRange defaults to 30-150", function() {
-        expect(driver.angleRange.min).to.be.eql(30);
-        expect(driver.angleRange.max).to.be.eql(150);
+      it("@angleRange defaults to 20-160", function() {
+        expect(driver.angleRange.min).to.be.eql(20);
+        expect(driver.angleRange.max).to.be.eql(160);
       });
     });
   });
