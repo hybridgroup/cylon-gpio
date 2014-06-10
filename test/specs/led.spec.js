@@ -23,7 +23,7 @@ describe("Led", function() {
   });
 
   it("has led commands", function() {
-    var commands = ['isOn', 'turnOn', 'turnOff', 'toggle', 'brightness'];
+    var commands = ['isOn', 'turnOn', 'turnOff', 'toggle', 'brightness', 'currentBrightness'];
     expect(driver.commands()).to.be.eql(commands);
   });
 
@@ -83,8 +83,8 @@ describe("Led", function() {
 
   describe("#brightness", function() {
     it("calls #pwmWrite to set the pin's brightness", function() {
-      driver.brightness(250);
-      expect(driver.connection.pwmWrite).to.be.calledWith(13, 250);
+      driver.brightness(255);
+      expect(driver.connection.pwmWrite).to.be.calledWith(13, 1);
     });
   });
 

@@ -26,18 +26,18 @@ describe("Servo", function() {
         var new_driver = new Servo({
           name: 'serv',
           device: { connection: 'connect', pin: 13 },
-          extraParams: { range: { min: 0, max: 180 } }
+          extraParams: { limits: { bottom: 0, top: 180 } }
         });
 
-        expect(new_driver.angleRange.min).to.be.eql(0);
-        expect(new_driver.angleRange.max).to.be.eql(180);
+        expect(new_driver.limits.bottom).to.be.eql(0);
+        expect(new_driver.limits.top).to.be.eql(180);
       });
     });
 
     context("if no servo range is supplied", function() {
       it("@angleRange defaults to 20-160", function() {
-        expect(driver.angleRange.min).to.be.eql(20);
-        expect(driver.angleRange.max).to.be.eql(160);
+        expect(driver.limits.bottom).to.be.eql(20);
+        expect(driver.limits.top).to.be.eql(160);
       });
     });
   });
@@ -79,7 +79,7 @@ describe("Servo", function() {
     });
 
     it("writes the value to the servo", function() {
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 120);
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 0.6666666666666666, 50, { max: 2400, min: 500 });
     });
 
     it("sets @angleValue to the new servo value", function() {
@@ -89,7 +89,7 @@ describe("Servo", function() {
 
   describe("#safeAngle", function() {
     before(function() {
-      driver.angleRange = { min: 30, max: 130 };
+      driver.limits = { bottom: 30, top: 130 };
     });
 
     context("when passed a value below the servo's range min", function() {

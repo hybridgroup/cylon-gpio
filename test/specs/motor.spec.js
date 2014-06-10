@@ -95,15 +95,15 @@ describe("Motor", function() {
 
   describe("#speed", function() {
     before(function() {
-      driver.speed(100);
+      driver.speed(255);
     });
 
     it("writes the speed value to the pin via the connection", function() {
-      expect(driver.connection.pwmWrite).to.be.calledWith(13, 100);
+      expect(driver.connection.pwmWrite).to.be.calledWith(13, 1);
     });
 
     it("sets @speedValue to the passed value", function() {
-      expect(driver.speedValue).to.be.eql(100);
+      expect(driver.speedValue).to.be.eql(255);
     });
 
     it("sets @isOn depending on whether the speed is greater than 0", function() {
