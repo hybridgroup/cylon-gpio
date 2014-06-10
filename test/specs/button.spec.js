@@ -19,7 +19,7 @@ describe("Button", function() {
   });
 
   describe("#commands", function() {
-    var commands = driver.commands();
+    var commands = driver.commands;
 
     it("returns an array of button commands", function() {
       expect(commands).to.be.an('array');

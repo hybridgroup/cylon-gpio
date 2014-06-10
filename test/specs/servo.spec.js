@@ -42,7 +42,7 @@ describe("Servo", function() {
   });
 
   describe("#commands", function() {
-    var commands = driver.commands();
+    var commands = driver.commands;
     it("provides an array of motor commands", function() {
       expect(commands).to.be.an('array');
 
