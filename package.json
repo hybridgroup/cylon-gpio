@@ -1,6 +1,6 @@
 {
   "name": "cylon-gpio",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "main": "lib/cylon-gpio.js",
   "description": "Cylon module for General Purpose Input/Output (GPIO)",
   "homepage": "http://cylonjs.com",
@@ -27,6 +27,10 @@
     "mocha":      "~1.12.1",
     "sinon":      "~1.7.3",
     "jshint":     "~2.4.4"
+  },
+
+  "peerDependencies": {
+    "cylon": ">= 0.15.0 < 1"
   },
 
   "dependencies": {
