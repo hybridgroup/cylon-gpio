@@ -86,6 +86,8 @@ Thank you!
 
 ## Release History
 
+Version 0.15.0 - Compatibility with Cylon 0.15.0
+
 Version 0.14.0 - Compatibility with Cylon 0.14.0, remove node-namespace.
 
 Version 0.13.1 - Adds new direct-pin driver
