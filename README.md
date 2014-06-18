@@ -13,9 +13,8 @@ Want to use the Go programming language to power your robots? Check out our sist
 ## Getting Started
 Install the module with: `npm install cylon-gpio`
 
-## Examples
+## Example
 
-### JavaScript:
 ```javascript
 var Cylon = require('cylon');
 
@@ -31,26 +30,6 @@ Cylon.robot({
 }).start();
 ```
 
-### CoffeeScript:
-```
-Cylon = require('cylon')
-
-# Initialize the robot
-Cylon.robot
-  connection:
-    name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-  devices:
-    [
-      {name: 'led', driver: 'led', pin: 13},
-      {name: 'button', driver: 'button', pin: 2}
-    ]
-
-  work: (my) ->
-    my.button.on 'push', -> my.led.toggle()
-
-.start()
-```
 ## Hardware Support
 Cylon.js has a extensible system for connecting to hardware devices. The following GPIO devices are currently supported:
 
@@ -85,6 +64,10 @@ Thank you!
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
+
+Version 0.15.1 - Add peerDependencies to package.json
+
+Version 0.15.0 - Compatibility with Cylon 0.15.0
 
 Version 0.14.0 - Compatibility with Cylon 0.14.0, remove node-namespace.
 

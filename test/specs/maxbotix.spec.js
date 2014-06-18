@@ -23,7 +23,7 @@ describe("Maxbotix", function() {
   });
 
   describe("#commands", function() {
-    var commands = driver.commands();
+    var commands = driver.commands;
 
     it("provides an array of Maxbotix commands", function() {
       expect(commands).to.be.an('array');

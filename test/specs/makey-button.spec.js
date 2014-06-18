@@ -31,7 +31,7 @@ describe("MakeyButton", function() {
   });
 
   describe("#commands", function() {
-    var commands = driver.commands();
+    var commands = driver.commands;
     it("provides an array of makey-button commands", function() {
       expect(commands).to.be.an('array');
 

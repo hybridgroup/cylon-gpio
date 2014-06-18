@@ -41,7 +41,7 @@ describe("AnalogSensor", function() {
   });
 
   describe("#commands", function() {
-    var commands = driver.commands();
+    var commands = driver.commands;
     it("returns an array of AnalogSensor commands", function() {
       expect(commands).to.be.a('array')
 

@@ -24,7 +24,7 @@ describe("Led", function() {
 
   it("has led commands", function() {
     var commands = ['isOn', 'turnOn', 'turnOff', 'toggle', 'brightness'];
-    expect(driver.commands()).to.be.eql(commands);
+    expect(driver.commands).to.be.eql(commands);
   });
 
   describe('#turnOn', function() {
