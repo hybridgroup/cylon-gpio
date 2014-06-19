@@ -8,7 +8,8 @@ describe("Servo", function() {
     device: {
       connection: { servoWrite: spy() },
       pin: 13
-    }
+    },
+    extraParams: {}
   });
 
   describe("constructor", function() {
@@ -34,9 +35,9 @@ describe("Servo", function() {
     });
 
     context("if no servo range is supplied", function() {
-      it("@angleRange defaults to 30-150", function() {
-        expect(driver.angleRange.min).to.be.eql(30);
-        expect(driver.angleRange.max).to.be.eql(150);
+      it("@angleRange defaults to 20-160", function() {
+        expect(driver.angleRange.min).to.be.eql(20);
+        expect(driver.angleRange.max).to.be.eql(160);
       });
     });
   });
@@ -65,8 +66,8 @@ describe("Servo", function() {
     var safeAngle = null;
 
     before(function() {
-      stub(driver, 'safeAngle').returns(120);
-      driver.angle(120);
+      stub(driver, 'safeAngle').returns(90);
+      driver.angle(90);
     });
 
     after(function() {
@@ -74,21 +75,21 @@ describe("Servo", function() {
     });
 
     it("ensures the value is safe", function() {
-      expect(driver.safeAngle).to.be.calledWith(120);
+      expect(driver.safeAngle).to.be.calledWith(90);
     });
 
     it("writes the value to the servo", function() {
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 120);
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 0.5, null, { max: 2400, min: 500 });
     });
 
     it("sets @angleValue to the new servo value", function() {
-      expect(driver.angleValue).to.be.eql(120);
+      expect(driver.angleValue).to.be.eql(90);
     });
   });
 
   describe("#safeAngle", function() {
     before(function() {
-      driver.angleRange = { min: 30, max: 130 };
+      driver.angleRange = { min: 30, max: 150 };
     });
 
     context("when passed a value below the servo's range min", function() {
@@ -99,7 +100,7 @@ describe("Servo", function() {
 
     context("when passed a value above the servo's range max", function() {
       it("returns the range's max value", function() {
-        expect(driver.safeAngle(180)).to.be.eql(130);
+        expect(driver.safeAngle(180)).to.be.eql(150);
       });
     });
 

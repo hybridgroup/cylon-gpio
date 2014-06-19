@@ -8,7 +8,8 @@ describe("Motor", function() {
     device: {
       connection: { digitalWrite: spy(), pwmWrite: spy() },
       pin: 13
-    }
+    },
+    extraParams: {}
   });
 
   describe('constructor', function() {
@@ -94,15 +95,15 @@ describe("Motor", function() {
 
   describe("#speed", function() {
     before(function() {
-      driver.speed(100);
+      driver.speed(127.5);
     });
 
     it("writes the speed value to the pin via the connection", function() {
-      expect(driver.connection.pwmWrite).to.be.calledWith(13, 100);
+      expect(driver.connection.pwmWrite).to.be.calledWith(13, 0.5);
     });
 
     it("sets @speedValue to the passed value", function() {
-      expect(driver.speedValue).to.be.eql(100);
+      expect(driver.speedValue).to.be.eql(127.5);
     });
 
     it("sets @isOn depending on whether the speed is greater than 0", function() {
