@@ -13,8 +13,8 @@ describe("Button", function() {
       expect(driver.pin).to.be.eql(13);
     });
 
-    it("sets @isPressed to false by default", function() {
-      expect(driver.isPressed).to.be["false"];
+    it("sets @pressed to false by default", function() {
+      expect(driver.pressed).to.be["false"];
     });
   });
 
@@ -47,12 +47,12 @@ describe("Button", function() {
         driver.start(callback);
       });
 
-      it("emits 'push'", function() {
-        expect(driver.device.emit).to.be.calledWith('push');
+      it("emits 'press'", function() {
+        expect(driver.device.emit).to.be.calledWith('press');
       });
 
       it('sets @isPressed to true', function() {
-        expect(driver.isPressed).to.be.true;
+        expect(driver.isPressed()).to.be.true;
       });
     });
 
@@ -67,7 +67,18 @@ describe("Button", function() {
       });
 
       it('sets @isPressed to false', function() {
-        expect(driver.isPressed).to.be.false;
+        expect(driver.isPressed()).to.be.false;
+      });
+    });
+    context("when 1 and prevState == 0", function() {
+      before(function() {
+        driver.connection.digitalRead.callsArgWith(1, 1);
+        driver.connection.digitalRead.callsArgWith(1, 0);
+        driver.start(callback);
+      });
+
+      it("emits 'push'", function() {
+        expect(driver.device.emit).to.be.calledWith('push');
       });
     });
   });
