@@ -2,17 +2,17 @@
 
 ## update
 
-This event will contain one of the following events. 
+This event will contain one of the following events.
 You can also subscribe to one of the specific events, if that is the information you are interested in.
 
-## push
+## press
 
-This event gets triggered when the button changes state from released to pushed.
+This event is triggered when the button is pressed.
 
 ## release
 
-This event gets triggered when the button changes state from pushed to released.
+This event is triggered when the button is released.
 
-## start
+## push
 
-Sent when the device has been started and is ready to use.
+This event is triggered when the button is pressed and then released.
