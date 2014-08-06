@@ -65,6 +65,8 @@ Thank you!
 
 ## Release History
 
+Version 0.17.0 - Corrections to IR Range Sensor values
+
 Version 0.16.0 - Compatibility with Cylon 0.16.0
 
 Version 0.15.1 - Add peerDependencies to package.json
