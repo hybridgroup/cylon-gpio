@@ -23,11 +23,9 @@ describe("Led", function() {
   });
 
   it("has led commands", function() {
-    var commands = [
-    'isOn', 'turnOn', 'turnOff', 'toggle', 'brightness', 'currentBrightness'
-    ];
-
-    expect(driver.commands).to.be.eql(commands);
+    for (var c in driver.commands) {
+      expect(driver.commands[c]).to.be.a('function');
+    }
   });
 
   describe('#turnOn', function() {

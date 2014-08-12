@@ -22,13 +22,9 @@ describe("ContinuousServo", function() {
   });
 
   describe("#commands", function() {
-    var commands = driver.commands;
-
-    it("returns an array of ContinuousSphero commands", function() {
-      expect(commands).to.be.an('array');
-
-      for (var i = 0; i < commands.length; i++) {
-        expect(commands[i]).to.be.a('string');
+    it("is an object containing ContinuousServo commands", function() {
+      for (var c in driver.commands) {
+        expect(driver.commands[c]).to.be.a('function');
       }
     });
   });
