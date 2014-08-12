@@ -30,17 +30,6 @@ describe("MakeyButton", function() {
     });
   });
 
-  describe("#commands", function() {
-    var commands = driver.commands;
-    it("provides an array of makey-button commands", function() {
-      expect(commands).to.be.an('array');
-
-      for (var i = 0; i < commands.length; i++) {
-        expect(commands[i]).to.be.a('string');
-      }
-    });
-  });
-
   describe("#start", function() {
     before(function() {
       this.clock = sinon.useFakeTimers();
