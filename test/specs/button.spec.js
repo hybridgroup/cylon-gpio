@@ -39,7 +39,7 @@ describe("Button", function() {
 
     context("when 1", function() {
       before(function() {
-        driver.connection.digitalRead.callsArgWith(1, 1);
+        driver.connection.digitalRead.callsArgWith(1, null, 1);
         driver.start(callback);
       });
 
@@ -54,7 +54,7 @@ describe("Button", function() {
 
     context("when 0", function() {
       before(function() {
-        driver.connection.digitalRead.callsArgWith(1, 0);
+        driver.connection.digitalRead.callsArgWith(1, null, 0);
         driver.start(callback);
       });
 

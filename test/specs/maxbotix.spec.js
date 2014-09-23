@@ -32,7 +32,7 @@ describe("Maxbotix", function() {
 
   describe("#start", function() {
     before(function() {
-      stub(driver.device.connection, 'analogRead').callsArgWith(1, 20);
+      stub(driver.device.connection, 'analogRead').callsArgWith(1, null, 20);
       stub(driver, 'range').returns(10);
       stub(driver, 'rangeCm').returns(20);
 
