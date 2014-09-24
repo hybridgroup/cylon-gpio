@@ -16,7 +16,7 @@ var AnalogSensor = source('analog-sensor'),
 
 describe("GPIO", function() {
   describe('#driver', function() {
-    var opts = { device: {}, extraParams: {} };
+    var opts = { device: { connection: {} }, extraParams: {} };
 
     it("can instantiate a new AnalogSensor", function() {
       opts.name = 'analogSensor';
