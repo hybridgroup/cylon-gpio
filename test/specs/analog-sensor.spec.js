@@ -55,7 +55,7 @@ describe("AnalogSensor", function() {
     before(function() {
       originalConnection = driver.connection;
 
-      driver.connection = { analogRead: stub().callsArgWith(1, 75) }
+      driver.connection = { analogRead: stub().callsArgWith(1, null, 75) };
       driver.device.emit = spy();
 
       driver.start(callback);
@@ -80,7 +80,7 @@ describe("AnalogSensor", function() {
 
     context("when #analogRead returns a value under the lower limit", function() {
       before(function() {
-        driver.connection.analogRead.callsArgWith(1, -1);
+        driver.connection.analogRead.callsArgWith(1, null, -1);
         driver.start(callback);
       });
 
@@ -95,7 +95,7 @@ describe("AnalogSensor", function() {
 
     context("when #analogRead returns a value above the upper limit", function() {
       before(function() {
-        driver.connection.analogRead.callsArgWith(1, 360);
+        driver.connection.analogRead.callsArgWith(1, null, 360);
         driver.start(callback);
       });
 
