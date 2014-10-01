@@ -65,6 +65,8 @@ Thank you!
 
 ## Release History
 
+Version 0.19.0 - Compatibility with Cylon 0.19.0
+
 Version 0.18.0 - Bug fixes, compatibility with Cylon 0.18.0
 
 Version 0.17.0 - Corrections to IR Range Sensor values
