@@ -1,7 +1,6 @@
 "use strict";
 
 var module = source("cylon-gpio");
-var Cylon = require('cylon');
 
 var AnalogSensor = source('analog-sensor'),
     Button = source('button'),
@@ -15,6 +14,14 @@ var AnalogSensor = source('analog-sensor'),
     DirectPin = source('direct-pin');
 
 describe("GPIO", function() {
+  describe("#drivers", function() {
+
+    it("contains all drivers the module provides", function() {
+      var drivers = [ 'analogSensor', 'button', 'continuous-servo', 'led', 'makey-button', 'maxbotix', 'motor', 'servo', 'ir-range-sensor', 'direct-pin'];
+      expect(module.drivers).to.be.eql(drivers);
+    });
+  });
+
   describe('#driver', function() {
     var opts = { device: { connection: {} }, extraParams: {} };
 
@@ -80,45 +87,6 @@ describe("GPIO", function() {
 
     it("returns null if not passed a name", function() {
       expect(module.driver({})).to.be.eql(null);
-    });
-  });
-
-  describe("#register", function() {
-    var robot = { registerDriver: spy() },
-        register = robot.registerDriver;
-
-    before(function() { module.register(robot); });
-
-    it("registers the analogSensor driver", function() {
-      expect(register).to.be.calledWith('cylon-gpio', 'analogSensor');
-    });
-
-    it("registers the button driver", function() {
-      expect(register).to.be.calledWith('cylon-gpio', 'button');
-    });
-
-    it("registers the ContinuousServo driver", function() {
-      expect(register).to.be.calledWith('cylon-gpio', 'continuous-servo');
-    });
-
-    it("registers the LED driver", function() {
-      expect(register).to.be.calledWith('cylon-gpio', 'led');
-    });
-
-    it("registers the MakeyButton driver", function() {
-      expect(register).to.be.calledWith('cylon-gpio', 'makey-button');
-    });
-
-    it("registers the Maxbotix driver", function() {
-      expect(register).to.be.calledWith('cylon-gpio', 'maxbotix');
-    });
-
-    it("registers the Motor driver", function() {
-      expect(register).to.be.calledWith('cylon-gpio', 'motor');
-    });
-
-    it("registers the Servo driver", function() {
-      expect(register).to.be.calledWith('cylon-gpio', 'servo');
     });
   });
 });
