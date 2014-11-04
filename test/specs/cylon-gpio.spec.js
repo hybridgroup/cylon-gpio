@@ -23,64 +23,64 @@ describe("GPIO", function() {
   });
 
   describe('#driver', function() {
-    var opts = { device: { connection: {} }, extraParams: {} };
+    var opts = { device: { connection: {} } };
 
     it("can instantiate a new AnalogSensor", function() {
-      opts.name = 'analogSensor';
+      opts.driver = 'analogSensor';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(AnalogSensor);
     });
 
     it("can instantiate a new Button", function() {
-      opts.name = 'button';
+      opts.driver = 'button';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(Button);
     });
 
     it("can instantiate a new ContinuousServo", function() {
-      opts.name = 'continuous-servo';
+      opts.driver = 'continuous-servo';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(ContinuousServo);
     });
 
     it("can instantiate a new LED", function() {
-      opts.name = 'led';
+      opts.driver = 'led';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(Led);
     });
 
     it("can instantiate a new MakeyButton", function() {
-      opts.name = 'makey-button';
+      opts.driver = 'makey-button';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(MakeyButton);
     });
 
     it("can instantiate a new Maxbotix", function() {
-      opts.name = 'maxbotix';
+      opts.driver = 'maxbotix';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(Maxbotix);
     });
 
     it("can instantiate a new Motor", function() {
-      opts.name = 'motor';
+      opts.driver = 'motor';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(Motor);
     });
 
     it("can instantiate a new Servo", function() {
-      opts.name = 'servo';
+      opts.driver = 'servo';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(Servo);
     });
 
     it("can instantiate a new IrRangeSensor", function() {
-      opts.name = 'ir-range-sensor';
+      opts.driver = 'ir-range-sensor';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(IrRangeSensor);
     });
 
     it("can instantiate a new DirectPin", function() {
-      opts.name = 'direct-pin';
+      opts.driver = 'direct-pin';
       var driver = module.driver(opts);
       expect(driver).to.be.an.instanceOf(DirectPin);
     });

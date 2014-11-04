@@ -12,7 +12,8 @@ describe("AnalogSensor", function() {
     var testDriver = new AnalogSensor({
       name: 'sensor',
       device: { connection: 'connect', pin: 13 },
-      extraParams: { upperLimit: 180, lowerLimit: 50 }
+      upperLimit: 180,
+      lowerLimit: 50
     });
 
     it("assigns @pin to the passed device's pin", function() {

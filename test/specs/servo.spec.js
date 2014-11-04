@@ -8,8 +8,7 @@ describe("Servo", function() {
     device: {
       connection: { servoWrite: spy() },
       pin: 13
-    },
-    extraParams: {}
+    }
   });
 
   describe("constructor", function() {
@@ -26,7 +25,7 @@ describe("Servo", function() {
         var new_driver = new Servo({
           name: 'serv',
           device: { connection: 'connect', pin: 13 },
-          extraParams: { range: { min: 0, max: 180 } }
+          range: { min: 0, max: 180 }
         });
 
         expect(new_driver.angleRange.min).to.be.eql(0);
