@@ -9,7 +9,7 @@ var chai = require('chai');
 var sinonChai = require('sinon-chai');
 
 var Cylon = require('cylon');
-Cylon.Logger.setup(false) // disable Cylon's logger for tests
+Cylon.config({ logging: { logger: false }});
 
 global.chai = chai;
 global.should = chai.should();
