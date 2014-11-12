@@ -3,17 +3,18 @@
 var MakeyButton = source("makey-button");
 
 describe("MakeyButton", function() {
-  var driver = new MakeyButton({
-    name: 'button',
-    device: {
-      connection: { digitalRead: spy() },
-      pin: 13,
-      emit: spy()
-    }
+  var driver;
+
+  beforeEach(function() {
+    driver = new MakeyButton({
+      name: 'button',
+      adaptor: { digitalRead: spy() },
+      pin: 13
+    });
   });
 
   describe("#constructor", function() {
-    it("sets @pin to the passed device's pin", function() {
+    it("sets @pin to the passed pin", function() {
       expect(driver.pin).to.be.eql(13);
     });
 
@@ -31,7 +32,7 @@ describe("MakeyButton", function() {
   });
 
   describe("#start", function() {
-    before(function() {
+    beforeEach(function() {
       this.clock = sinon.useFakeTimers();
       driver.start(function() {});
     });
@@ -41,7 +42,7 @@ describe("MakeyButton", function() {
     });
 
     it("reads the value of the pin into @currentValue", function() {
-      expect(driver.connection.digitalRead).to.be.calledWith(13);
+      expect(driver.adaptor.digitalRead).to.be.calledWith(13);
     });
 
     describe("button-checking loop", function() {
@@ -61,20 +62,16 @@ describe("MakeyButton", function() {
       });
 
       describe("if @averageData is greater than 0.5", function() {
-        before(function() {
+        beforeEach(function() {
           driver.isPressed = true;
-          driver.device.emit = spy();
-          stub(driver, 'averageData').returns(0.65);
-        });
-
-        after(function() {
-          driver.averageData.restore();
+          driver.emit = spy();
+          driver.averageData = function() { return 0.65 };
+          this.clock.tick(55);
         });
 
         it("emits 'release' once", function() {
-          this.clock.tick(150);
-          expect(driver.device.emit).to.be.calledWith('release');
-          expect(driver.device.emit).to.be.calledOnce;
+          expect(driver.emit).to.be.calledWith('release');
+          expect(driver.emit).to.be.calledOnce;
         });
 
         it("sets @isPressed to false", function() {
@@ -83,20 +80,16 @@ describe("MakeyButton", function() {
       });
 
       describe("if @averageData is less than 0.5", function() {
-        before(function() {
+        beforeEach(function() {
           driver.isPressed = false;
-          driver.device.emit = spy();
-          stub(driver, 'averageData').returns(0.45);
-        });
-
-        after(function() {
-          driver.averageData.restore();
+          driver.emit = spy();
+          driver.averageData = function() { return 0.45 };
+          this.clock.tick(55);
         });
 
         it("emits 'push' once", function() {
-          this.clock.tick(150);
-          expect(driver.device.emit).to.be.calledWith('push');
-          expect(driver.device.emit).to.be.calledOnce;
+          expect(driver.emit).to.be.calledWith('push');
+          expect(driver.emit).to.be.calledOnce;
         });
 
         it("sets @isPressed to true", function() {
@@ -108,7 +101,7 @@ describe("MakeyButton", function() {
 
   describe('#averateData', function() {
     context("when @data is empty", function() {
-      before(function() { driver.data = []; });
+      beforeEach(function() { driver.data = []; });
 
       it("returns 0", function() {
         expect(driver.averageData()).to.be.eql(0);
@@ -116,7 +109,7 @@ describe("MakeyButton", function() {
     });
 
     context("when @data is an array of values", function() {
-      before(function() { driver.data = [0, 0, 10, 10]; });
+      beforeEach(function() { driver.data = [0, 0, 10, 10]; });
 
       it("returns an average", function() {
         expect(driver.averageData()).to.be.eql(5);

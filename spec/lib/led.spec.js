@@ -3,16 +3,18 @@
 var Led = source("led");
 
 describe("Led", function() {
-  var driver = new Led({
-    name: 'blinky',
-    device: {
-      connection: { digitalWrite: spy(), pwmWrite: spy() },
+  var driver;
+
+  beforeEach(function() {
+    driver = new Led({
+      name: 'blinky',
+      adaptor: { digitalWrite: spy(), pwmWrite: spy() },
       pin: 13
-    }
+    });
   });
 
   describe('constructor', function() {
-    it("sets @pin to the value of the passed device's pin", function() {
+    it("sets @pin to the value of the passed pin", function() {
       expect(driver.pin).to.be.eql(13);
     });
 
@@ -33,7 +35,7 @@ describe("Led", function() {
       driver.turnOn();
 
       expect(driver.isHigh).to.be.true;
-      expect(driver.connection.digitalWrite).to.be.calledWith(13 ,1);
+      expect(driver.adaptor.digitalWrite).to.be.calledWith(13 ,1);
     });
   });
 
@@ -43,13 +45,13 @@ describe("Led", function() {
       driver.turnOff();
 
       expect(driver.isHigh).to.be.false;
-      expect(driver.connection.digitalWrite).to.be.calledWith(13, 0);
+      expect(driver.adaptor.digitalWrite).to.be.calledWith(13, 0);
     });
   });
 
   describe('#toggle', function() {
     context('when @isHigh is true', function() {
-      before(function() {
+      beforeEach(function() {
         driver.isHigh = true;
         stub(driver, 'turnOff');
       });
@@ -65,7 +67,7 @@ describe("Led", function() {
     });
 
     context('when @isHigh is false', function() {
-      before(function() {
+      beforeEach(function() {
         driver.isHigh = false;
         stub(driver, 'turnOn');
       });
@@ -84,7 +86,7 @@ describe("Led", function() {
   describe("#brightness", function() {
     it("calls #pwmWrite to set the pin's brightness", function() {
       driver.brightness(255);
-      expect(driver.connection.pwmWrite).to.be.calledWith(13, 1);
+      expect(driver.adaptor.pwmWrite).to.be.calledWith(13, 1);
     });
   });
 

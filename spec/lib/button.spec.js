@@ -3,13 +3,18 @@
 var Button = source("button");
 
 describe("Button", function() {
-  var driver = new Button({
-    name: 'button',
-    device: { connection: 'connect', pin: 13 }
+  var driver;
+
+  beforeEach(function() {
+    driver = new Button({
+      name: 'button',
+      adaptor: {},
+      pin: 13
+    });
   });
 
   describe("constructor", function() {
-    it("sets @pin to the passed device's pin", function() {
+    it("sets @pin to the passed pin", function() {
       expect(driver.pin).to.be.eql(13);
     });
 
@@ -27,24 +32,21 @@ describe("Button", function() {
   });
 
   describe("on the 'data' event", function() {
-    var callback = function() {},
-        originalConnection;
+    var callback = function() {};
 
-    before(function() {
-      originalConnection = driver.connection;
-
-      driver.connection = { digitalRead: stub() };
-      driver.device = { emit: spy() };
+    beforeEach(function() {
+      driver.adaptor = { digitalRead: stub() };
+      driver.emit = spy();
     });
 
     context("when 1", function() {
-      before(function() {
-        driver.connection.digitalRead.callsArgWith(1, null, 1);
+      beforeEach(function() {
+        driver.adaptor.digitalRead.callsArgWith(1, null, 1);
         driver.start(callback);
       });
 
       it("emits 'press'", function() {
-        expect(driver.device.emit).to.be.calledWith('press');
+        expect(driver.emit).to.be.calledWith('press');
       });
 
       it('sets @isPressed to true', function() {
@@ -53,28 +55,29 @@ describe("Button", function() {
     });
 
     context("when 0", function() {
-      before(function() {
-        driver.connection.digitalRead.callsArgWith(1, null, 0);
+      beforeEach(function() {
+        driver.adaptor.digitalRead.callsArgWith(1, null, 0);
         driver.start(callback);
       });
 
       it("emits 'release'", function() {
-        expect(driver.device.emit).to.be.calledWith('release');
+        expect(driver.emit).to.be.calledWith('release');
       });
 
       it('sets @isPressed to false', function() {
         expect(driver.isPressed()).to.be.false;
       });
     });
+
     context("when 1 and prevState == 0", function() {
-      before(function() {
-        driver.connection.digitalRead.callsArgWith(1, 1);
-        driver.connection.digitalRead.callsArgWith(1, 0);
+      beforeEach(function() {
         driver.start(callback);
+        driver.adaptor.digitalRead.yield(null, 1);
+        driver.adaptor.digitalRead.yield(null, 0);
       });
 
       it("emits 'push'", function() {
-        expect(driver.device.emit).to.be.calledWith('push');
+        expect(driver.emit).to.be.calledWith('push');
       });
     });
   });

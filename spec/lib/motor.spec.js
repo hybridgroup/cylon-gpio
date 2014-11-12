@@ -3,16 +3,18 @@
 var Motor = source("motor");
 
 describe("Motor", function() {
-  var driver = new Motor({
-    name: 'vrroom',
-    device: {
-      connection: { digitalWrite: spy(), pwmWrite: spy() },
+  var driver;
+
+  beforeEach(function() {
+    driver = new Motor({
+      name: 'vrroom',
+      adaptor: { digitalWrite: spy(), pwmWrite: spy() },
       pin: 13
-    }
+    });
   });
 
   describe('constructor', function() {
-    it("sets @pin to the value of the passed device's pin", function() {
+    it("sets @pin to the value of the passed pin", function() {
       expect(driver.pin).to.be.eql(13);
     });
 
@@ -38,7 +40,7 @@ describe("Motor", function() {
       driver.turnOn();
 
       expect(driver.isOn).to.be.eql(true);
-      expect(driver.connection.digitalWrite).to.be.calledWith(13, 1);
+      expect(driver.adaptor.digitalWrite).to.be.calledWith(13, 1);
     });
   });
 
@@ -47,13 +49,13 @@ describe("Motor", function() {
       driver.turnOff();
 
       expect(driver.isOn).to.be.eql(false);
-      expect(driver.connection.digitalWrite).to.be.calledWith(13, 0);
+      expect(driver.adaptor.digitalWrite).to.be.calledWith(13, 0);
     });
   });
 
   describe("#toggle", function() {
 
-    before(function() {
+    beforeEach(function() {
       stub(driver, 'turnOn');
       stub(driver, 'turnOff');
     });
@@ -90,12 +92,12 @@ describe("Motor", function() {
   });
 
   describe("#speed", function() {
-    before(function() {
+    beforeEach(function() {
       driver.speed(127.5);
     });
 
-    it("writes the speed value to the pin via the connection", function() {
-      expect(driver.connection.pwmWrite).to.be.calledWith(13, 0.5);
+    it("writes the speed value to the pin via the adaptor", function() {
+      expect(driver.adaptor.pwmWrite).to.be.calledWith(13, 0.5);
     });
 
     it("sets @speedValue to the passed value", function() {

@@ -23,7 +23,7 @@ describe("GPIO", function() {
   });
 
   describe('#driver', function() {
-    var opts = { device: { connection: {} } };
+    var opts = { adaptor: {} };
 
     it("can instantiate a new AnalogSensor", function() {
       opts.driver = 'analogSensor';

@@ -3,16 +3,18 @@
 var ContinuousServo = source("continuous-servo");
 
 describe("ContinuousServo", function() {
-  var driver = new ContinuousServo({
-    name: 'serv',
-    device: {
-      connection: { servoWrite: spy() },
+  var driver;
+
+  beforeEach(function() {
+    driver = new ContinuousServo({
+      name: 'serv',
+      adaptor: { servoWrite: spy() },
       pin: 13
-    }
+    });
   });
 
   describe("#constructor", function() {
-    it("sets @pin to the provided device's pin", function() {
+    it("sets @pin to the provided pin", function() {
       expect(driver.pin).to.be.eql(13);
     });
 
@@ -32,21 +34,21 @@ describe("ContinuousServo", function() {
   describe("#stop", function() {
     it('writes a value of 90 to the servo', function() {
       driver.stop();
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 90);
+      expect(driver.adaptor.servoWrite).to.be.calledWith(13, 90);
     });
   });
 
   describe("#clockwise", function() {
     it('writes a value of 180 to the servo', function() {
       driver.clockwise();
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 180);
+      expect(driver.adaptor.servoWrite).to.be.calledWith(13, 180);
     });
   });
 
   describe("#counterClockwise", function() {
     it('writes a value of 180 to the servo', function() {
       driver.counterClockwise();
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 89);
+      expect(driver.adaptor.servoWrite).to.be.calledWith(13, 89);
     });
   });
 });
