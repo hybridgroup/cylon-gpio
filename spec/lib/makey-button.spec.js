@@ -8,7 +8,7 @@ describe("MakeyButton", function() {
   beforeEach(function() {
     driver = new MakeyButton({
       name: 'button',
-      adaptor: { digitalRead: spy() },
+      connection: { digitalRead: spy() },
       pin: 13
     });
   });
@@ -42,7 +42,7 @@ describe("MakeyButton", function() {
     });
 
     it("reads the value of the pin into @currentValue", function() {
-      expect(driver.adaptor.digitalRead).to.be.calledWith(13);
+      expect(driver.connection.digitalRead).to.be.calledWith(13);
     });
 
     describe("button-checking loop", function() {

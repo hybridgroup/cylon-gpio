@@ -8,7 +8,7 @@ describe("Button", function() {
   beforeEach(function() {
     driver = new Button({
       name: 'button',
-      adaptor: {},
+      connection: {},
       pin: 13
     });
   });
@@ -35,13 +35,13 @@ describe("Button", function() {
     var callback = function() {};
 
     beforeEach(function() {
-      driver.adaptor = { digitalRead: stub() };
+      driver.connection = { digitalRead: stub() };
       driver.emit = spy();
     });
 
     context("when 1", function() {
       beforeEach(function() {
-        driver.adaptor.digitalRead.callsArgWith(1, null, 1);
+        driver.connection.digitalRead.callsArgWith(1, null, 1);
         driver.start(callback);
       });
 
@@ -56,7 +56,7 @@ describe("Button", function() {
 
     context("when 0", function() {
       beforeEach(function() {
-        driver.adaptor.digitalRead.callsArgWith(1, null, 0);
+        driver.connection.digitalRead.callsArgWith(1, null, 0);
         driver.start(callback);
       });
 
@@ -72,8 +72,8 @@ describe("Button", function() {
     context("when 1 and prevState == 0", function() {
       beforeEach(function() {
         driver.start(callback);
-        driver.adaptor.digitalRead.yield(null, 1);
-        driver.adaptor.digitalRead.yield(null, 0);
+        driver.connection.digitalRead.yield(null, 1);
+        driver.connection.digitalRead.yield(null, 0);
       });
 
       it("emits 'push'", function() {

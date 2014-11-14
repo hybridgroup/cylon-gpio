@@ -8,7 +8,7 @@ describe("ContinuousServo", function() {
   beforeEach(function() {
     driver = new ContinuousServo({
       name: 'serv',
-      adaptor: { servoWrite: spy() },
+      connection: { servoWrite: spy() },
       pin: 13
     });
   });
@@ -34,21 +34,21 @@ describe("ContinuousServo", function() {
   describe("#stop", function() {
     it('writes a value of 90 to the servo', function() {
       driver.stop();
-      expect(driver.adaptor.servoWrite).to.be.calledWith(13, 90);
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 90);
     });
   });
 
   describe("#clockwise", function() {
     it('writes a value of 180 to the servo', function() {
       driver.clockwise();
-      expect(driver.adaptor.servoWrite).to.be.calledWith(13, 180);
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 180);
     });
   });
 
   describe("#counterClockwise", function() {
     it('writes a value of 180 to the servo', function() {
       driver.counterClockwise();
-      expect(driver.adaptor.servoWrite).to.be.calledWith(13, 89);
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 89);
     });
   });
 });

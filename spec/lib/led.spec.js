@@ -8,7 +8,7 @@ describe("Led", function() {
   beforeEach(function() {
     driver = new Led({
       name: 'blinky',
-      adaptor: { digitalWrite: spy(), pwmWrite: spy() },
+      connection: { digitalWrite: spy(), pwmWrite: spy() },
       pin: 13
     });
   });
@@ -35,7 +35,7 @@ describe("Led", function() {
       driver.turnOn();
 
       expect(driver.isHigh).to.be.true;
-      expect(driver.adaptor.digitalWrite).to.be.calledWith(13 ,1);
+      expect(driver.connection.digitalWrite).to.be.calledWith(13 ,1);
     });
   });
 
@@ -45,7 +45,7 @@ describe("Led", function() {
       driver.turnOff();
 
       expect(driver.isHigh).to.be.false;
-      expect(driver.adaptor.digitalWrite).to.be.calledWith(13, 0);
+      expect(driver.connection.digitalWrite).to.be.calledWith(13, 0);
     });
   });
 
@@ -86,7 +86,7 @@ describe("Led", function() {
   describe("#brightness", function() {
     it("calls #pwmWrite to set the pin's brightness", function() {
       driver.brightness(255);
-      expect(driver.adaptor.pwmWrite).to.be.calledWith(13, 1);
+      expect(driver.connection.pwmWrite).to.be.calledWith(13, 1);
     });
   });
 

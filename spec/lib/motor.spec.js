@@ -8,7 +8,7 @@ describe("Motor", function() {
   beforeEach(function() {
     driver = new Motor({
       name: 'vrroom',
-      adaptor: { digitalWrite: spy(), pwmWrite: spy() },
+      connection: { digitalWrite: spy(), pwmWrite: spy() },
       pin: 13
     });
   });
@@ -40,7 +40,7 @@ describe("Motor", function() {
       driver.turnOn();
 
       expect(driver.isOn).to.be.eql(true);
-      expect(driver.adaptor.digitalWrite).to.be.calledWith(13, 1);
+      expect(driver.connection.digitalWrite).to.be.calledWith(13, 1);
     });
   });
 
@@ -49,7 +49,7 @@ describe("Motor", function() {
       driver.turnOff();
 
       expect(driver.isOn).to.be.eql(false);
-      expect(driver.adaptor.digitalWrite).to.be.calledWith(13, 0);
+      expect(driver.connection.digitalWrite).to.be.calledWith(13, 0);
     });
   });
 
@@ -96,8 +96,8 @@ describe("Motor", function() {
       driver.speed(127.5);
     });
 
-    it("writes the speed value to the pin via the adaptor", function() {
-      expect(driver.adaptor.pwmWrite).to.be.calledWith(13, 0.5);
+    it("writes the speed value to the pin via the connection", function() {
+      expect(driver.connection.pwmWrite).to.be.calledWith(13, 0.5);
     });
 
     it("sets @speedValue to the passed value", function() {

@@ -17,13 +17,13 @@ describe("GPIO", function() {
   describe("#drivers", function() {
 
     it("contains all drivers the module provides", function() {
-      var drivers = [ 'analogSensor', 'button', 'continuous-servo', 'led', 'makey-button', 'maxbotix', 'motor', 'servo', 'ir-range-sensor', 'direct-pin'];
+      var drivers = [ 'analog-sensor', 'analogSensor', 'button', 'continuous-servo', 'led', 'makey-button', 'maxbotix', 'motor', 'servo', 'ir-range-sensor', 'direct-pin'];
       expect(module.drivers).to.be.eql(drivers);
     });
   });
 
   describe('#driver', function() {
-    var opts = { adaptor: {} };
+    var opts = { connection: {} };
 
     it("can instantiate a new AnalogSensor", function() {
       opts.driver = 'analogSensor';

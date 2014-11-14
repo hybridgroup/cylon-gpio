@@ -8,7 +8,7 @@ describe("Servo", function() {
   beforeEach(function() {
     driver = new Servo({
       name: 'serv',
-      adaptor: { servoWrite: spy() },
+      connection: { servoWrite: spy() },
       pin: 13
     });
   });
@@ -26,7 +26,7 @@ describe("Servo", function() {
       it("@angleRange is set to provided range", function() {
         var new_driver = new Servo({
           name: 'serv',
-          adaptor: 'connect',
+          connection: 'connect',
           pin: 13,
           range: { min: 0, max: 180 }
         });
@@ -61,7 +61,7 @@ describe("Servo", function() {
   });
 
   describe("#angle", function() {
-    var adaptor = null;
+    var connection = null;
     var safeAngle = null;
 
     beforeEach(function() {
@@ -78,7 +78,7 @@ describe("Servo", function() {
     });
 
     it("writes the value to the servo", function() {
-      expect(driver.adaptor.servoWrite).to.be.calledWith(13, 0.5, null, { max: 2400, min: 500 });
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 0.5, null, { max: 2400, min: 500 });
     });
 
     it("sets @angleValue to the new servo value", function() {

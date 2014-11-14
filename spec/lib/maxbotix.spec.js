@@ -8,7 +8,7 @@ describe("Maxbotix", function() {
   beforeEach(function() {
     driver = new Maxbotix({
       name: 'max',
-      adaptor: { analogRead: function() {} },
+      connection: { analogRead: function() {} },
       pin: 13
     });
   });
@@ -33,7 +33,7 @@ describe("Maxbotix", function() {
 
   describe("#start", function() {
     beforeEach(function() {
-      stub(driver.adaptor, 'analogRead').callsArgWith(1, null, 20);
+      stub(driver.connection, 'analogRead').callsArgWith(1, null, 20);
       stub(driver, 'range').returns(10);
       stub(driver, 'rangeCm').returns(20);
       stub(driver, 'emit');
@@ -42,13 +42,13 @@ describe("Maxbotix", function() {
     });
 
     after(function() {
-      driver.adaptor.analogRead.restore();
+      driver.connection.analogRead.restore();
       driver.range.restore();
       driver.rangeCm.restore();
     });
 
-    it("asks the adaptor to read the analog pin value", function() {
-      expect(driver.adaptor.analogRead).to.be.calledWith(13);
+    it("asks the connection to read the analog pin value", function() {
+      expect(driver.connection.analogRead).to.be.calledWith(13);
     });
 
     it("sets @analogValue to the pin value", function() {

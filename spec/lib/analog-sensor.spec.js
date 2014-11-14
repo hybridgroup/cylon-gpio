@@ -8,7 +8,7 @@ describe("AnalogSensor", function() {
   beforeEach(function() {
     driver = new AnalogSensor({
       name: 'sensor',
-      adaptor: {},
+      connection: {},
       pin: 13
     });
   });
@@ -16,7 +16,7 @@ describe("AnalogSensor", function() {
   describe("constructor", function() {
     var testDriver = new AnalogSensor({
       name: 'sensor',
-      adaptor: {},
+      connection: {},
       pin: 13,
       upperLimit: 180,
       lowerLimit: 50
@@ -59,14 +59,14 @@ describe("AnalogSensor", function() {
     var callback = function() {};
 
     beforeEach(function() {
-      driver.adaptor = { analogRead: stub().callsArgWith(1, null, 75) };
+      driver.connection = { analogRead: stub().callsArgWith(1, null, 75) };
       driver.emit = spy();
 
       driver.start(callback);
     });
 
-    it("tells the adaptor to #analogRead the pin", function() {
-      expect(driver.adaptor.analogRead).to.be.calledWith(13);
+    it("tells the connection to #analogRead the pin", function() {
+      expect(driver.connection.analogRead).to.be.calledWith(13);
     });
 
     it("sets @analogVal to the read value", function() {
@@ -79,7 +79,7 @@ describe("AnalogSensor", function() {
 
     context("when #analogRead returns a value under the lower limit", function() {
       beforeEach(function() {
-        driver.adaptor.analogRead.callsArgWith(1, null, -1);
+        driver.connection.analogRead.callsArgWith(1, null, -1);
         driver.start(callback);
       });
 
@@ -94,7 +94,7 @@ describe("AnalogSensor", function() {
 
     context("when #analogRead returns a value above the upper limit", function() {
       beforeEach(function() {
-        driver.adaptor.analogRead.callsArgWith(1, null, 360);
+        driver.connection.analogRead.callsArgWith(1, null, 360);
         driver.start(callback);
       });
 
