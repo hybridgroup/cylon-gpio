@@ -21,6 +21,13 @@ describe("Led", function() {
      it("sets @isHigh to false by default", function() {
       expect(driver.isHigh).to.be.false;
     });
+
+    context("if no pin is specified", function() {
+      it("throws an error", function() {
+        var fn = function() { new Led({ name: 'hi' }); };
+        expect(fn).to.throw("No pin specified for LED. Cannot proceed");
+      });
+    });
   });
 
   it("has led commands", function() {

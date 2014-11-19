@@ -14,12 +14,16 @@ describe("AnalogSensor", function() {
   });
 
   describe("constructor", function() {
-    var testDriver = new AnalogSensor({
-      name: 'sensor',
-      connection: {},
-      pin: 13,
-      upperLimit: 180,
-      lowerLimit: 50
+    var testDriver;
+
+    beforeEach(function() {
+      testDriver = new AnalogSensor({
+        name: 'sensor',
+        connection: {},
+        pin: 13,
+        upperLimit: 180,
+        lowerLimit: 50
+      });
     });
 
     it("assigns @pin to the passed pin", function() {
@@ -44,6 +48,13 @@ describe("AnalogSensor", function() {
 
     it("assigns @analog_val to null by default", function() {
       expect(driver.lowerLimit).to.be.eql(0);
+    });
+
+    context("if no pin is specified", function() {
+      it("throws an error", function() {
+        var fn = function() { new AnalogSensor({ name: 'hi' }); };
+        expect(fn).to.throw("No pin specified for Analog Sensor. Cannot proceed");
+      });
     });
   });
 

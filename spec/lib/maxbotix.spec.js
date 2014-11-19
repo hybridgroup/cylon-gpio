@@ -21,6 +21,13 @@ describe("Maxbotix", function() {
     it("sets @analogValue to 0 by default", function() {
       expect(driver.analogValue).to.be.eql(0);
     });
+
+    context("if no pin is specified", function() {
+      it("throws an error", function() {
+        var fn = function() { new Maxbotix({ name: 'hi' }); };
+        expect(fn).to.throw("No pin specified for Maxbotix. Cannot proceed");
+      });
+    });
   });
 
   describe("#commands", function() {

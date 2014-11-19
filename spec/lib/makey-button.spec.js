@@ -29,6 +29,13 @@ describe("MakeyButton", function() {
     it("sets @data to an empty array by default", function() {
       expect(driver.data).to.be.eql([]);
     });
+
+    context("if no pin is specified", function() {
+      it("throws an error", function() {
+        var fn = function() { new MakeyButton({ name: 'hi' }); };
+        expect(fn).to.throw("No pin specified for Makey Button. Cannot proceed");
+      });
+    });
   });
 
   describe("#start", function() {

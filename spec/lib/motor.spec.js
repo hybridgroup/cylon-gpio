@@ -25,6 +25,13 @@ describe("Motor", function() {
     it("sets @isOn to false by default", function() {
       expect(driver.isOn).to.be["false"];
     });
+
+    context("if no pin is specified", function() {
+      it("throws an error", function() {
+        var fn = function() { new Motor({ name: 'hi' }); };
+        expect(fn).to.throw("No pin specified for Motor. Cannot proceed");
+      });
+    });
   });
 
   describe("#commands", function() {

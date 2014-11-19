@@ -21,6 +21,13 @@ describe("Button", function() {
     it("sets @pressed to false by default", function() {
       expect(driver.pressed).to.be["false"];
     });
+
+    context("if no pin is specified", function() {
+      it("throws an error", function() {
+        var fn = function() { new Button({ name: 'hi' }); };
+        expect(fn).to.throw("No pin specified for Button. Cannot proceed");
+      });
+    });
   });
 
   describe("#commands", function() {

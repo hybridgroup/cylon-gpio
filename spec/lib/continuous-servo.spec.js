@@ -21,6 +21,13 @@ describe("ContinuousServo", function() {
     it("sets @angleValue to 0 by default", function() {
       expect(driver.angleValue).to.be.eql(0);
     });
+
+    context("if no pin is specified", function() {
+      it("throws an error", function() {
+        var fn = function() { new ContinuousServo({ name: 'hi' }); };
+        expect(fn).to.throw("No pin specified for Continuous Servo. Cannot proceed");
+      });
+    });
   });
 
   describe("#commands", function() {

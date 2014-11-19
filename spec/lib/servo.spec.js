@@ -42,6 +42,13 @@ describe("Servo", function() {
         expect(driver.angleRange.max).to.be.eql(160);
       });
     });
+
+    context("if no pin is specified", function() {
+      it("throws an error", function() {
+        var fn = function() { new Servo({ name: 'hi' }); };
+        expect(fn).to.throw("No pin specified for Servo. Cannot proceed");
+      });
+    });
   });
 
   describe("#commands", function() {
