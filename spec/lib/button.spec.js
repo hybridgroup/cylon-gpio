@@ -46,45 +46,39 @@ describe("Button", function() {
       driver.emit = spy();
     });
 
-    context("when 1", function() {
-      beforeEach(function() {
-        driver.connection.digitalRead.callsArgWith(1, null, 1);
-        driver.start(callback);
-      });
-
-      it("emits 'press'", function() {
-        expect(driver.emit).to.be.calledWith('press');
-      });
-
-      it('sets @isPressed to true', function() {
-        expect(driver.isPressed()).to.be.true;
-      });
-    });
-
-    context("when 0", function() {
-      beforeEach(function() {
-        driver.connection.digitalRead.callsArgWith(1, null, 0);
-        driver.start(callback);
-      });
-
-      it("emits 'release'", function() {
-        expect(driver.emit).to.be.calledWith('release');
-      });
-
-      it('sets @isPressed to false', function() {
-        expect(driver.isPressed()).to.be.false;
-      });
-    });
-
-    context("when 1 and prevState == 0", function() {
+    context("when the button is pressed", function() {
       beforeEach(function() {
         driver.start(callback);
+        driver.pressed = false;
         driver.connection.digitalRead.yield(null, 1);
+        driver.connection.digitalRead.yield(null, 1);
+      });
+
+      it("emits 'push' when first pressed", function() {
+        expect(driver.emit).to.be.calledWith('push');
+        expect(driver.emit).to.be.calledOnce;
+      });
+
+      it("sets @pressed to true", function() {
+        expect(driver.pressed).to.be.eql(true);
+      });
+    });
+
+    context("when the button is released", function() {
+      beforeEach(function() {
+        driver.start(callback);
+        driver.pressed = true;
+        driver.connection.digitalRead.yield(null, 0);
         driver.connection.digitalRead.yield(null, 0);
       });
 
-      it("emits 'push'", function() {
-        expect(driver.emit).to.be.calledWith('push');
+      it("emits 'push' when first released", function() {
+        expect(driver.emit).to.be.calledWith('release');
+        expect(driver.emit).to.be.calledOnce;
+      });
+
+      it("sets @pressed to false", function() {
+        expect(driver.pressed).to.be.eql(false);
       });
     });
   });
