@@ -1,3 +1,4 @@
+/* jshint expr:true */
 "use strict";
 
 var AnalogSensor = source("analog-sensor");
@@ -7,7 +8,7 @@ describe("AnalogSensor", function() {
 
   beforeEach(function() {
     driver = new AnalogSensor({
-      name: 'sensor',
+      name: "sensor",
       connection: {},
       pin: 13
     });
@@ -18,7 +19,7 @@ describe("AnalogSensor", function() {
 
     beforeEach(function() {
       testDriver = new AnalogSensor({
-        name: 'sensor',
+        name: "sensor",
         connection: {},
         pin: 13,
         upperLimit: 180,
@@ -52,8 +53,10 @@ describe("AnalogSensor", function() {
 
     context("if no pin is specified", function() {
       it("throws an error", function() {
-        var fn = function() { new AnalogSensor({ name: 'hi' }); };
-        expect(fn).to.throw("No pin specified for Analog Sensor. Cannot proceed");
+        var fn = function() { return new AnalogSensor({ name: "hi" }); };
+        expect(fn).to.throw(
+          "No pin specified for Analog Sensor. Cannot proceed"
+        );
       });
     });
   });
@@ -61,12 +64,12 @@ describe("AnalogSensor", function() {
   describe("#commands", function() {
     it("is an object containing AnalogSensor commands", function() {
       for (var c in driver.commands) {
-        expect(driver.commands[c]).to.be.a('function');
+        expect(driver.commands[c]).to.be.a("function");
       }
     });
   });
 
-  describe('#start', function() {
+  describe("#start", function() {
     var callback = function() {};
 
     beforeEach(function() {
@@ -82,39 +85,39 @@ describe("AnalogSensor", function() {
 
     it("sets @analogVal to the read value", function() {
       expect(driver.analogVal).to.be.eql(75);
-    })
-
-    it("emits the 'analogRead' event with the read value", function() {
-      expect(driver.emit).to.be.calledWith('analogRead', 75);
     });
 
-    context("when #analogRead returns a value under the lower limit", function() {
+    it("emits the 'analogRead' event with the read value", function() {
+      expect(driver.emit).to.be.calledWith("analogRead", 75);
+    });
+
+    context("when a value under the lower limit is read", function() {
       beforeEach(function() {
         driver.connection.analogRead.callsArgWith(1, null, -1);
         driver.start(callback);
       });
 
       it("emits the 'analogRead' event with the read value", function() {
-        expect(driver.emit).to.be.calledWith('analogRead', -1);
+        expect(driver.emit).to.be.calledWith("analogRead", -1);
       });
 
       it("emits the 'lowerLimit' event with the read value", function() {
-        expect(driver.emit).to.be.calledWith('lowerLimit', -1);
+        expect(driver.emit).to.be.calledWith("lowerLimit", -1);
       });
     });
 
-    context("when #analogRead returns a value above the upper limit", function() {
+    context("when a value above the upper limit is read", function() {
       beforeEach(function() {
         driver.connection.analogRead.callsArgWith(1, null, 360);
         driver.start(callback);
       });
 
       it("emits the 'analogRead' event with the read value", function() {
-        expect(driver.emit).to.be.calledWith('analogRead', 360);
+        expect(driver.emit).to.be.calledWith("analogRead", 360);
       });
 
       it("emits the 'upperLimit' event with the read value", function() {
-        expect(driver.emit).to.be.calledWith('upperLimit', 360);
+        expect(driver.emit).to.be.calledWith("upperLimit", 360);
       });
     });
   });

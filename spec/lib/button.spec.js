@@ -1,3 +1,4 @@
+/* jshint expr:true */
 "use strict";
 
 var Button = source("button");
@@ -7,7 +8,7 @@ describe("Button", function() {
 
   beforeEach(function() {
     driver = new Button({
-      name: 'button',
+      name: "button",
       connection: {},
       pin: 13
     });
@@ -24,7 +25,7 @@ describe("Button", function() {
 
     context("if no pin is specified", function() {
       it("throws an error", function() {
-        var fn = function() { new Button({ name: 'hi' }); };
+        var fn = function() { return new Button({ name: "hi" }); };
         expect(fn).to.throw("No pin specified for Button. Cannot proceed");
       });
     });
@@ -33,7 +34,7 @@ describe("Button", function() {
   describe("#commands", function() {
     it("is an object containing Button commands", function() {
       for (var c in driver.commands) {
-        expect(driver.commands[c]).to.be.a('function');
+        expect(driver.commands[c]).to.be.a("function");
       }
     });
   });
@@ -55,7 +56,7 @@ describe("Button", function() {
       });
 
       it("emits 'push' when first pressed", function() {
-        expect(driver.emit).to.be.calledWith('push');
+        expect(driver.emit).to.be.calledWith("push");
         expect(driver.emit).to.be.calledOnce;
       });
 
@@ -73,7 +74,7 @@ describe("Button", function() {
       });
 
       it("emits 'push' when first released", function() {
-        expect(driver.emit).to.be.calledWith('release');
+        expect(driver.emit).to.be.calledWith("release");
         expect(driver.emit).to.be.calledOnce;
       });
 
