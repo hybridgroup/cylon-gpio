@@ -8,7 +8,7 @@ describe("Servo", function() {
 
   beforeEach(function() {
     driver = new Servo({
-      name: 'serv',
+      name: "serv",
       connection: { servoWrite: spy() },
       pin: 13
     });
@@ -26,8 +26,8 @@ describe("Servo", function() {
     context("if a servo range is supplied", function() {
       it("@angleRange is set to provided range", function() {
         var new_driver = new Servo({
-          name: 'serv',
-          connection: 'connect',
+          name: "serv",
+          connection: "connect",
           pin: 13,
           range: { min: 0, max: 180 }
         });
@@ -46,7 +46,7 @@ describe("Servo", function() {
 
     context("if no pin is specified", function() {
       it("throws an error", function() {
-        var fn = function() { new Servo({ name: 'hi' }); };
+        var fn = function() { return new Servo({ name: "hi" }); };
         expect(fn).to.throw("No pin specified for Servo. Cannot proceed");
       });
     });
@@ -55,12 +55,12 @@ describe("Servo", function() {
   describe("#commands", function() {
     it("is an object containing Servo commands", function() {
       for (var c in driver.commands) {
-        expect(driver.commands[c]).to.be.a('function');
+        expect(driver.commands[c]).to.be.a("function");
       }
     });
   });
 
-  describe('#currentAngle', function() {
+  describe("#currentAngle", function() {
     it("returns the current value of the servo's angle", function() {
       expect(driver.currentAngle()).to.be.eql(0);
       driver.angleValue = 10;
@@ -69,11 +69,8 @@ describe("Servo", function() {
   });
 
   describe("#angle", function() {
-    var connection = null;
-    var safeAngle = null;
-
     beforeEach(function() {
-      stub(driver, 'safeAngle').returns(90);
+      stub(driver, "safeAngle").returns(90);
       driver.angle(90);
     });
 
@@ -86,7 +83,12 @@ describe("Servo", function() {
     });
 
     it("writes the value to the servo", function() {
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 0.5, null, { max: 2400, min: 500 });
+      expect(driver.connection.servoWrite).to.be.calledWith(
+        13,
+        0.5,
+        null,
+        { max: 2400, min: 500 }
+      );
     });
 
     it("sets @angleValue to the new servo value", function() {

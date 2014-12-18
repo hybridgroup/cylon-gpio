@@ -8,13 +8,13 @@ describe("Motor", function() {
 
   beforeEach(function() {
     driver = new Motor({
-      name: 'vrroom',
+      name: "vrroom",
       connection: { digitalWrite: spy(), pwmWrite: spy() },
       pin: 13
     });
   });
 
-  describe('constructor', function() {
+  describe("constructor", function() {
     it("sets @pin to the value of the passed pin", function() {
       expect(driver.pin).to.be.eql(13);
     });
@@ -29,7 +29,7 @@ describe("Motor", function() {
 
     context("if no pin is specified", function() {
       it("throws an error", function() {
-        var fn = function() { new Motor({ name: 'hi' }); };
+        var fn = function() { return new Motor({ name: "hi" }); };
         expect(fn).to.throw("No pin specified for Motor. Cannot proceed");
       });
     });
@@ -38,7 +38,7 @@ describe("Motor", function() {
   describe("#commands", function() {
     it("is an object containing Motor commands", function() {
       for (var c in driver.commands) {
-        expect(driver.commands[c]).to.be.a('function');
+        expect(driver.commands[c]).to.be.a("function");
       }
     });
   });
@@ -64,8 +64,8 @@ describe("Motor", function() {
   describe("#toggle", function() {
 
     beforeEach(function() {
-      stub(driver, 'turnOn');
-      stub(driver, 'turnOff');
+      stub(driver, "turnOn");
+      stub(driver, "turnOff");
     });
 
     after(function() {
@@ -78,7 +78,7 @@ describe("Motor", function() {
         driver.isOn = true;
         driver.toggle();
 
-        expect(driver.turnOff).to.be.called;;
+        expect(driver.turnOff).to.be.called;
       });
     });
 
@@ -112,7 +112,7 @@ describe("Motor", function() {
       expect(driver.speedValue).to.be.eql(127.5);
     });
 
-    it("sets @isOn depending on whether the speed is greater than 0", function() {
+    it("sets @isOn depending on whether speed is greater than 0", function() {
       expect(driver.isOn).to.be.eql(true);
       driver.speed(0);
       expect(driver.isOn).to.be.eql(false);

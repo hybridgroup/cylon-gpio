@@ -1,5 +1,5 @@
 /* jshint expr:true */
-'use strict';
+"use strict";
 
 var Maxbotix = source("maxbotix");
 
@@ -8,7 +8,7 @@ describe("Maxbotix", function() {
 
   beforeEach(function() {
     driver = new Maxbotix({
-      name: 'max',
+      name: "max",
       connection: { analogRead: function() {} },
       pin: 13
     });
@@ -25,7 +25,7 @@ describe("Maxbotix", function() {
 
     context("if no pin is specified", function() {
       it("throws an error", function() {
-        var fn = function() { new Maxbotix({ name: 'hi' }); };
+        var fn = function() { return new Maxbotix({ name: "hi" }); };
         expect(fn).to.throw("No pin specified for Maxbotix. Cannot proceed");
       });
     });
@@ -34,17 +34,17 @@ describe("Maxbotix", function() {
   describe("#commands", function() {
     it("is an object containing Maxbotix commands", function() {
       for (var c in driver.commands) {
-        expect(driver.commands[c]).to.be.a('function');
+        expect(driver.commands[c]).to.be.a("function");
       }
     });
   });
 
   describe("#start", function() {
     beforeEach(function() {
-      stub(driver.connection, 'analogRead').callsArgWith(1, null, 20);
-      stub(driver, 'range').returns(10);
-      stub(driver, 'rangeCm').returns(20);
-      stub(driver, 'emit');
+      stub(driver.connection, "analogRead").callsArgWith(1, null, 20);
+      stub(driver, "range").returns(10);
+      stub(driver, "rangeCm").returns(20);
+      stub(driver, "emit");
 
       driver.start(function() {});
     });
@@ -64,11 +64,11 @@ describe("Maxbotix", function() {
     });
 
     it("emits 'range' with the distance in inches", function() {
-      expect(driver.emit).to.be.calledWith('range', 10);
+      expect(driver.emit).to.be.calledWith("range", 10);
     });
 
     it("emits 'rangeCm' with the distance in centimeters", function() {
-      expect(driver.emit).to.be.calledWith('rangeCm', 20);
+      expect(driver.emit).to.be.calledWith("rangeCm", 20);
     });
   });
 

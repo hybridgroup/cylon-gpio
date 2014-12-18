@@ -8,7 +8,7 @@ describe("MakeyButton", function() {
 
   beforeEach(function() {
     driver = new MakeyButton({
-      name: 'button',
+      name: "button",
       connection: { digitalRead: spy() },
       pin: 13
     });
@@ -33,8 +33,10 @@ describe("MakeyButton", function() {
 
     context("if no pin is specified", function() {
       it("throws an error", function() {
-        var fn = function() { new MakeyButton({ name: 'hi' }); };
-        expect(fn).to.throw("No pin specified for Makey Button. Cannot proceed");
+        var fn = function() { return new MakeyButton({ name: "hi" }); };
+        expect(fn).to.throw(
+          "No pin specified for Makey Button. Cannot proceed"
+        );
       });
     });
   });
@@ -60,7 +62,7 @@ describe("MakeyButton", function() {
         expect(driver.data).to.be.eql([0]);
       });
 
-      it("keeps the array at 5 items by shifting out the oldest values", function() {
+      it("keeps the array at 5 items by shifting out older values", function() {
         driver.data = [];
         this.clock.tick(251);
         expect(driver.data).to.be.eql([0, 0, 0, 0, 0]);
@@ -73,12 +75,12 @@ describe("MakeyButton", function() {
         beforeEach(function() {
           driver.isPressed = true;
           driver.emit = spy();
-          driver.averageData = function() { return 0.65 };
+          driver.averageData = function() { return 0.65; };
           this.clock.tick(55);
         });
 
         it("emits 'release' once", function() {
-          expect(driver.emit).to.be.calledWith('release');
+          expect(driver.emit).to.be.calledWith("release");
           expect(driver.emit).to.be.calledOnce;
         });
 
@@ -91,12 +93,12 @@ describe("MakeyButton", function() {
         beforeEach(function() {
           driver.isPressed = false;
           driver.emit = spy();
-          driver.averageData = function() { return 0.45 };
+          driver.averageData = function() { return 0.45; };
           this.clock.tick(55);
         });
 
         it("emits 'push' once", function() {
-          expect(driver.emit).to.be.calledWith('push');
+          expect(driver.emit).to.be.calledWith("push");
           expect(driver.emit).to.be.calledOnce;
         });
 
@@ -107,7 +109,7 @@ describe("MakeyButton", function() {
     });
   });
 
-  describe('#averateData', function() {
+  describe("#averateData", function() {
     context("when @data is empty", function() {
       beforeEach(function() { driver.data = []; });
 
