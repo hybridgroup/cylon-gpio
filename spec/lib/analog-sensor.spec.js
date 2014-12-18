@@ -1,3 +1,4 @@
+/* jshint expr:true */
 "use strict";
 
 var AnalogSensor = source("analog-sensor");

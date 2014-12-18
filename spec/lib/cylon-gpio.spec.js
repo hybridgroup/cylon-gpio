@@ -1,3 +1,4 @@
+/* jshint expr:true */
 "use strict";
 
 var module = source("cylon-gpio");
