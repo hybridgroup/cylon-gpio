@@ -1,9 +1,0 @@
-# Events
-
-## start
-
-Sent when the device has been started and is ready to use.
-
-## stop
-
-Sent when the device has been stopped.
