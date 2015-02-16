@@ -119,4 +119,4 @@ Version 0.2.0 - Add Motor and Servo support, refactor to use Basestar
 Version 0.1.0 - Initial release with support for AnalogSensor, Button, and LED
 
 ## License
-Copyright (c) 2013-2014 The Hybrid Group. Licensed under the Apache 2.0 license.
+Copyright (c) 2013-2015 The Hybrid Group. Licensed under the Apache 2.0 license.
