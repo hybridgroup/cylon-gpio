@@ -72,6 +72,17 @@ describe("Maxbotix", function() {
     });
   });
 
+  describe("#start", function() {
+    var callback = spy();
+
+    beforeEach(function() {
+      driver.halt(callback);
+    });
+
+    it("calls the callback when halting", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
   describe("#range", function() {
     context("with no reading", function() {
       beforeEach(function() { driver.analogValue = 0; });
@@ -104,6 +115,26 @@ describe("Maxbotix", function() {
 
       it("returns a value near 25.6", function() {
         expect(driver.rangeCm()).to.be.closeTo(25.6, 0.0001);
+      });
+
+      it("returns a value 40.315 when model === 'xl-long'", function() {
+        driver.model = "xl-long";
+        expect(driver.rangeCm()).to.be.closeTo(40.315, 0.001);
+      });
+
+      it("returns a value near 10.58 when model === 'hr'", function() {
+        driver.model = "hr";
+        expect(driver.rangeCm()).to.be.closeTo(10.0788, 0.0001);
+      });
+
+      it("returns a value 25.1575 when model === 'xl'", function() {
+        driver.model = "xl";
+        expect(driver.rangeCm()).to.be.eql(20.1575);
+      });
+
+      it("returns a value 25.1575 when model not specified", function() {
+        driver.model = "zz";
+        expect(driver.rangeCm()).to.be.eql(20.1575);
       });
     });
   });
