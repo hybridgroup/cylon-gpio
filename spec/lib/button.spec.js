@@ -83,4 +83,23 @@ describe("Button", function() {
       });
     });
   });
+
+  describe("#halt", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.halt(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
+
+  describe("#isPressed", function() {
+    it("returns the value of @pressed", function() {
+      driver.pressed = true;
+      expect(driver.isPressed()).to.be.eql(true);
+    });
+  });
 });

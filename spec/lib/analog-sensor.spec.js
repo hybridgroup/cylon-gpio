@@ -121,4 +121,23 @@ describe("AnalogSensor", function() {
       });
     });
   });
+
+  describe("#halt", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.halt(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
+
+  describe("#analogRead", function() {
+    it("returns the value of @analogVal", function() {
+      driver.analogVal = 128;
+      expect(driver.analogRead()).to.be.eql(128);
+    });
+  });
 });

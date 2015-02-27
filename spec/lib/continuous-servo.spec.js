@@ -48,6 +48,18 @@ describe("ContinuousServo", function() {
     });
   });
 
+  describe("#rotate", function() {
+    it("writes a value of 180 when rotation is clockwise", function() {
+      driver.rotate("clockwise");
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 180);
+    });
+
+    it("writes a value of 89 when rotation is counter-clockwise", function() {
+      driver.rotate("counter-clockwise");
+      expect(driver.connection.servoWrite).to.be.calledWith(13, 89);
+    });
+  });
+
   describe("#clockwise", function() {
     it("writes a value of 180 to the servo", function() {
       driver.clockwise();
@@ -59,6 +71,30 @@ describe("ContinuousServo", function() {
     it("writes a value of 180 to the servo", function() {
       driver.counterClockwise();
       expect(driver.connection.servoWrite).to.be.calledWith(13, 89);
+    });
+  });
+
+  describe("#start", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.start(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
+
+  describe("#halt", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.halt(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
     });
   });
 });
