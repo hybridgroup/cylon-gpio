@@ -85,7 +85,7 @@ describe("Maxbotix", function() {
       beforeEach(function() { driver.analogValue = 20.1575; });
 
       it("returns a value near 10", function() {
-        expect(driver.range()).to.be.closeTo(10, 0.0001);
+        expect(driver.range()).to.be.closeTo(10, 0.1);
       });
     });
   });
