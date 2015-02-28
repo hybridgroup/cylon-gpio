@@ -96,6 +96,7 @@ describe("GPIO", function() {
 
     it("can instantiate a new IrRangeSensor", function() {
       opts.driver = "ir-range-sensor";
+      opts.model = "gp2y0a41sk0f";
       driver = mod.driver(opts);
       expect(driver).to.be.an.instanceOf(IrRangeSensor);
     });
