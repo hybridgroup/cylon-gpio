@@ -19,12 +19,8 @@ describe("DirectPin", function() {
       expect(driver.pin).to.be.eql(5);
     });
 
-    it("sets @dReadSet to false by default", function() {
-      expect(driver.dReadSet).to.be["false"];
-    });
-
-    it("sets @aReadSet to false by default", function() {
-      expect(driver.aReadSet).to.be["false"];
+    it("sets @readSet to false by default", function() {
+      expect(driver.readSet).to.be["false"];
     });
 
     it("sets @high to false by default", function() {
@@ -101,8 +97,8 @@ describe("DirectPin", function() {
       expect(driver.connection.digitalRead).to.be.calledWith(5, callback);
     });
 
-    it("sets driver@dreadSet true", function() {
-      expect(driver.dReadSet).to.be.eql(true);
+    it("sets driver@readSet true", function() {
+      expect(driver.readSet).to.be.eql(true);
     });
   });
 
@@ -129,8 +125,8 @@ describe("DirectPin", function() {
       expect(driver.connection.analogRead).to.be.calledWith(5, callback);
     });
 
-    it("sets driver@aReadSet true", function() {
-      expect(driver.aReadSet).to.be.eql(true);
+    it("sets driver@readSet true", function() {
+      expect(driver.readSet).to.be.eql(true);
     });
   });
 
