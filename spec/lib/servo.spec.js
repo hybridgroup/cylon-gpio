@@ -60,6 +60,29 @@ describe("Servo", function() {
     });
   });
 
+  describe("#start", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.start(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
+
+  describe("#halt", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.halt(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
   describe("#currentAngle", function() {
     it("returns the current value of the servo's angle", function() {
       expect(driver.currentAngle()).to.be.eql(0);

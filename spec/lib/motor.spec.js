@@ -43,6 +43,29 @@ describe("Motor", function() {
     });
   });
 
+  describe("#start", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.start(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
+
+  describe("#halt", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.halt(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
   describe("#turnOn", function() {
     it("writes a high value to the digital pin", function() {
       driver.turnOn();

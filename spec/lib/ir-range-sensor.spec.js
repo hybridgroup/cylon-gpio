@@ -3,6 +3,8 @@
 
 var RangeSensor = source("ir-range-sensor");
 
+var Cylon = require("cylon");
+
 describe("IrRangeSensor", function() {
   var driver;
 
@@ -51,6 +53,29 @@ describe("IrRangeSensor", function() {
       for (var c in commands) {
         expect(driver.commands[commands[c]]).to.be.a("function");
       }
+    });
+  });
+
+  describe("#_setRangeTable", function() {
+    beforeEach(function() {
+      stub(Cylon.Logger, "info");
+    });
+
+    afterEach(function() {
+      Cylon.Logger.info.restore();
+    });
+
+    it("sets @rangeTable when @model is not undefined", function() {
+      driver._setRangeTable();
+      expect(driver.rangeTable).not.to.be.eql({});
+      expect(Cylon.Logger.info).to.not.be.called;
+    });
+
+    it("sets when @model is not undefined", function() {
+      driver.model = undefined;
+      driver._setRangeTable();
+      expect(driver.rangeTable).to.be.eql({});
+      expect(Cylon.Logger.info).to.be.calledOnce;
     });
   });
 

@@ -37,6 +37,37 @@ describe("Led", function() {
     }
   });
 
+  describe("#start", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.start(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
+
+  describe("#halt", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.halt(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
+
+  describe("#currentBrightness", function() {
+    it("triggers the callback", function() {
+      driver.brightnessValue = 128;
+      expect(driver.currentBrightness()).to.be.eql(128);
+    });
+  });
+
   describe("#turnOn", function() {
     it("writes a high value to the pin", function() {
       driver.isHigh = false;

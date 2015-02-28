@@ -9,7 +9,7 @@ describe("MakeyButton", function() {
   beforeEach(function() {
     driver = new MakeyButton({
       name: "button",
-      connection: { digitalRead: spy() },
+      connection: { digitalRead: stub() },
       pin: 13
     });
   });
@@ -42,9 +42,17 @@ describe("MakeyButton", function() {
   });
 
   describe("#start", function() {
+    var callback;
+
     beforeEach(function() {
+      callback =spy();
+
+      //driver.connection.digitalRead = stub();
+      driver.connection.digitalRead.yields(null, 0);
+
       this.clock = sinon.useFakeTimers();
-      driver.start(function() {});
+
+      driver.start(callback);
     });
 
     after(function() {
@@ -53,6 +61,10 @@ describe("MakeyButton", function() {
 
     it("reads the value of the pin into @currentValue", function() {
       expect(driver.connection.digitalRead).to.be.calledWith(13);
+    });
+
+    it("sets @currentValue to callback param data", function() {
+      expect(driver.currentValue).to.be.eql(0);
     });
 
     describe("button-checking loop", function() {
@@ -106,6 +118,22 @@ describe("MakeyButton", function() {
           expect(driver.isPressed).to.be.eql(true);
         });
       });
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
+    });
+  });
+
+  describe("#halt", function() {
+    var callback =spy();
+
+    beforeEach(function() {
+      driver.halt(callback);
+    });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.calledOnce;
     });
   });
 
