@@ -12,7 +12,8 @@ var AnalogSensor = source("analog-sensor"),
     Motor = source("motor"),
     Servo = source("servo"),
     IrRangeSensor = source("ir-range-sensor"),
-    DirectPin = source("direct-pin");
+    DirectPin = source("direct-pin"),
+    RGBLed = source("rgb-led");
 
 describe("GPIO", function() {
   describe("#drivers", function() {
@@ -29,7 +30,8 @@ describe("GPIO", function() {
         "motor",
         "servo",
         "ir-range-sensor",
-        "direct-pin"
+        "direct-pin",
+        "rgb-led"
       ];
 
       expect(mod.drivers).to.be.eql(drivers);
@@ -105,6 +107,15 @@ describe("GPIO", function() {
       opts.driver = "direct-pin";
       driver = mod.driver(opts);
       expect(driver).to.be.an.instanceOf(DirectPin);
+    });
+
+    it("can instantiate a new RGB LED", function() {
+      opts.driver = "rgb-led";
+      opts.redPin = 1;
+      opts.greenPin = 2;
+      opts.bluePin = 3;
+      driver = mod.driver(opts);
+      expect(driver).to.be.an.instanceOf(RGBLed);
     });
 
     it("returns null if not passed a name", function() {
