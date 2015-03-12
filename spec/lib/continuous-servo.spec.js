@@ -4,9 +4,10 @@
 var ContinuousServo = source("continuous-servo");
 
 describe("ContinuousServo", function() {
-  var driver;
+  var driver, callback;
 
   beforeEach(function() {
+    callback = spy();
     driver = new ContinuousServo({
       name: "serv",
       connection: { servoWrite: spy() },
@@ -42,35 +43,42 @@ describe("ContinuousServo", function() {
   });
 
   describe("#stop", function() {
-    it("writes a value of 90 to the servo", function() {
-      driver.stop();
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 90);
+    it("writes a scaledValue of 0.5 (90 non scaled) to the servo", function() {
+      driver.stop(callback);
+      expect(driver.connection.servoWrite)
+        .to.be.calledWith(13, 0.5, null, { min: 500, max: 2400 }, callback);
     });
   });
 
   describe("#rotate", function() {
-    it("writes a value of 180 when rotation is clockwise", function() {
+    it("writes a scaled value of 1 when rotation is clockwise", function() {
       driver.rotate("clockwise");
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 180);
+      expect(driver.connection.servoWrite).to.be
+        .calledWith(13, 1, null, { min: 500, max: 2400 });
     });
 
-    it("writes a value of 89 when rotation is counter-clockwise", function() {
-      driver.rotate("counter-clockwise");
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 89);
+    it("writes a scaled value of 0.49 when counter-clockwise", function() {
+      driver.rotate("counter-clockwise", callback);
+      expect(driver.connection.servoWrite).to.be
+        .calledWith(13, 0.49444444444444446, null, { min: 500, max: 2400 });
     });
   });
 
   describe("#clockwise", function() {
-    it("writes a value of 180 to the servo", function() {
-      driver.clockwise();
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 180);
+    it("writes a scaled value of 1 to the servo", function() {
+      driver.clockwise(callback);
+      expect(driver.connection.servoWrite).to.be
+        .calledWith(13, 1, null, { min: 500, max: 2400 }, callback);
     });
   });
 
   describe("#counterClockwise", function() {
-    it("writes a value of 180 to the servo", function() {
-      driver.counterClockwise();
-      expect(driver.connection.servoWrite).to.be.calledWith(13, 89);
+    it("writes a scaled value of 0.49 to the servo", function() {
+      driver.counterClockwise(callback);
+      expect(driver.connection.servoWrite).to.be
+        .calledWith(
+          13,  0.49444444444444446, null,
+          { min: 500, max: 2400 }, callback);
     });
   });
 
