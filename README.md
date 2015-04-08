@@ -73,6 +73,8 @@ Thank you!
 
 ## Release History
 
+Version 0.23.0 - Compatibility with Cylon 1.0.0
+
 Version 0.22.1 - Driver now pass callback to adaptors
 
 Version 0.22.0 - Compatibility with Cylon 0.22.0
