@@ -13,6 +13,7 @@ var AnalogSensor = source("analog-sensor"),
     Servo = source("servo"),
     IrRangeSensor = source("ir-range-sensor"),
     DirectPin = source("direct-pin"),
+    Relay = source("relay"),
     RGBLed = source("rgb-led");
 
 describe("GPIO", function() {
@@ -31,6 +32,7 @@ describe("GPIO", function() {
         "servo",
         "ir-range-sensor",
         "direct-pin",
+        "relay",
         "rgb-led"
       ];
 
@@ -107,6 +109,12 @@ describe("GPIO", function() {
       opts.driver = "direct-pin";
       driver = mod.driver(opts);
       expect(driver).to.be.an.instanceOf(DirectPin);
+    });
+
+    it("can instantiate a new Relay", function() {
+      opts.driver = "relay";
+      driver = mod.driver(opts);
+      expect(driver).to.be.an.instanceOf(Relay);
     });
 
     it("can instantiate a new RGB LED", function() {
