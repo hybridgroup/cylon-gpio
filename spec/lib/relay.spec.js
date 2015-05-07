@@ -20,7 +20,7 @@ describe("Relay", function() {
     });
 
     it("sets @isOn to false by default", function() {
-      expect(driver.state.isOn).to.be.false;
+      expect(driver.isOn).to.be.false;
     });
 
     context("if no pin is specified", function() {
@@ -63,20 +63,20 @@ describe("Relay", function() {
 
   describe("#turnOn", function() {
     it("writes a high value to the pin", function() {
-      driver.state.isOn = false;
+      driver.isOn = false;
       driver.turnOn();
 
-      expect(driver.state.isOn).to.be.true;
+      expect(driver.isOn).to.be.true;
       expect(driver.connection.digitalWrite).to.be.calledWith(13 ,1);
     });
   });
 
   describe("#turnOff", function() {
     it("writes a high value to the pin", function() {
-      driver.state.isOn = true;
+      driver.isOn = true;
       driver.turnOff();
 
-      expect(driver.state.isOn).to.be.false;
+      expect(driver.isOn).to.be.false;
       expect(driver.connection.digitalWrite).to.be.calledWith(13, 0);
     });
   });
@@ -84,7 +84,7 @@ describe("Relay", function() {
   describe("#toggle", function() {
     context("when @isOn is true", function() {
       beforeEach(function() {
-        driver.state.isOn = true;
+        driver.isOn = true;
         stub(driver, "turnOff");
       });
 
@@ -100,7 +100,7 @@ describe("Relay", function() {
 
     context("when @isOn is false", function() {
       beforeEach(function() {
-        driver.state.isOn = false;
+        driver.isOn = false;
         stub(driver, "turnOn");
       });
 
@@ -115,20 +115,16 @@ describe("Relay", function() {
     });
   });
 
-  describe("#isInverted", function() {
-    context("when @isInverted is true", function() {
+  describe("normally closed relays", function() {
+    context("when type is 'closed'", function() {
       beforeEach(function() {
-        driver.state.isInverted = true;
-        driver.state.isOn = true;
+        driver.type = "closed";
+        driver.isOn = true;
         stub(driver, "turnOff");
       });
 
       after(function() {
         driver.turnOff.restore();
-      });
-
-      it("sets @isInverted to true", function() {
-        expect(driver.state.isInverted).to.be.true;
       });
 
       it("turns the Relay off", function() {
