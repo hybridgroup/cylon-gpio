@@ -1,6 +1,6 @@
 {
   "name": "cylon-gpio",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "main": "lib/cylon-gpio.js",
   "description": "Cylon module for General Purpose Input/Output (GPIO)",
   "homepage": "http://cylonjs.com",
@@ -13,7 +13,19 @@
     "url": "https://github.com/hybridgroup/cylon-gpio"
   },
 
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
+
+  "keywords": [
+    "cylon",
+    "cylonjs",
+    "cylons",
+    "robot",
+    "robots",
+    "robotics",
+    "iot",
+    "hardware",
+    "gpio"
+  ],
 
   "hardware": {
     "*": false,
