@@ -60,7 +60,7 @@ Thank you!
 
 ## Contributing
 
-For our contribution guidelines, please go to [https://github.com/hybridgroup/cylon-gpio/blob/master/CONTRIBUTING.md
+For our contribution guidelines, please go to [https://github.com/hybridgroup/cylon/blob/master/CONTRIBUTING.md
 ](https://github.com/hybridgroup/cylon/blob/master/CONTRIBUTING.md
 ).
 
