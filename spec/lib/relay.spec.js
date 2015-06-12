@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var Relay = source("relay");
+var Relay = lib("relay");
 
 describe("Relay", function() {
   var driver;
@@ -38,7 +37,7 @@ describe("Relay", function() {
   });
 
   describe("#start", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.start(callback);
@@ -50,7 +49,7 @@ describe("Relay", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);
@@ -67,7 +66,7 @@ describe("Relay", function() {
       driver.turnOn();
 
       expect(driver.isOn).to.be.true;
-      expect(driver.connection.digitalWrite).to.be.calledWith(13 ,1);
+      expect(driver.connection.digitalWrite).to.be.calledWith(13, 1);
     });
   });
 

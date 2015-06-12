@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var RangeSensor = source("ir-range-sensor");
+var RangeSensor = lib("ir-range-sensor");
 
 var Cylon = require("cylon");
 
@@ -88,7 +87,7 @@ describe("IrRangeSensor", function() {
       driver.connection.analogRead = stub();
       driver.connection.analogRead.yields(null, 180);
 
-      stub(driver,"emit");
+      stub(driver, "emit");
 
       driver.start(callback);
     });
@@ -115,7 +114,7 @@ describe("IrRangeSensor", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);

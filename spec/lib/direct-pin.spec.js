@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var DirectPin = source("direct-pin");
+var DirectPin = lib("direct-pin");
 
 describe("DirectPin", function() {
   var driver;
@@ -20,11 +19,11 @@ describe("DirectPin", function() {
     });
 
     it("sets @readSet to false by default", function() {
-      expect(driver.readSet).to.be["false"];
+      expect(driver.readSet).to.be.false;
     });
 
     it("sets @high to false by default", function() {
-      expect(driver.high).to.be["false"];
+      expect(driver.high).to.be.false;
     });
 
     context("if no pin is specified", function() {
@@ -51,7 +50,7 @@ describe("DirectPin", function() {
   });
 
   describe("#start", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.start(callback);
@@ -63,7 +62,7 @@ describe("DirectPin", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);

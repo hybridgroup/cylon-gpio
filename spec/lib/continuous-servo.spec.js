@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var ContinuousServo = source("continuous-servo");
+var ContinuousServo = lib("continuous-servo");
 
 describe("ContinuousServo", function() {
   var driver, callback;
@@ -75,34 +74,37 @@ describe("ContinuousServo", function() {
   describe("#counterClockwise", function() {
     it("writes a scaled value of 0.49 to the servo", function() {
       driver.counterClockwise(callback);
-      expect(driver.connection.servoWrite).to.be
-        .calledWith(
-          13,  0.49444444444444446, null,
-          { min: 500, max: 2400 }, callback);
+      expect(driver.connection.servoWrite).to.be.calledWith(
+        13,
+        0.49444444444444446,
+        null,
+        { min: 500, max: 2400 },
+        callback
+      );
     });
   });
 
   describe("#start", function() {
-    var callback =spy();
+    var cb = spy();
 
     beforeEach(function() {
-      driver.start(callback);
+      driver.start(cb);
     });
 
     it("triggers the callback", function() {
-      expect(callback).to.be.calledOnce;
+      expect(cb).to.be.calledOnce;
     });
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var cb = spy();
 
     beforeEach(function() {
-      driver.halt(callback);
+      driver.halt(cb);
     });
 
     it("triggers the callback", function() {
-      expect(callback).to.be.calledOnce;
+      expect(cb).to.be.calledOnce;
     });
   });
 });

@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var Servo = source("servo");
+var Servo = lib("servo");
 
 describe("Servo", function() {
   var driver;
@@ -61,7 +60,7 @@ describe("Servo", function() {
   });
 
   describe("#start", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.start(callback);
@@ -73,7 +72,7 @@ describe("Servo", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);

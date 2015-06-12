@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var AnalogSensor = source("analog-sensor");
+var AnalogSensor = lib("analog-sensor");
 
 describe("AnalogSensor", function() {
   var driver;
@@ -123,7 +122,7 @@ describe("AnalogSensor", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);

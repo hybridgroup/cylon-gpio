@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var MakeyButton = source("makey-button");
+var MakeyButton = lib("makey-button");
 
 describe("MakeyButton", function() {
   var driver;
@@ -45,9 +44,9 @@ describe("MakeyButton", function() {
     var callback;
 
     beforeEach(function() {
-      callback =spy();
+      callback = spy();
 
-      //driver.connection.digitalRead = stub();
+      // driver.connection.digitalRead = stub();
       driver.connection.digitalRead.yields(null, 0);
 
       this.clock = sinon.useFakeTimers();
@@ -126,7 +125,7 @@ describe("MakeyButton", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);

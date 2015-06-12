@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var Maxbotix = source("maxbotix");
+var Maxbotix = lib("maxbotix");
 
 describe("Maxbotix", function() {
   var driver;

@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var Motor = source("motor");
+var Motor = lib("motor");
 
 describe("Motor", function() {
   var driver;
@@ -24,7 +23,7 @@ describe("Motor", function() {
     });
 
     it("sets @isOn to false by default", function() {
-      expect(driver.isOn).to.be["false"];
+      expect(driver.isOn).to.be.false;
     });
 
     context("if no pin is specified", function() {
@@ -44,7 +43,7 @@ describe("Motor", function() {
   });
 
   describe("#start", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.start(callback);
@@ -56,7 +55,7 @@ describe("Motor", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);

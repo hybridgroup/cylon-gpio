@@ -1,19 +1,18 @@
-/* jshint expr:true */
 "use strict";
 
-var mod = source("cylon-gpio");
+var mod = lib("cylon-gpio");
 
-var AnalogSensor = source("analog-sensor"),
-    Button = source("button"),
-    ContinuousServo = source("continuous-servo"),
-    Led = source("led"),
-    MakeyButton = source("makey-button"),
-    Maxbotix = source("maxbotix"),
-    Motor = source("motor"),
-    Servo = source("servo"),
-    IrRangeSensor = source("ir-range-sensor"),
-    DirectPin = source("direct-pin"),
-    RGBLed = source("rgb-led");
+var AnalogSensor = lib("analog-sensor"),
+    Button = lib("button"),
+    ContinuousServo = lib("continuous-servo"),
+    Led = lib("led"),
+    MakeyButton = lib("makey-button"),
+    Maxbotix = lib("maxbotix"),
+    Motor = lib("motor"),
+    Servo = lib("servo"),
+    IrRangeSensor = lib("ir-range-sensor"),
+    DirectPin = lib("direct-pin"),
+    RGBLed = lib("rgb-led");
 
 describe("GPIO", function() {
   describe("#drivers", function() {

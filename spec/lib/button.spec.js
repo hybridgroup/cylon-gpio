@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var Button = source("button");
+var Button = lib("button");
 
 describe("Button", function() {
   var driver;
@@ -20,7 +19,7 @@ describe("Button", function() {
     });
 
     it("sets @pressed to false by default", function() {
-      expect(driver.pressed).to.be["false"];
+      expect(driver.pressed).to.be.false;
     });
 
     context("if no pin is specified", function() {
@@ -85,7 +84,7 @@ describe("Button", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);

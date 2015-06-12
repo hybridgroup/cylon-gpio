@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var Led = source("led");
+var Led = lib("led");
 
 describe("Led", function() {
   var driver;
@@ -38,7 +37,7 @@ describe("Led", function() {
   });
 
   describe("#start", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.start(callback);
@@ -50,7 +49,7 @@ describe("Led", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);
@@ -74,7 +73,7 @@ describe("Led", function() {
       driver.turnOn();
 
       expect(driver.isHigh).to.be.true;
-      expect(driver.connection.digitalWrite).to.be.calledWith(13 ,1);
+      expect(driver.connection.digitalWrite).to.be.calledWith(13, 1);
     });
   });
 

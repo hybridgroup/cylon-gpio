@@ -1,20 +1,21 @@
+"use strict";
+
 var Cylon = require("cylon");
 
 Cylon.robot({
   connections: {
-    arduino: { adaptor: "firmata",
-               port: '/dev/ttyACM0' },
-    mqtt: { adaptor: 'mqtt', host: 'mqtt://localhost:1883' }
+    arduino: { adaptor: "firmata", port: "/dev/ttyACM0" },
+    mqtt: { adaptor: "mqtt", host: "mqtt://localhost:1883" }
   },
 
   devices: {
     toggle: { driver: "mqtt", topic: "toggle", connection: "mqtt" },
-    relay: { driver: 'relay', pin: 2, type: "closed" }
+    relay: { driver: "relay", pin: 2, type: "closed" }
   },
 
   work: function(my) {
     my.toggle.on("message", function(data) {
-      console.log("Message on 'toggle': " + data);
+      console.log('Message on "toggle": ' + data);
       my.relay.toggle();
     });
 

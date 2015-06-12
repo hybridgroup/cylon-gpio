@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var RGBLed = source("rgb-led");
+var RGBLed = lib("rgb-led");
 
 describe("RGBLed", function() {
   var driver;
@@ -39,7 +38,7 @@ describe("RGBLed", function() {
   });
 
   describe("#start", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.start(callback);
@@ -51,7 +50,7 @@ describe("RGBLed", function() {
   });
 
   describe("#halt", function() {
-    var callback =spy();
+    var callback = spy();
 
     beforeEach(function() {
       driver.halt(callback);
