@@ -1,6 +1,6 @@
 "use strict";
 
-var mod = lib("cylon-gpio");
+var mod = lib("../");
 
 var AnalogSensor = lib("analog-sensor"),
     Button = lib("button"),
@@ -27,6 +27,7 @@ describe("GPIO", function() {
         "makey-button",
         "maxbotix",
         "motor",
+        "relay",
         "servo",
         "ir-range-sensor",
         "direct-pin",

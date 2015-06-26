@@ -1,7 +1,6 @@
 {
   "name": "cylon-gpio",
   "version": "0.25.0",
-  "main": "lib/cylon-gpio.js",
   "description": "Cylon module for General Purpose Input/Output (GPIO)",
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon-gpio/issues",
