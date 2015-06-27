@@ -29,6 +29,7 @@
   "hardware": {
     "*": false,
     "./": false,
+    "./index.js": true,
     "./lib": true
   },
 
