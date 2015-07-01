@@ -1,5 +1,7 @@
 ## Release History
 
+Version 0.26.0 - Use Cylon 1.1.0
+
 Version 0.25.0 - Add newly rewritten Relay driver
 
 Version 0.24.0 - Remove contributed driver
