@@ -59,7 +59,7 @@ describe("ContinuousServo", function() {
     it("writes a scaled value of 0.49 when counter-clockwise", function() {
       driver.rotate("counter-clockwise", callback);
       expect(driver.connection.servoWrite).to.be
-        .calledWith(13, 0.49444444444444446, null, { min: 500, max: 2400 });
+        .calledWith(13, 0, null, { min: 500, max: 2400 });
     });
   });
 
@@ -76,7 +76,7 @@ describe("ContinuousServo", function() {
       driver.counterClockwise(callback);
       expect(driver.connection.servoWrite).to.be.calledWith(
         13,
-        0.49444444444444446,
+        0,
         null,
         { min: 500, max: 2400 },
         callback
