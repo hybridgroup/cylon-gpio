@@ -2,7 +2,7 @@
 
 Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics, physical computing, and the Internet of Things (IoT).
 
-This module provides drivers for General Purpose Input/Output (GPIO) devices (https://en.wikipedia.org/wiki/General_Purpose_Input/Output). It is normally not used directly, but instead is registered by adaptor modules such as cylon-firmata (https://github.com/hybridgroup/cylon-firmata) that support the needed interfaces for GPIO devices.
+This module provides drivers for General Purpose Input/Output (GPIO) devices (https://en.wikipedia.org/wiki/General_Purpose_Input/Output). It must be used along with an adaptor module such as cylon-firmata (https://github.com/hybridgroup/cylon-firmata) that supports the needed interfaces for GPIO devices.
 
 Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io)
 
@@ -12,6 +12,8 @@ Want to use the Go programming language to power your robots? Check out our sist
 
 ## Getting Started
 Install the module with: `npm install cylon cylon-gpio`
+
+Note you must also install whichever adaptor you want to use, such as: `npm install cylon-firmata`
 
 ## Example
 
@@ -71,4 +73,4 @@ For the release history, please go to [https://github.com/hybridgroup/cylon-gpio
 ).
 
 ## License
-Copyright (c) 2013-2015 The Hybrid Group. Licensed under the Apache 2.0 license.
+Copyright (c) 2013-2016 The Hybrid Group. Licensed under the Apache 2.0 license.

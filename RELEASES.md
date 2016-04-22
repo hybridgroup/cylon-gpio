@@ -1,5 +1,7 @@
 ## Release History
 
+Version 0.28.0 - Use Cylon 1.3.0, fixes for RGB LED
+
 Version 0.27.0 - Use Cylon 1.2.0, fixes for continuous-servo
 
 Version 0.26.0 - Use Cylon 1.1.0
