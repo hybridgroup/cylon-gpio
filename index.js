@@ -17,6 +17,7 @@ var Drivers = {
   "direct-pin": require("./lib/direct-pin"),
   "rgb-led": require("./lib/rgb-led"),
   "temperature-sensor": require("./lib/temperature-sensor"),
+  "tp401": require("./lib/tp401"),
 };
 
 module.exports = {

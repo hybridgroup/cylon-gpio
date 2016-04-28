@@ -38,7 +38,7 @@ Cylon.robot({
 ```
 
 ## Hardware Support
-Cylon.js has a extensible system for connecting to hardware devices. The following GPIO devices are currently supported:
+Cylon.js has a extensible system for connecting to hardware devices. The following 14 GPIO devices are currently supported:
 
   - Analog Sensor
   - Button
@@ -53,6 +53,7 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
   - RGB LED
   - Servo
   - Temperature Sensor
+  - TP401 Gas Sensor
 
 More drivers are coming soon...
 
