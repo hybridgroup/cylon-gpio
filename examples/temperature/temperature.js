@@ -13,7 +13,7 @@ Cylon.robot({
 
   work: function(my) {
     every(100, function() {
-      my.temp.celsius();
+      console.log(my.temp.celsius());
     });
   }
 }).start();
