@@ -54,7 +54,7 @@ describe("TP401", function() {
 
     it("returns a value of @ppm of around 13 when 512", function() {
       driver.analogVal = 512;
-      expect(Math.ceil(driver.ppm())).to.be.eql(13);
+      expect(driver.ppm()).to.be.eql(13);
     });
   });
 });
