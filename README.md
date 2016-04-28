@@ -52,6 +52,7 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
   - Relay
   - RGB LED
   - Servo
+  - Temperature Sensor
 
 More drivers are coming soon...
 

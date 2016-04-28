@@ -31,7 +31,8 @@ describe("GPIO", function() {
         "servo",
         "ir-range-sensor",
         "direct-pin",
-        "rgb-led"
+        "rgb-led",
+        "temperature"
       ];
 
       expect(mod.drivers).to.be.eql(drivers);
