@@ -16,7 +16,7 @@ var Drivers = {
   "ir-range-sensor": require("./lib/ir-range-sensor"),
   "direct-pin": require("./lib/direct-pin"),
   "rgb-led": require("./lib/rgb-led"),
-  "temperature": require("./lib/temperature-sensor"),
+  "temperature-sensor": require("./lib/temperature-sensor"),
 };
 
 module.exports = {
