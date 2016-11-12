@@ -1,4 +1,5 @@
-var Cylon = require('cylon');
+"use strict";
+var Cylon = require("cylon");
 
 Cylon.robot({
   connection: {
